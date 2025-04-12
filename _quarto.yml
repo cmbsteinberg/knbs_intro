@@ -11,6 +11,7 @@ book:
     - data_manipulation.qmd
     - importing_data.qmd
     - ggplot.qmd
+    #- intro_to_gis_in_r.qmd
 
 format:
   html:
