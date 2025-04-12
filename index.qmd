@@ -78,7 +78,7 @@ Now open a new script (File -\> New File -\> R Script) and save it as Intro.R
 
 <summary style="font-size: 20px; font-weight: bold;">
 
-1.4.1. Solution</strong>
+Solution</strong>
 
 </summary>
 
@@ -113,7 +113,7 @@ Other programming languages tend to use `=`. The equals sign is used in R but fo
 
 <summary style="font-size: 20px; font-weight: bold;">
 
-1.4.3. Solution</strong>
+Solution</strong>
 
 </summary>
 
@@ -156,7 +156,7 @@ Note: all elements of a vector must be of the same type; either numeric, charact
 
 <summary style="font-size: 20px; font-weight: bold;">
 
-1.4.5. Solution</strong>
+Solution</strong>
 
 </summary>
 
@@ -251,7 +251,7 @@ When arguments have default values like this, they will use these if you don't p
 
 <summary style="font-size: 20px; font-weight: bold;">
 
-1.5.1. Solution</strong>
+Solution</strong>
 
 </summary>
 
@@ -319,7 +319,7 @@ The following exercise should be completed by those who are running through the 
 
 <summary style="font-size: 20px; font-weight: bold;">
 
-1.7.1. Solution</strong>
+Solution</strong>
 
 </summary>
 
@@ -336,5 +336,3 @@ knitr::include_graphics("img/tidyverse.svg")
 </details>
 
 <br>
-
-This is a good opportunity to take a 10-minute break away from the computer to refresh your mind, stretch, and reset before continuing onto Chapter 2.
