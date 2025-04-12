@@ -1,0 +1,388 @@
+# Data Manipulation
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# load packages
+library(gapminder)
+library(countdown)
+library(dplyr)
+```
+
+In this chapter, we will cover `dplyr`, one of the most essential packages in an R user's toolkit. As a key part of the `tidyverse`, `dplyr` offers easy-to-use functions for manipulating data frames, which is a vital step in the data analysis process.
+
+To illustrate the key functions of `dplyr`, we'll be using the `gapminder` dataset. You can view this dataset by installing and loading the `gapminder` package, just as you did with tidyverse.
+
+The exercises in this chapter will use an inbuilt R dataset. However, if you'd like to follow along with the examples, you're welcome to load the `gapminder` dataset, although please note it will not be required for the exercises themselves.
+
+<br>
+
+There are six key `dplyr` functions that allow you to solve the vast majority of data-manipulation challenges;
+
+-   `select()` to pick variables/columns by their names.
+-   `group_by()` to change the scope of each function from operating on the entire data set to operating on it group-by-group.
+-   `summarise()` to collapse many values down to a single summary.
+-   `filter()` to pick observations by their value.
+-   `mutate()` to create new variables/columns with functions of existing variables/columns.
+-   `arrange()` to reorder the rows.
+
+These functions look similar to SQL statements and are designed to replace the need for any data manipulation in SQL.
+
+All `dplyr` functions allow you to specify the column names without "quotations". However, if there are spaces in the column name, you'll need to use `` `back ticks` ``.
+
+## Select
+
+Select allows you to choose the columns that you'd like to keep from a dataset.
+
+```{r results="hide"}
+?select
+```
+
+Looking at the gapminder dataset, if we want to create a new dataset which only included the year, country and life expectancy, we could do this by selecting those columns:
+
+```{r eval=FALSE}
+gapminder_life_exp <- select(gapminder, year, country, lifeExp)
+```
+
+The first argument within the select command specifies use of the gapminder dataset. Following this we list the variables we want to keep.
+
+It is also possible to select to *exclude* specific columns. This is ideal if you want to keep all columns except for one or two, and can be done by using a `-` minus sign in front of column names.
+
+```{r eval=FALSE}
+#Removes the continent column but keeps all others
+gapminder_no_continent <- select(gapminder, -continent)
+```
+
+You can also use the `select` function to reorder columns as it will select columns in the order specified.
+
+### Exercise
+
+`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Using the inbuilt dataset `airquality`, select to keep the columns Ozone, Temp, Month and Day.
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+2.1.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include=TRUE}
+airquality_exercise <-
+  select(airquality, Ozone, Temp, Month, Day)
+```
+
+</details>
+
+<br>
+
+## Pipes
+
+Before we continue, let's visit one of the most important (and cool) operators in R... the pipe `|>`. You may have seen the old pipe `%>%` before. This has been replaced with a native pipe in R 4.1 onwards. It's likely that you'll want to use multiple functions consecutively, especially when using `dplyr`. Currently, we may do something like this:
+
+```{r use_pipe, eval=FALSE}
+gapminder_new <- select(gapminder, -continent)
+gapminder_new <- select(gapminder_new, year, country, lifeExp)
+```
+
+This code is a little frustrating to write because we have to name each intermediate data frame, even though we don't care about it. Naming things is hard, and having separate names for each step makes it difficult to read. Let's see how we can rewrite this code using the pipe:
+
+```{r use_pipe2, eval=FALSE}
+gapminder_new <- gapminder |>
+ select(-continent) |> 
+ select(year, country, lifeExp)
+```
+
+The pipe means we can read this code as a series of statements separated by the pipe representing "and then"; e.g. take the gapminder data *and then* remove the continent column *and then* select the year, country and lifeExp columns.
+
+You may notice that we don't need to specify the `data` argument in each function when using \|\>. By piping, the subsequent function recognises we want to use the result of our previous statement as our data.
+
+You can quickly insert the pipe operator in RStudio by pressing `Ctrl` + `Shift` + `M` (Windows) or `Cmd` + `Shift` + `M` (Mac). This will still insert the old pipe `%>%`. This can be changed in `Tools` \> `Global Options` \> `Code` \> `Editing` \> `Use native pipe operator, |>`
+
+## Grouping and summarising data
+
+We can produce breakdowns of statistics using the group_by and summarise commands from the dplyr package:
+
+-   group_by() identifies which variables we want to produce breakdowns by.
+-   summarise() is used to indicate which values we want to calculate.
+
+Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use the pipe (\|\>) operator to chain these functions together.
+
+So if we want the mean life expectancy by *continent* and *year*:
+
+```{r results="hide", eval=FALSE}
+mean_life_exp <- gapminder |>
+  group_by(year, continent) |>
+  summarise(life_exp = mean(lifeExp))
+```
+
+Here R takes the dataset, then groups it first by year and then by continent and then outputs the mean life expectancy. The mean life expentancy variable is created as a new column called `life_exp`. The results are saved into a new dataset called `mean_life_exp`.
+
+There are other functions that could be used here instead of mean e.g. n, n_distinct, min, max, mean, median, var and sd.
+
+If we want to add a new variable that we decide to call `country_count` that provides the counts by year and continent we can rerun as follows using the pipe operator:
+
+```{r results="hide", eval=FALSE}
+mean_life_exp <- gapminder |>
+  group_by(year, continent) |>
+  summarise(life_exp = mean(lifeExp), country_count = n())
+```
+
+### Exercise
+
+`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Using the pipe function, group the airquality dataset by month.
+2.  Summarise the grouped dataset to produce an average of Ozone and Temp by month.
+3.  Assign this to an object called airquality_summarised.
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+2.3.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE}
+
+airquality_summarised <- airquality |>
+  group_by(Month) |>
+  summarise(avg_ozone = mean(Ozone, na.rm = TRUE),
+            avg_temp = mean(Temp, na.rm = TRUE))
+  
+```
+
+</details>
+
+<br>
+
+## Filter
+
+If you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
+
+Let's first take a look at the different possible values of the continent variable. We can do that quickly using the group_by/summarise combination.
+
+```{r results= "hide", eval = FALSE}
+gapminder |>
+  group_by(continent) |>
+  summarise(count = n())
+```
+
+To filter we just specify the data that we want to filter (gapminder) and the value that we want to filter on. In this case lets filter where continent is "Asia" and year is after 1992 then recalculate the mean life expectancy by country:
+
+```{r results="hide", eval = FALSE}
+mean_life_exp <- gapminder |> 
+filter(continent == "Asia" & year > 1992) |>
+group_by(country) |>
+summarise(life_exp = mean(lifeExp))
+```
+
+R provides the standard suite of comparison operators which can be used to filter:
+
+| Comparison               | Operator |
+|--------------------------|----------|
+| Greater than             | \>       |
+| Greater than or equal to | \>=      |
+| Less than                | \<       |
+| Less than or equal to    | \<=      |
+| Equal to                 | ==       |
+| Not equal to             | !=       |
+| And                      | &        |
+| Or                       | \|       |
+| Not                      | !        |
+| Group membership         | %in%     |
+
+The `%in%` operator allows you to compare a column against a vector of values to see if it matches any one of them; this is much more convenient than comparing against each value individually.
+
+```{r results="hide"}
+##This does work to filter the data for the three given years but is clunky to read and edit
+gapminder |> 
+filter(year == 1992 | year == 1998 | year == 2002) 
+
+##Using the %in% operator is simple and clean to read, and gives exactly the same result
+gapminder |> 
+filter(year %in% c(1992, 1998, 2002)) 
+
+```
+
+### Exercise
+
+`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Filter the original airquality dataset to only include data for May and June. Try to do this using the %in% function.
+2.  Call this assignment: airquality_filter.
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+2.4.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE}
+
+airquality_filter <- airquality |>
+  filter(Month %in% c(5, 6))
+  
+```
+
+</details>
+
+<br>
+
+## Rename
+
+We can rename variables using the dplyr function rename(). Let’s amend our previous code creating the mean_life_exp dataset to change the name of the "year" column to "selected_year".
+
+```{r results="hide", eval = FALSE}
+mean_life_exp <- gapminder |> 
+  filter(continent == "Asia" & year > 1992) |>
+  group_by(year, country) |>
+  summarise(life_exp = mean(lifeExp)) |>
+  rename(selected_year = year)
+```
+
+Within the rename function, the new name "selected_year" is specified on the left and the old name on the right of the equal sign.
+
+## Mutate
+
+You can create new columns and perform calculations on existing columns using the dplyr command mutate().
+
+```{r eval = FALSE}
+?mutate
+```
+
+For example, imagine we wanted to calculate overall GDP as a new column in the gapminder dataset. We could do this by multiplying the `gdpPercap` and `pop` columns:
+
+```{r eval=FALSE, warning=FALSE, comment=FALSE}
+gapminder |>
+  mutate(gdp_total = gdpPercap * pop)
+```
+
+You can also use functions like `mean()` and `sum()` in `mutate()`. For example, using `x / sum(x)` for calculating proportions of a total and `y - mean(y)` for difference from the mean.
+
+Notice that by default, mutate calculates values on a *rowwise* basis; each value in the gdp_total column is made by multiplying the values in the corresponding row. This default behaviour can be changed by grouping data before mutate, e.g. this code produces a mean population column by country:
+
+```{r eval=FALSE, warning=FALSE, comment=FALSE}
+gapminder |>
+ group_by(country) |>
+ mutate(mean_pop = mean(pop))
+```
+
+You can also combine mutate with the `case_when` function to perform one or more if/else conditions. Maybe we want to have coded values for each year by decade. The case_when function allows you to provide multiple instances of a statement which evaluates to TRUE/FALSE, and then a result if that condition is true (after `~`). The function evaluates these statements in order, so if an earlier statement is TRUE, a later one will not be evaluated. Finally, for cases that don't meet any of the conditions, the final TRUE value is used (this defaults to NA if not specified)
+
+```{r use_mutate3, eval=FALSE}
+gapminder |>
+  mutate(
+    decade =
+      case_when(
+        year >= 1950 & year < 1960 ~ "1950s",
+        year >= 1960 & year < 1970 ~ "1960s",
+        year >= 1970 & year < 1980 ~ "1970s",
+        year >= 1980 & year < 1990 ~ "1980s",
+        year >= 1990 & year < 2000 ~ "1990s",
+        TRUE ~ "Post-2000"
+      )
+  )
+```
+
+You can download the Data Transformation Cheat Sheet (and other cheatsheets) at: <https://www.rstudio.com/resources/cheatsheets/>
+
+### Exercise
+
+`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  The inbuilt trees dataset includes columns for tree girth and height in inches. Using mutate, create two new columns (Girth_cm and Height_cm) containing the equivalent values in centimetres.
+2.  How can you replace an existing column with a new column using mutate?
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+2.6.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE}
+
+# 1. conversion is 2.54
+
+trees_with_cm <- trees |>
+  mutate(Girth_cm = Girth * 2.54,
+         Height_cm = Height * 2.54)
+
+# 2. Using mutate to replace existing column
+
+trees_with_cm <- trees |>
+  mutate(Girth = Girth * 2.54)
+  
+```
+
+</details>
+
+<br>
+
+## Arrange
+
+`arrange()` is used to change the order of rows. It takes a data frame as it's first argument and a column name to sort by as it's second. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns. By default `arrange()` will sort in ascending order (1-9 and A-Z). If you'd like to sort in descending order wrap the column name in `desc()`. Using arrange with one column sorts how you'd might expect:
+
+```{r use_arrange, eval=FALSE}
+gapminder |>
+ arrange(year)
+```
+
+Sorting with multiple columns sorts within the hierarchy specified:
+
+```{r use_arrange2, eval=FALSE}
+gapminder |>
+  arrange(year, desc(continent))
+```
+
+It's worth noting that missing values (NA) are always sorted at the end:
+
+```{r use_arrange3, eval=TRUE}
+df <- tibble(x = c(1, 2, 3, NA))
+arrange(df, x)
+arrange(df, desc(x))
+```
+
+### Exercise
+
+`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Arrange the rows of the `trees` dataset by increasing height and decreasing girth.
+2.  What do you notice?
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+2.7.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE}
+
+trees_arranged <- trees |>
+  arrange(Height, desc(Girth))
+
+```
+
+</details>
+
+<br>
+
+This is a good opportunity to take a 45-minute to an hour lunch break away from the computer to refresh your mind, stretch, and reset before continuing onto Chapter 3.

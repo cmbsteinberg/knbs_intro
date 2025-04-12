@@ -1,0 +1,172 @@
+# Importing Data
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# load packages
+library(readr)
+library(readxl)
+library(countdown)
+library(dplyr)
+library(datasets)
+library(openxlsx)
+```
+
+So far, we have only made use of data which is pre-loaded into R via packages, but it is also possible to load your own data in from a variety of sources. We will focus on two different file types;
+
+-   CSV
+-   Excel
+
+## Local Reading
+
+As described in Chapter 1, the bottom right pane of RStudio allows you to view files that are within your own personal filesystem. You are free to create new folders in this area, using the `New Folder` button.
+
+`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Navigate to the `Files` at the bottom right pane of your RStudio
+2.  Create a new folder called `data`
+3.  Save the GCP dataset to this folder as `gcp.csv`
+
+Great, we will come back to using these two files, but first let's discuss how to read in csv files.
+
+## CSV
+
+Although there is a `read.csv()` function in base R, like most things there is a better `tidyverse` alternative! `read_csv()` from the `readr` package reads CSVs in as a tibble (which has additional features compared to a standard data frame), is much faster (\~10X), and allows you to specify how you read data in more easily.
+
+As always, let's read the function documentation using `?read_csv`. This tells us we need to provide a path to the file. This path can be either local or remote; so it will work equally well for data inside your project or from the internet.
+
+To read in a local file, you have to specify the exact location of the file. You can do this as either an *absolute* filepath, which starts from the drive name right through to the final file (e.g. C:/Documents/My_work/file.csv), or as a *relative* file path. A relative file path just gives the location of the file starting from your current working environment. You can check what your current working environment is using the command `getwd()`. The advantage of using relative file paths is if someone duplicates your project from Github, the code will still work on their own computer.
+
+We will start by reading in some local data, which contains details of Kenyan Gross County Product by economic activity for 2017:
+
+```{r use_read_csv, eval=FALSE}
+gcp <- read_csv("data/gcp.csv")
+```
+
+Notice that the file is inside the **data** folder inside the current working directory.
+
+`gcp` will now show in your environment. The environment viewer (top right) shows you basic information about the data that has been loaded in. You can also click on any object to view it in your script window.
+
+You can also read in data directly from the web using the same function. For example, reading in this CSV of Eurovision Song Contest data:
+
+```{r, eval = T}
+eurovision_data <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-17/eurovision.csv")
+```
+
+This works exactly the same way as reading in local data, and the object you have created will appear in your environment (top right).
+
+### Exercise
+
+`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Read in the frogs dataset found here:'<https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-02/frogs.csv>' as an object called `frogs`
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+4.2.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE}
+
+frogs <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-02/frogs.csv")
+
+```
+
+</details>
+
+<br>
+
+### Inspecting the dataset
+
+As noted in the previous section, you can see by looking in the environment window that the eurovision dataset has 2005 observations and 18 variables. You can also return this information (and more) about datasets programatically, using the `glimpse()` function, again from the dplyr package:
+
+```{r}
+glimpse(eurovision_data)
+```
+
+As well as returning the number of rows and columns in the data, the glimpse function also shows you the names of the columns, the column classes (indicated in <triangular brackets>), and an example of the first few rows of data.
+
+### Exercise
+
+`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Use the glimpse and View functions to examine the frogs dataset. How many rows and columns does it have?
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+4.2.3. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, eval = FALSE}
+View(frogs)
+```
+
+```{r, eval = TRUE}
+glimpse(frogs)
+```
+
+</details>
+
+<br>
+
+## Excel
+
+Reading excel files works in much the same way as CSV files. However, due to the difference in underlying structures we require the function `read_excel()` from a different package called `readxl`.
+
+The main difference when reading excel files is three additional arguments that we can set;
+
+-   `sheet` which allows us to specify which sheet to read. It can take the form of a string (the name of the sheet) or an integer (the position of the sheet); and
+-   `range` which allows us to specify a cell range. It takes a typical cell reference like "B3:D10".
+-   `skip` an alternative to specifying a cell range, you can simply indicate how many rows to skip at the start of the sheet. This is ideal if you want to read in a sheet with an unknown number of columns and/or rows, but know there are several lines of metadata at the top of the sheet.
+
+If we don't set any of these arguments it will assume our data is in the first row of the first sheet (and it becomes almost identical to read_csv above).
+
+```{r, eval = FALSE}
+# One option is to download the file 
+url = "https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"
+download_first <- download.file(,destfile = "tourism.xlsx")
+tourism <- read_excel("tourism.xlsx")
+```
+
+
+### Exercise
+
+`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+
+1.  Install and load the readxl package.
+2.  Try downloading an excel spreadsheet from KNBS. For example: "https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"
+3.  Specify the sheet name you want to read in.
+4.  Examine the data you have read in; are the column names what you want? Work out how to skip these and only read in the data, with the correct column names.
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+4.3.1. Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, eval = FALSE}
+url = "https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"
+download_first <- download.file(url,destfile = "data/tourism.xlsx")
+tourism <- read_excel("data/tourism.xlsx", sheet = "Table 12.5", skip = 2)
+```
+
+## Rio
+
+Sometimes you may want to read a selection of files of all different types. This is where `Rio` can come in handy. `Rio` is a wrapper around the libraries we've used above and many more, which lets you use `import()` to read almost any file in. This isn't always useful, when you want to do very specific things with a certain file, but can be much cleaner.
+
+</details>
+
+<br>
