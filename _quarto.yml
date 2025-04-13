@@ -8,6 +8,7 @@ book:
   date: "4/12/2025"
   chapters:
     - index.qmd
+
     - part: intro.qmd
       chapters:
       - basics.qmd
