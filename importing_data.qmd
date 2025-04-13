@@ -137,7 +137,6 @@ download_first <- download.file(,destfile = "tourism.xlsx")
 tourism <- read_excel("tourism.xlsx")
 ```
 
-
 ### Exercise
 
 `r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
@@ -170,3 +169,78 @@ Sometimes you may want to read a selection of files of all different types. This
 </details>
 
 <br>
+
+## Column Names
+
+In the previous section we looked at reading data into R and also inspecting it.
+
+In this section we are going to look at how to manipulate it.
+
+In the previous session we stated that every column in a data frame is a variable and it is good practice to not have spaces within variable names, as spaces makes it harder for us to call on the variables when we need to use them.
+
+When you enter data in Excel, you most often don’t think too much about what you call each column. After all, you just label them once and as long as they are meaningful to you, what does it matter if the column name is a long combination of CAPITALLETTERS, lowercaseletters, and numbers?
+
+When you are working with variables in R though, you need to type the name of each variable, every time you want to work with it. So, it makes sense to make your column names as simple, but meaningful as possible.
+
+> **Ideally, they should also be consistently formatted.**
+
+For example if we wanted to pick the `name of Passenger` column from the Titanic dataset.
+
+```{r, eval = FALSE}
+Titanic$name Of Passenger
+```
+
+To get around this we enclose `name of passenger` with back ticks like the code below - this is the key above the tab key on the left hand side of your keyboard.
+
+```{r, eval = FALSE}
+# Selecting data using the $ symbol
+# note this now works because of the back ticks
+Titanic$`name Of Passenger`
+```
+
+If your column names have spaces and you don’t get rid of them, you must use backticks.
+
+However its good practise to remove spaces and symbols.
+
+We can see the column names by using the `names()` function to access the `name` attribute of the data.
+
+```{r}
+# Getting the column names using the names function
+
+names(Titanic)
+```
+
+As we can see our column names have spaces and some start with capital letters and some with small letters, we can clean the names using the either the `janitor package` or `gsub`.
+
+### Cleaning Column Names
+
+-   [**janitor Package**](#janitor-package)
+
+The `janitor` package offers many functions used to manipulate data, for example removing empty rows and columns, finding duplicates within a data frame. In this session we will use the library to to clean our data set names.
+
+We can clean the names of our dataset with the **janitor::`clean_names()`** function as shown below.
+
+We are overwriting the original Titanic data frame with a version with the column names cleaned.
+
+```{r}
+# Cleaning the column names using the janitor
+# package and the clean_names() function.
+# This will put all names in lower case letters and 
+# replace blank spaces with underscores.
+
+Titanic <- janitor::clean_names(Titanic)
+
+# Getting the column names of the dataset
+
+names(Titanic)
+```
+
+`clean_names()` removes spaces, symbols, changes characters to lower case and makes all columns start with letters.
+
+This is the default setting, there are many other options such as `snake`, `lower_camel` and `all_caps`. These can be put inside the `clean_names()` function as shown below:
+
+```{r}
+# Specifying the case within the clean_names function
+
+janitor::clean_names(Titanic, case = "snake")
+```

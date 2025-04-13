@@ -7,11 +7,16 @@ book:
   author: "Menna Bishop, Christopher Steinberg"
   date: "4/12/2025"
   chapters:
-    - index.qmd
-    - data_manipulation.qmd
-    - importing_data.qmd
-    - ggplot.qmd
-    #- intro_to_gis_in_r.qmd
+    - part: index.qmd
+    - part: intro.qmd
+      chapters:
+      - data_manipulation.qmd
+      - importing_data.qmd
+      - application_1.qmd
+      - ggplot.qmd
+    - part: mapping.qmd
+      #chapters:
+      #- spatial_operations.qmd
 
 format:
   html:

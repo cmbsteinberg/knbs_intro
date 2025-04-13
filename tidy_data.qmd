@@ -233,7 +233,6 @@ print(income_chart)
 
 <br>
 
-
 ## Multiple data frames
 
 It's rare that a data analysis involves only a single data frame. Typically you have many data frames, and you must **join** them together to answer the questions that you're interested in. This chapter will introduce you to two important types of joins:
@@ -389,9 +388,9 @@ In this section, you'll learn how to use one mutating join, `left_join()`, and t
 
 ### Mutating joins
 
-A **mutating join** allows you to combine variables from two data frames: it first matches observations by their keys, then copies across variables from one data frame to the other. Like `mutate()`, the join functions add variables to the right, so if your dataset has many variables, you won't see the new ones. For these examples, we'll make it easier to see what's going on by creating a narrower dataset with just six variables[^05-tidy_data-1]:
+A **mutating join** allows you to combine variables from two data frames: it first matches observations by their keys, then copies across variables from one data frame to the other. Like `mutate()`, the join functions add variables to the right, so if your dataset has many variables, you won't see the new ones. For these examples, we'll make it easier to see what's going on by creating a narrower dataset with just six variables[^tidy_data-1]:
 
-[^05-tidy_data-1]: Remember that in RStudio you can also use `View()` to avoid this problem.
+[^tidy_data-1]: Remember that in RStudio you can also use `View()` to avoid this problem.
 
 ```{r}
 flights2 <- flights |> 
@@ -399,9 +398,9 @@ flights2 <- flights |>
 flights2
 ```
 
-There are four types of mutating join, but there's one that you'll use almost all of the time: `left_join()`. It's special because the output will always have the same rows as `x`, the data frame you're joining to[^05-tidy_data-2]. The primary use of `left_join()` is to add in additional metadata. For example, we can use `left_join()` to add the full airline name to the `flights2` data:
+There are four types of mutating join, but there's one that you'll use almost all of the time: `left_join()`. It's special because the output will always have the same rows as `x`, the data frame you're joining to[^tidy_data-2]. The primary use of `left_join()` is to add in additional metadata. For example, we can use `left_join()` to add the full airline name to the `flights2` data:
 
-[^05-tidy_data-2]: That's not 100% true, but you'll get a warning whenever it isn't.
+[^tidy_data-2]: That's not 100% true, but you'll get a warning whenever it isn't.
 
 ```{r}
 flights2 |>

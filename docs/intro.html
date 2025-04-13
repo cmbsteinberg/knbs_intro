@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Menna Bishop, Christopher Steinberg">
-<meta name="dcterms.date" content="2025-04-12">
 
-<title>Introduction to R - KNBS</title>
+<title>Introduction to R – Introduction to R - KNBS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./data_manipulation.html" rel="next">
-<link href="./curriculum.html" rel="prev">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -119,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction to R</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -144,37 +142,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./curriculum.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNBS R Programming Curriculum</span></span></a>
-  </div>
-</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Introduction to R</span></span>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./index.html" class="sidebar-item-text sidebar-link active">
+            <a href="./intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./importing_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Plotting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Plotting</span></span></a>
   </div>
 </li>
       </ul>
@@ -193,31 +189,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r"><span class="header-section-number">1</span> Introduction to R</a>
+  <li><a href="#session-aims" id="toc-session-aims" class="nav-link active" data-scroll-target="#session-aims">Session aims</a></li>
+  <li><a href="#what-is-r" id="toc-what-is-r" class="nav-link" data-scroll-target="#what-is-r">What is R?</a></li>
+  <li><a href="#introducing-rstudio" id="toc-introducing-rstudio" class="nav-link" data-scroll-target="#introducing-rstudio">Introducing RStudio</a>
   <ul class="collapse">
-  <li><a href="#session-aims" id="toc-session-aims" class="nav-link" data-scroll-target="#session-aims"><span class="header-section-number">1.1</span> Session aims</a></li>
-  <li><a href="#what-is-r" id="toc-what-is-r" class="nav-link" data-scroll-target="#what-is-r"><span class="header-section-number">1.2</span> What is R?</a></li>
-  <li><a href="#introducing-rstudio" id="toc-introducing-rstudio" class="nav-link" data-scroll-target="#introducing-rstudio"><span class="header-section-number">1.3</span> Introducing RStudio</a>
-  <ul class="collapse">
-  <li><a href="#recommended-changes" id="toc-recommended-changes" class="nav-link" data-scroll-target="#recommended-changes"><span class="header-section-number">1.3.1</span> Recommended Changes</a></li>
+  <li><a href="#recommended-changes" id="toc-recommended-changes" class="nav-link" data-scroll-target="#recommended-changes">Recommended Changes</a></li>
   </ul></li>
-  <li><a href="#basic-syntax" id="toc-basic-syntax" class="nav-link" data-scroll-target="#basic-syntax"><span class="header-section-number">1.4</span> Basic Syntax</a>
+  <li><a href="#basic-syntax" id="toc-basic-syntax" class="nav-link" data-scroll-target="#basic-syntax">Basic Syntax</a>
   <ul class="collapse">
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">1.4.1</span> Exercise</a></li>
-  <li><a href="#the-assignment-operator" id="toc-the-assignment-operator" class="nav-link" data-scroll-target="#the-assignment-operator"><span class="header-section-number">1.4.2</span> The assignment operator</a></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">1.4.3</span> Exercise</a></li>
-  <li><a href="#combining-using-c" id="toc-combining-using-c" class="nav-link" data-scroll-target="#combining-using-c"><span class="header-section-number">1.4.4</span> Combining using <code>c()</code></a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="header-section-number">1.4.5</span> Exercise</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#the-assignment-operator" id="toc-the-assignment-operator" class="nav-link" data-scroll-target="#the-assignment-operator">The assignment operator</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
+  <li><a href="#combining-using-c" id="toc-combining-using-c" class="nav-link" data-scroll-target="#combining-using-c">Combining using <code>c()</code></a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise</a></li>
   </ul></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.5</span> Functions</a>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
   <ul class="collapse">
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3"><span class="header-section-number">1.5.1</span> Exercise</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise</a></li>
   </ul></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">1.6</span> Packages</a></li>
-  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="header-section-number">1.7</span> The Tidyverse</a>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse">The Tidyverse</a>
   <ul class="collapse">
-  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4"><span class="header-section-number">1.7.1</span> Exercise</a></li>
-  </ul></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -227,26 +220,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction to R - KNBS</h1>
+<h1 class="title">Introduction to R</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Menna Bishop, Christopher Steinberg </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">April 12, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -256,13 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction-to-r" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction to R</h1>
 <p>In this course, you will explore the versatility of R, a powerful language for statistical computing and graphics. You will discover the benefits of using R and get started with the basics, and fain confidence with the user-friendly R Studio interface and learn fundamental R concepts. You will also dive into the Tidyverse, a collection of packages for data storage, visualisation and manipulation. This course offers a solid foundation to kickstart your journey with R!</p>
 <p>This book is designed to accompany the Introduction to R training that is starting at KNBS. To complete this course, you will need to have <a href="https://posit.co/download/rstudio-desktop/">R Studio</a> installed on your computer.</p>
 <p>If you’re running through this book solo, it is recommended to run through it in order and try out all the of the exercises as you go through. Each exercise has a <strong>Solution</strong> dropdown, which allows you to view prompts to help with the question and see the answers.</p>
-<section id="session-aims" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="session-aims"><span class="header-section-number">1.1</span> Session aims</h2>
+<section id="session-aims" class="level2">
+<h2 class="anchored" data-anchor-id="session-aims">Session aims</h2>
 <ul>
 <li>navigate the R and R Studio environment</li>
 <li>understand and use the common R functions for data manipulation</li>
@@ -270,8 +249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>understand the term <em>tidy data</em> and why it is important for writing efficient code</li>
 </ul>
 </section>
-<section id="what-is-r" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="what-is-r"><span class="header-section-number">1.2</span> What is R?</h2>
+<section id="what-is-r" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-r">What is R?</h2>
 <p>R is an open-source programming language and software environment, designed primarily for statistical computing. It has a long history - it is based on the S language, which was developed in 1976 in Bell Labs, where the UNIX operating system and the C and C++ languages were developed. The R language itself was developed in the 1990s, with the first stable version release in 2000.</p>
 <p>R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool used by analysts in governments globally.</p>
 <p>Some of the advantages:</p>
@@ -282,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It’s <strong>free and open source</strong> - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS or STATA.</li>
 </ul>
 </section>
-<section id="introducing-rstudio" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="introducing-rstudio"><span class="header-section-number">1.3</span> Introducing RStudio</h2>
+<section id="introducing-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-rstudio">Introducing RStudio</h2>
 <p>RStudio is an integrated development environment (IDE) for R. You don’t have to use an IDE but it’s strongly advised as it provides a user-friendly interface to work with. RStudio has four main panels;</p>
 <ol type="1">
 <li><strong>Script Editor</strong> (top left) - used to write and save your code, which is only run when you explicitly tell RStudio to do so.</li>
@@ -300,16 +279,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>You may have noticed that your Script Editor is bigger than the Console or your Environment has suddenly disappeared. In RStudio, you can adjust the size of different panes by clicking and dragging the dividers between them. If you want to maximize a specific pane, such as the Script Editor, use the shortcut <strong>Ctrl + Shift + 1</strong> (Windows/Linux) or <strong>Cmd + Shift + 1</strong> (Mac) to focus on it. To restore the default layout, press <strong>Ctrl + Shift + 0</strong> (Windows/Linux) or <strong>Cmd + Shift + 0 (Mac)</strong>. You can also use the <strong>View</strong> menu to toggle different panes on and off, ensuring your workspace suits your needs.</p>
 <p>If you find the text difficult to read or prefer a different appearance, you can customise the <strong>theme</strong>, <strong>font</strong>, and <strong>text size</strong> in RStudio. Go to <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code>, where you can choose from different editor themes (e.g., light or dark mode), adjust the font type, and increase or decrease the text size for better readability. These changes can help make coding more comfortable, especially during long sessions.</p>
-<section id="recommended-changes" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="recommended-changes"><span class="header-section-number">1.3.1</span> Recommended Changes</h3>
+<section id="recommended-changes" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-changes">Recommended Changes</h3>
 <p>While not necessary, certain changes are almost always recommended for visibility reasons. These include: - Choosing a different theme, as Textmate can be hard on the eyes. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code> &gt; <code>Editor theme:</code>. - Highlight R function calls. This makes functions look a different colour than normal text, which can make reading your code much easier. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Code</code> &gt; <code>Display</code> &gt; <code>Highlight R function calls</code>. - Use Rainbow Parenthesis. This makes each pair of () in a line a different colour, which can help you catch if you’re missing one and it’s breaking your code. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Code</code> &gt; <code>Display</code> &gt; <code>Use rainbow parenthesis</code>.</p>
 </section>
 </section>
-<section id="basic-syntax" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="basic-syntax"><span class="header-section-number">1.4</span> Basic Syntax</h2>
-<section id="exercise" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">1.4.1</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_a7bef097" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
+<section id="basic-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="basic-syntax">Basic Syntax</h2>
+<section id="exercise" class="level3">
+<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<p></p><div class="countdown" id="timer_c81751c1" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
 <p>As a quick exercise, try out some arithmetic in your console:</p>
 <ol type="1">
 <li>25 * 15</li>
@@ -342,14 +321,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <p><br></p>
 </section>
-<section id="the-assignment-operator" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="the-assignment-operator"><span class="header-section-number">1.4.2</span> The assignment operator</h3>
+<section id="the-assignment-operator" class="level3">
+<h3 class="anchored" data-anchor-id="the-assignment-operator">The assignment operator</h3>
 <p>R uses the assignment operator <code>&lt;-</code> to assign values or data frames to objects. The object name goes on the left, with the object value on the right. For example, <code>x &lt;- 5</code> assigns the value 5 to the object <code>x</code>. You can quickly type the assignment operator in RStudio by pressing <code>Alt</code> + <code>-</code> (Windows) or <code>Option</code> + <code>-</code> (Mac).</p>
 <p>Other programming languages tend to use <code>=</code>. The equals sign is used in R but for other purposes, as you’ll find out later. Note: <code>=</code> will actually work for assignment in R but it is not convention.</p>
 </section>
-<section id="exercise-1" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">1.4.3</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_3867f217" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise</h3>
+<p></p><div class="countdown" id="timer_67413cea" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
 <ol type="1">
 <li>Create an object x1 with a value of 14</li>
 <li>Create an object x2 with a value of x1 + 7</li>
@@ -385,14 +364,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <p><br></p>
 </section>
-<section id="combining-using-c" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="combining-using-c"><span class="header-section-number">1.4.4</span> Combining using <code>c()</code></h3>
+<section id="combining-using-c" class="level3">
+<h3 class="anchored" data-anchor-id="combining-using-c">Combining using <code>c()</code></h3>
 <p>So how do you assign more than one number to an object? Typing <code>x &lt;- 1,2,3</code> will throw an error. The way to do it is to combine the values into a vector before assigning. For example, <code>x &lt;- c(1, 2, 3)</code>.</p>
 <p>Note: all elements of a vector must be of the same type; either numeric, character, or logical. Vector types are important, but they aren’t interesting, which is why they aren’t covered on this course. We advise you to <a href="https://r4ds.had.co.nz/vectors.html">read about vectors</a> in your own time.</p>
 </section>
-<section id="exercise-2" class="level3" data-number="1.4.5">
-<h3 data-number="1.4.5" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">1.4.5</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_2b7cec40" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise</h3>
+<p></p><div class="countdown" id="timer_6f9a33b5" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
 <ol type="1">
 <li>Use the combine function to create a vector with values 1, 2 and 3.</li>
 <li>What happens when you write <code>1:10</code> inside <code>c()</code>?</li>
@@ -428,7 +407,7 @@ function (x)
 {
     UseMethod("year")
 }
-&lt;bytecode: 0x11fc82850&gt;
+&lt;bytecode: 0x106a06b60&gt;
 &lt;environment: namespace:lubridate&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3. Correct code</span></span>
@@ -442,8 +421,8 @@ function (x)
 <p><br></p>
 </section>
 </section>
-<section id="functions" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.5</span> Functions</h2>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
 <p>Functions are one of the most important aspects of any programming language. Functions are essentially just R scripts that other R users have created. You could write a whole project without using any functions, but why would we when others have done the hard work for us? To demonstrate how using functions can save us time let’s look at an example.</p>
 <p>Imagine you had the following data for test scores of students and you wanted to find the mean score:</p>
 <div class="cell">
@@ -489,9 +468,9 @@ function (x)
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When arguments have default values like this, they will use these if you don’t provide an alternative. There is no default value for x, so if you don’t provide a value for x the function will return an error.</p>
-<section id="exercise-3" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">1.5.1</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_18f1663d" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise</h3>
+<p></p><div class="countdown" id="timer_90210f42" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
 <ol type="1">
 <li>Look at the help for the <code>sum()</code> function. What does it do?</li>
 <li>How many arguments does the <code>sum()</code> function have? How many of these have default values?</li>
@@ -520,8 +499,8 @@ function (x)
 <p><br></p>
 </section>
 </section>
-<section id="packages" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.6</span> Packages</h2>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <p>Being open-source means R has an extensive community of users that are building and improving packages for others. Base R covers a lot of useful functions but there’s lots it doesn’t, that’s when we want to install packages. Each package contains a number of functions, once we install a package we have access to every one of it’s functions.</p>
 <p>Packages need to be both installed and loaded before they can be used. You only need to install a package the first time you use it, but you will need to load it every time you want to use it.</p>
 <p>Start by opening RStudio, which is an integrated development environment (IDE) for R. You don’t have to use an IDE but it’s strongly advised as it provides a user-friendly interface to work with.</p>
@@ -540,13 +519,13 @@ function (x)
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>?select</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-tidyverse" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">1.7</span> The Tidyverse</h2>
+<section id="the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="the-tidyverse">The Tidyverse</h2>
 <p>While base R has a wide range of functions for data manipulation and visualisation, most analytical code will make use of <strong>the tidyverse</strong>. This is a specific group of packages which are designed for use in the reading, processing and visualisation of data, and aim to be easy to use for beginner coders and clear to read and write. It is recommended to use the tidyverse packages wherever possible to make code consistent.</p>
 <p>This training course will therefore make extensive use of tidyverse packages including <code>dplyr</code>, <code>ggplot2</code> and <code>tidyr</code>.</p>
 <p>The following exercise should be completed by those who are running through the course solo.</p>
-<section id="exercise-4" class="level3" data-number="1.7.1">
-<h3 data-number="1.7.1" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">1.7.1</span> Exercise</h3>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise</h3>
 <ol type="1">
 <li>Install the tidyverse package in your Console (do you remember where this is?!)</li>
 <li>Load the tidyverse library at the top of your <code>Intro.R</code> script.</li>
@@ -572,7 +551,6 @@ function (x)
 <p><br></p>
 
 
-</section>
 </section>
 </section>
 
@@ -996,13 +974,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./curriculum.html" class="pagination-link" aria-label="KNBS R Programming Curriculum">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNBS R Programming Curriculum</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Introduction to R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./data_manipulation.html" class="pagination-link" aria-label="Data Manipulation">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

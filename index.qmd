@@ -1,338 +1,261 @@
-# Introduction to R
+---
+project:
+  type: default
+format: 
+  pdf:
+    toc: false
+    number-sections: false
+  html:
+    page-layout: full
+---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, dev = "svg")
+# KNBS R Programming Curriculum
 
-# load packages
-library(countdown)
-library(rmarkdown)
-library(dplyr)
-library(tidyverse)
+This comprehensive curriculum is designed to take KNBS employees from novice R users to advanced practitioners, equipping them with the skills necessary to perform sophisticated data analysis and programming tasks. The curriculum is structured into three distinct levels - Beginner, Intermediate, and Advanced - each building upon the knowledge gained in the previous level.
+
+## Curriculum Overview
+
+The journey begins with the foundational "Introduction to R" course, which provides non-R users with the essential skills to perform basic work tasks in R. This is followed by a series of courses that broaden the base knowledge of R and introduce complementary languages and tools such as SQL, Bash, and Git. These courses are designed to give analysts a well-rounded skill set that is crucial for most data analysis tasks in R.
+
+As learners progress, the Intermediate level courses delve into more specific and advanced topics. These courses introduce various analytical methods and best practices in coding for automation. They are designed to enhance the analysts' capabilities in handling complex data tasks and improving code efficiency and reproducibility.
+
+The Advanced level courses introduce cutting-edge techniques and tools in data science and software development. These courses cover topics such as machine learning, natural language processing, big data processing with Sparklyr, and modern software development practices like continuous integration.
+
+```{mermaid}
+gantt
+    title KNBS R Curriculum
+    dateFormat  X
+    axisFormat %H
+    
+    section Beginner
+    Introduction to R           :a1, 0, 16h
+    Introduction to Data Visualisation :a2, after a1 start, 16h
+    Optional Modules            :a3, after a2, 4h
+    Introduction to GIS in R    :a4, after a2, 3h
+    R Control Flow Loops and Functions :a5, after a2, 3h
+
+    section Intermediate Level
+    Optional Modules            :b1, after a5, 25h
+    More GIS in R               :b3, after a5, 3h
+    Introduction to Git         :b4, after a5, 4h
+    Statistics in R             :b5, after a5, 16h
+    
+    section Advanced
+    Introduction to NLP in R    :c1, after b5, 16h
+    Introduction to Machine Learning in R :c2, after b5, 24h
+    Additional Analysis Modules: c3, after c2, 38h
+    Packaging and Documentation :c4, after b5, 4h
+    Additional Developer Modules: c5, after c4, 6h
+
+    
 ```
 
-In this course, you will explore the versatility of R, a powerful language for statistical computing and graphics. You will discover the benefits of using R and get started with the basics, and fain confidence with the user-friendly R Studio interface and learn fundamental R concepts. You will also dive into the Tidyverse, a collection of packages for data storage, visualisation and manipulation. This course offers a solid foundation to kickstart your journey with R!
+# Course Runthrough
 
-This book is designed to accompany the Introduction to R training that is starting at KNBS. To complete this course, you will need to have [R Studio](https://posit.co/download/rstudio-desktop/) installed on your computer.
+## Beginner Level
 
-If you’re running through this book solo, it is recommended to run through it in order and try out all the of the exercises as you go through. Each exercise has a **Solution** dropdown, which allows you to view prompts to help with the question and see the answers.
+### Introduction to R
 
-## Session aims
+This redesigned course focuses on applying skills and building confidence in R programming. Participants will learn about data types, importing data, and working with DataFrames through hands-on exercises. The course is structured with a week between sessions to allow for practice and assimilation of learning, making it ideal for beginners to develop independence and resilience in their R programming journey.
 
--   navigate the R and R Studio environment
--   understand and use the common R functions for data manipulation
--   understand the basics of data visualisation using the ggplot2 package
--   understand the term *tidy data* and why it is important for writing efficient code
+-   Data Types
+-   Importing Data
+-   DataFrames, Manipulation, and Cleaning
 
-## What is R?
+*Course Length: 2 Days*
 
-R is an open-source programming language and software environment, designed primarily for statistical computing. It has a long history - it is based on the S language, which was developed in 1976 in Bell Labs, where the UNIX operating system and the C and C++ languages were developed. The R language itself was developed in the 1990s, with the first stable version release in 2000.
+*Prerequisites: None*
 
-R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool used by analysts in governments globally.
+### Introduction to Data Visualisation
 
-Some of the advantages:
+Data Visualisation is the art of displaying data in a clear and understandable way that allows for maximum impact. This comprehensive course covers both theoretical and practical aspects of data visualization in R. Participants will learn best practices for presenting data clearly and professionally. The course then transitions into practical application, teaching how to produce production-ready visualizations using R. By the end, students will have a solid foundation in creating impactful and consistent data visualizations.
 
--   It is **popular** - there is a large, active and rapidly growing community of R programmers, which has resulted in a plethora of resources and extensions.
--   It is **powerful** - the history as a statistical language means it is well suited for data analysis and manipulation.
--   It is **extensible** - there are a vast array of **packages** that can be added to extend the functionality of R, produced by statisticians and programmers around the world. These can range from obscure statistical techniques to tools for making interactive charts.
--   It's **free and open source** - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS or STATA.
+*Course Length: 2 Days*
 
-## Introducing RStudio
+*Prerequisites: Introduction to R*
 
-RStudio is an integrated development environment (IDE) for R. You don't have to use an IDE but it's strongly advised as it provides a user-friendly interface to work with. RStudio has four main panels;
+### Introduction to GIS in R
 
-1.  **Script Editor** (top left) - used to write and save your code, which is only run when you explicitly tell RStudio to do so.
-2.  **Console** (bottom left) - all code is run through the console, even the code you write in the script editor is sent to the console to be run. It's perfect for quickly viewing data structures and help for functions but should not be used to write code you want to save (that should be done in the script editor).
-3.  **Environment** (top right) - all data, objects and functions that you have read in/created will appear here.
-4.  **Files/Plots/Help** (bottom right) - this pane groups a few miscellaneous areas of RStudio.
-    -   *Files* acts like the windows folder to navigate between files and folders.
-    -   *Plots* shows any graphs that you generate.
-    -   *Packages* let's you install and manage packages currently in use.
-    -   *Help* provides information about packages or functions, including how to use them.
-    -   *Viewer* is essentially RStudio's built-in browser, which can be used for web app development.
+This course introduces the fundamentals of working with geospatial data in R. Participants will learn to load spatial data, manipulate spatial objects, and create both static and interactive maps. The course covers important concepts such as GSS codes, spatial joins, and coordinate reference systems. By the end, students will be able to perform basic spatial analysis and create visually appealing maps using R.
 
-You may have noticed that your Script Editor is bigger than the Console or your Environment has suddenly disappeared. In RStudio, you can adjust the size of different panes by clicking and dragging the dividers between them. If you want to maximize a specific pane, such as the Script Editor, use the shortcut **Ctrl + Shift + 1** (Windows/Linux) or **Cmd + Shift + 1** (Mac) to focus on it. To restore the default layout, press **Ctrl + Shift + 0** (Windows/Linux) or **Cmd + Shift + 0 (Mac)**. You can also use the **View** menu to toggle different panes on and off, ensuring your workspace suits your needs.
+*Course Length: 2-3 hours*
 
-If you find the text difficult to read or prefer a different appearance, you can customise the **theme**, **font**, and **text size** in RStudio. Go to `Tools` \> `Global Options` \> `Appearance`, where you can choose from different editor themes (e.g., light or dark mode), adjust the font type, and increase or decrease the text size for better readability. These changes can help make coding more comfortable, especially during long sessions.
+*Prerequisites: Introduction to Data Visualisation*
 
-### Recommended Changes
+### R Control Flow Loops and Functions
 
-While not necessary, certain changes are almost always recommended for visibility reasons. These include: - Choosing a different theme, as Textmate can be hard on the eyes. This can be done in `Tools` \> `Global Options` \> `Appearance` \> `Editor theme:`. - Highlight R function calls. This makes functions look a different colour than normal text, which can make reading your code much easier. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Highlight R function calls`. - Use Rainbow Parenthesis. This makes each pair of () in a line a different colour, which can help you catch if you're missing one and it's breaking your code. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Use rainbow parenthesis`.
+This course focuses on more advanced programming concepts in R, specifically loops, control flow, and function writing. Participants will learn how to use these tools to reduce code repetition, improve readability, and follow good coding practices. The course includes practical examples and exercises to reinforce learning, and provides guidance on areas for additional study to further enhance programming skills.
 
-## Basic Syntax
+*Course Length: 3 Hours*
 
-### Exercise
+*Prerequisites: Introduction to Data Visualisation*
 
-`r countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")`
+### Optional Modules
 
-As a quick exercise, try out some arithmetic in your console:
+#### Introduction to RAP
 
-1.  25 \* 15
-2.  (45 + 3) \^ 2
-3.  78 / 4
+This course introduces the concepts, motivation, and techniques for creating a Reproducible Analytical Pipeline (RAP). Participants will learn about the benefits of RAP and how to overcome common barriers in implementation. The course is tailored for government analysts and managers of analysis, providing a foundation for enhancing reproducibility and efficiency in analytical workflows.
 
-Now open a new script (File -\> New File -\> R Script) and save it as Intro.R
+*Course Length: 1 Hour*
 
-1.  Repeat the above exercises. What happens when you hit enter? Try using `Ctrl` + `Enter`
+*Prerequisites: Introduction to Data Visualisation*
 
-<details>
+#### Introduction to RMarkdown
 
-<summary style="font-size: 20px; font-weight: bold;">
+This course provides a comprehensive introduction to RMarkdown, a powerful tool for creating dynamic, reproducible documents in R. Participants will learn how to set up new documents, create various types of content, and output to different formats including HTML, PDF, and Word. The course covers text formatting, tables, images, and RMarkdown-specific features, equipping students with the skills to create professional, data-driven reports.
 
-Solution</strong>
+*Course Length: 1-2 Hours*
 
-</summary>
+*Prerequisites: Introduction to Data Visualisation*
 
-<br>
+#### Best Practice in Programming - Clean Code
 
-```{r, include = TRUE}
-25 * 15
-(45 + 3) ^ 2
-78 / 4
-```
+This workshop emphasizes best practices in programming for improved code readability and collaboration. Participants will learn general principles that enhance coding skills and make code more accessible to others. The course covers techniques for writing clean, maintainable code and encourages the development of good coding habits. By the end, students will have a solid foundation in creating code that is easy to read, understand, and modify.
 
-</details>
+*Course Length: 1 Hour*
 
-<br>
+*Prerequisites: Introduction to Data Visualisation*
 
-### The assignment operator
+## Intermediate Level
 
-R uses the assignment operator `<-` to assign values or data frames to objects. The object name goes on the left, with the object value on the right. For example, `x <- 5` assigns the value 5 to the object `x`. You can quickly type the assignment operator in RStudio by pressing `Alt` + `-` (Windows) or `Option` + `-` (Mac).
+### Introduction to Git
 
-Other programming languages tend to use `=`. The equals sign is used in R but for other purposes, as you'll find out later. Note: `=` will actually work for assignment in R but it is not convention.
+This course provides a comprehensive understanding of the Git version control system. Participants will gain hands-on experience working both locally and collaboratively with Git. The course covers the fundamentals of Git, its practical applications, and the benefits of using it for individual and team projects. By the end, students will be equipped with the skills to effectively use Git for version control and collaboration in their development workflows.
 
-### Exercise
+*Course Length: 4 Hours*
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+*Prerequisites: R Control Flow Loops and Functions*
 
-1.  Create an object x1 with a value of 14
-2.  Create an object x2 with a value of x1 + 7
-3.  Check the value of x2 by looking in the environment pane
-4.  Create an object x3 equal to x2 divided by 3.
+### Statistics in R
 
-<details>
+This comprehensive course covers both statistical theory and its practical application in R. Participants will learn about exploratory data analysis, various statistical tests, linear regression, model adequacy and selection, and generalized linear models. The course provides a balanced mix of theoretical understanding and hands-on coding experience. By the end, students will be equipped to perform advanced statistical analyses and interpret results using R.
 
-<summary style="font-size: 20px; font-weight: bold;">
+*Course Length: 16 Hours*
 
-Solution</strong>
+*Prerequisites: R Control Flow Loops and Functions*
 
-</summary>
+### More GIS in R
 
-<br>
+Building on the introductory GIS course, this advanced session covers more complex geospatial operations and analysis techniques in R. Participants will learn about buffers, intersections, area summary statistics, and network analysis. The course also focuses on troubleshooting common error messages and improving the accuracy of spatial analyses. By the end, students will be able to conduct and present comprehensive spatial analyses using R.
 
-```{r, eval = TRUE}
-x1 <- 14
-x1
-```
+*Course Length: 2-3 Hours*
 
-```{r, eval = TRUE}
-x2 <- x1 + 7
-x2
-```
+*Prerequisites: R Control Flow Loops and Functions*
 
-```{r, eval = TRUE}
-x3 <- x2 / 3
-x3
-```
+### Optional Modules
 
-</details>
+#### Foundations of SQL
 
-<br>
+This course provides a comprehensive introduction to SQL, covering syntax applicable to various database systems. Using an online platform with SQLite, participants will learn through hands-on exercises. The course covers basic SQL queries, table manipulation, joining tables, and database alterations. By the end, students will have a solid foundation in SQL, enabling them to work with databases effectively in their data analysis projects.
 
-### Combining using `c()`
+*Course Length: 6 Hours*
 
-So how do you assign more than one number to an object? Typing `x <- 1,2,3` will throw an error. The way to do it is to combine the values into a vector before assigning. For example, `x <- c(1, 2, 3)`.
+*Prerequisites: R Control Flow Loops and Functions*
 
-Note: all elements of a vector must be of the same type; either numeric, character, or logical. Vector types are important, but they aren't interesting, which is why they aren't covered on this course. We advise you to [read about vectors](https://r4ds.had.co.nz/vectors.html) in your own time.
+#### Command Line Basics
 
-### Exercise
+This course introduces the powerful world of command line interfaces for both UNIX and Windows systems. Participants will learn basic commands and understand how to navigate file systems and execute operations using the command line. The course aims to make participants comfortable using this essential tool in their work, enhancing their ability to interact with computers efficiently and perform advanced operations.
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+*Course Length: 2 Hours*
 
-1.  Use the combine function to create a vector with values 1, 2 and 3.
-2.  What happens when you write `1:10` inside `c()`?
-3.  What happens if you try to create a vector containing a number such as 2019 and the word "year"?
+*Prerequisites: R Control Flow Loops and Functions*
 
-<details>
+#### Reproducible Reporting with RMarkdown
 
-<summary style="font-size: 20px; font-weight: bold;">
+This course delves into advanced features of RMarkdown for creating reproducible reports. Participants will learn to embed executable code and data into reports, work with YAML headers and theme options, and use parameters for dynamic reporting. The course also covers markdown syntax, code chunks, and chunk options. By the end, students will be able to create professional, reproducible reports that seamlessly integrate code, data, and narrative.
 
-Solution</strong>
+*Course Length: 2 Hours*
 
-</summary>
+*Prerequisites: Introduction to RMarkdown, Introduction to RAP*
 
-<br>
+#### Modular Programming in R
 
-```{r, include = TRUE}
-#1. combine c() to create vector with values 1,2,3
-x <- c(1, 2, 3)
-x
+This course focuses on the principles of modular design in R programming. Participants will learn the importance of well-structured, reproducible code and how to implement modular design principles. The course covers techniques for converting code into functions and modules, improving code organization and reusability. By the end, students will be able to write more efficient, maintainable, and scalable R code.
 
-#2. combine c() with 1:10
-x <- c(1:10)
-x
+*Course Length: 4-5 hours*
 
-#3. Incorrect code: will throw an error
-x <- c(2019, year)
-x
+*Prerequisites: R Control Flow Loops and Functions*
 
-#3. Correct code
-x <- c(2019, "year")
-x
-  
-```
+#### Hypothesis Testing in R
 
-</details>
+This intermediate course focuses on advanced concepts in hypothesis testing using R. Participants will learn to define and calculate Type I and Type II errors, determine effect sizes, and calculate statistical power. The course also covers sample size calculations for various statistical tests. By the end, students will have a deeper understanding of the nuances of hypothesis testing and be able to design more robust statistical analyses in R.
 
-<br>
+*Course Length: 4-6 Hours*
 
-## Functions
+*Prerequisites: Statistics in R*
 
-Functions are one of the most important aspects of any programming language. Functions are essentially just R scripts that other R users have created. You could write a whole project without using any functions, but why would we when others have done the hard work for us? To demonstrate how using functions can save us time let's look at an example.
+#### Dates and Times in R
 
-Imagine you had the following data for test scores of students and you wanted to find the mean score:
+This course provides a comprehensive overview of handling date and time data in R. Participants will learn how to create, convert, and manipulate date-time objects, understanding the underlying storage mechanisms. The course covers practical operations such as extracting parts of dates, performing date-time arithmetic, and working with time zones. By the end, students will be proficient in managing and analyzing time-based data in R.
 
-```{r use_functions}
-test_scores <- c(70, 68, 56, 88, 42, 55)
-```
+*Course Length: 4 Hours*
 
-We could extract each individual score from the data frame, add them together and then divide them by the number of elements:
+*Prerequisites: R Control Flow Loops and Functions*
 
-```{r use_functions2}
-(test_scores[1] + test_scores[2] + test_scores[3] + test_scores[4] + test_scores[5] + test_scores[6]) / 6
-```
+## Advanced Level
 
-This gives us the mean score of 63.2. But that's pretty tedious, especially if our data set was of any significant size. To overcome this we can use a function called `mean()`. To read about a function in R type `help("function_name")` or `?function_name` in the console. By reading the help file we see that `mean()` requires an R object of numerical values. So we can pass our `test_scores` data as the argument:
+### Introduction to NLP in R
 
-```{r use_function3, echo=TRUE}
-mean(test_scores)
-```
+This course provides a comprehensive introduction to Natural Language Processing (NLP) using R. Participants will learn fundamental NLP concepts and techniques, including text cleaning, exploratory analysis, and feature engineering. The course covers practical applications such as sentiment analysis on real datasets. By the end, students will have the skills to preprocess text data, extract meaningful features, and perform basic NLP tasks in R.
 
-Not only does this save us time, it makes the code far more readable. While the two approaches above return the same answer, the use of the function makes our intention immediately clear. It's important to remember it's not just you that will be using and reading your code.
+*Course Length: 2 days*
 
-The values you passed to the mean function are known as `arguments`. Most functions require one or more arguments in order to work, and details of these can be seen by checking the help file.
+*Prerequisites: Statistics in R*
 
-Running `?mean` shows us that the function mean has three arguments; `x`, `trim` and `na.rm`. You can pass these arguments to a function either by position or name. If you name the arguments in the function, R will use the values for the arguments they've been assigned to, e.g.:
+### Introduction to Machine Learning in R
 
-```{r}
-mean(x = c(1, 2, 3),
-     trim = 0,
-     na.rm = FALSE)
-```
+This course introduces the fundamentals of machine learning using R's state-of-the-art "mlr3" package. Participants will learn about classification, regression, and cluster analysis experiments. The course covers the entire machine learning workflow, from data preparation to model evaluation and interpretation. By the end, students will have hands-on experience implementing various machine learning algorithms and understand how to apply them to real-world problems.
 
-If you don't provide names for the arguments, R will just assign them in order, with the first value going to the first argument, etc:
+*Course Length: 3 days*
 
-```{r}
-mean(c(1, 2, 3), #These are used for the first argument, x
-     0, #This is used for the second argument, trim
-     FALSE) #This is used for the third argument, na.rm
-```
+*Prerequisites: Statistics in R*
 
-It is good practice to use names to assign any arguments after the first one or two, to avoid confusion and mistakes!
+### Packaging and Documentation
 
-You will notice that the first time we called the `mean` function, we didn't have to specify values for either `trim` or `na.rm`. if you check the help file, you'll notice that `trim` and `na.rm` have default values:
+This course guides participants through the process of building and sharing R packages. Students will learn how to create custom functions, organize them into a package structure, and document their code effectively. The course covers best practices in package development, including version control and collaboration. By the end, participants will be able to create their own R packages, enhancing code reusability and facilitating collaboration with other R users.
 
-```{r, eval = FALSE}
+*Course Length: 4 Hours*
 
-mean(x, trim = 0, na.rm = FALSE)
+*Prerequisites: R Control Flow Loops and Functions, Best Practice in Programming - Clean Code, Introduction to Git*
 
-```
+### Additional Analysis Modules
 
-When arguments have default values like this, they will use these if you don't provide an alternative. There is no default value for x, so if you don't provide a value for x the function will return an error.
+#### Quality Assurance of Predictive Modelling
 
-### Exercise
+This course explores critical quality issues in statistical modeling and machine learning for prediction. Participants will learn best practices for model design, validation, and usage across various industries. The course covers topics such as model interpretability, bias detection, and robustness testing. By the end, students will be equipped with the knowledge to ensure the reliability and effectiveness of their predictive models.
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+*Course Length: 6-8 hours*
 
-1.  Look at the help for the `sum()` function. What does it do?
-2.  How many arguments does the `sum()` function have? How many of these have default values?
-3.  Try summing up the values 1 to 8 using this function.
+*Prerequisites: Statistics in R*
 
-<details>
+#### Introduction to Sparklyr
 
-<summary style="font-size: 20px; font-weight: bold;">
+This course introduces Sparklyr, the R interface to Apache Spark for big data processing. Participants will learn how to handle and analyze massive datasets that exceed the capabilities of traditional R. The course covers data manipulation, querying, and processing techniques specific to Sparklyr. By the end, students will be able to leverage the power of distributed computing for their large-scale data analysis projects in R.
 
-Solution</strong>
+*Course Length: 2 days*
 
-</summary>
+*Prerequisites: Introduction to Machine Learning in R*
 
-<br>
+#### Introduction to Bayesian Data Analysis
 
-```{r, include = TRUE}
-#1. using sum() function
-?sum()
+This course provides a foundational understanding of Bayesian Data Analysis and its implementation in R. Participants will explore the principles of Bayesian statistics, including prior and posterior distributions, and Markov Chain Monte Carlo (MCMC) methods. The course includes hands-on examples of Bayesian analysis in R, covering model fitting and interpretation. By the end, students will be able to apply Bayesian techniques to their own data analysis projects.
 
-#2.sum() has two arguments: a numeric value or logical vector and 'na.rm'
-# whether missing values (NA) should be removed (TRUE or FALSE)
-# by default, NA values are ignored (i.e. na.rm = TRUE)
+*Course Length: 6 Hours*
 
-#3. summing values 1 to 8 using sum()
-sum(1:8, na.rm = TRUE)
-  
-```
+*Prerequisites: Statistics in R*
 
-</details>
+### Additional Developer Modules
 
-<br>
+#### Introduction to Unit Testing
 
-## Packages
+This course focuses on the principles and implementation of unit testing in R for ensuring code quality. Participants will learn how to design, create, and execute tests for their R code. The course covers both the theoretical aspects of software development and practical implementation in R. By the end, students will be able to implement robust testing strategies in their R projects, improving code reliability and maintainability.
 
-Being open-source means R has an extensive community of users that are building and improving packages for others. Base R covers a lot of useful functions but there's lots it doesn't, that's when we want to install packages. Each package contains a number of functions, once we install a package we have access to every one of it's functions.
+*Course Length: 4 Hours*
 
-Packages need to be both installed and loaded before they can be used. You only need to install a package the first time you use it, but you will need to load it every time you want to use it.
+*Prerequisites: Packaging and Documentation*
 
-Start by opening RStudio, which is an integrated development environment (IDE) for R. You don't have to use an IDE but it's strongly advised as it provides a user-friendly interface to work with.
+#### Introduction to Continuous Integration
 
-To install a package locally, run `install.packages("package_name")`, making sure the package name is wrapped in quotation marks. The code below will install the `tidyverse` package, which is actually a collection of data manipulation and presentation packages.
+This course introduces modern software development approaches, focusing on Continuous Integration (CI) concepts. Participants will learn about DevOps and CI/CD philosophies and how they contribute to efficient software development. The course covers tools and practices that automate testing and deployment processes. While not hands-on, this course provides essential background knowledge for advanced technical courses on building modern development infrastructures. *Course Length: 2 Hours*
 
-```{r, eval=FALSE}
-install.packages("tidyverse")
-```
-
-Once installed, you can load the packages using the `library()` function. Unlike installing packages, you don't need to wrap package names in quotation marks inside a library call.
-
-```{r, load_packages}
-library(tidyverse)
-```
-
-To know more about a package, it is always useful to read the associated documentation. You can do this by adding a `?` in front of the name of any package or function, and running this in the console
-
-```{r eval = FALSE}
-?tidyverse
-
-?select
-```
-
-## The Tidyverse
-
-While base R has a wide range of functions for data manipulation and visualisation, most analytical code will make use of **the tidyverse**. This is a specific group of packages which are designed for use in the reading, processing and visualisation of data, and aim to be easy to use for beginner coders and clear to read and write. It is recommended to use the tidyverse packages wherever possible to make code consistent.
-
-This training course will therefore make extensive use of tidyverse packages including `dplyr`, `ggplot2` and `tidyr`.
-
-The following exercise should be completed by those who are running through the course solo.
-
-### Exercise
-
-1.  Install the tidyverse package in your Console (do you remember where this is?!)
-2.  Load the tidyverse library at the top of your `Intro.R` script.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, eval = TRUE}
-library(tidyverse)
-```
-
-```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("img/tidyverse.svg")
-```
-
-</details>
-
-<br>
+*Prerequisites: Packaging and Documentation*

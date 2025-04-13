@@ -1,0 +1,109 @@
+---
+title: "KNBS Application"
+format: html
+---
+
+```{r include=FALSE}
+library(countdown)
+```
+
+## Application for KNBS
+
+`r countdown(minutes = 45, seconds = 0, style = "position: relative; width: min-content;")`
+
+In this application, we will practice some of the coding skills learned in the training so far. Whereas the examples used in the textbook use toy datasets which are already clean and well-formatted, the datasets used in our applications may require some initial cleaning prior to analysis. This is likely closer to tasks you might encounter in your everyday work at KNBS.
+
+In this particular application, we would like you to produce 3 simple pieces of analysis using Kenya's 2019 census data: the breakdown of Kenya by religious belief, the share of people who are migrants in each county, and the average working hours for men and women in rural vs. urban areas.
+
+There are two stages to this task. The first is to read in the data and prepare it to be analysed. This will involve reading the data in properly, fixing any column name issues, reducing the size of the dataset if it is too large, and finally dealing with any missing values, or NAs, that are found in the data.
+
+The second is to perform the analysis on your dataset. This will involve creating new columns,
+
+The 2019 Census data you need is found [at this link]()
+
+1.  Read in the dataset and use janitor to clean any column names
+2.  We need columns relating to migration, age, etc. Select the columns we will need - look at [survey metadata]()
+3.  Let's rename some columns to make them easier to understand
+4.  For our religion question, let's examine the data in this column
+5.  How should we approach the summary? How do we want to treat NAs, or DK
+6.  
+
+<details>
+
+<summary style="font-size: 20px; font-weight: bold;">
+
+Solution</strong>
+
+</summary>
+
+<br>
+
+```{r, include = TRUE, eval = FALSE}
+
+library(tidyverse)
+
+# Example 1
+
+
+
+
+# Example 1
+
+## Reading and cleaning names
+census <- read_csv("../intro_R-main/data/census.csv") |>
+  janitor::clean_names()
+
+## Creating a unique identifier, to allow us to drop columns
+census <-  census |> 
+  mutate(id = paste(sublocation_code, ea, ea_type, strnumber, hhnumber, line_number, sep = "_"),
+         hhid = paste(sublocation_code, ea, ea_type, hhnumber, sep = "_"))
+
+length(unique(census$id))
+## Dropping columns that we don't need, ro red
+
+religion <- census |> 
+  select(sublocation_code, ea, hhnumber, line_number, p17) |> 
+  rename(religion = p17) |> 
+
+sum(is.na(census$p19))
+
+migration <- census |>
+  select(county, subcounty_code, p19) |>
+  rename(birthplace = p19) |>
+  mutate(migrant = if_else(birthplace == county, 0, 1))
+
+mig_nairobi <- migration |>
+  group_by(subcounty_code) |>
+  summarise(migration_prop = mean(migrant))
+
+```
+
+```{r, include = TRUE, eval = FALSE}
+working_hours <- census |>
+  select(ea_type, p11, p52, p12) |>
+  rename(hours_worked_if_work = p52,
+         age = p12,
+         sex = p11) |>
+  filter(age >= 18) |>
+  mutate(
+    rural = if_else(ea_type == 1, 1, 0),
+    female = if_else(sex == 2, 1, 0),
+    hours_worked = replace_na(hours_worked_if_work, 0)
+  )
+
+
+working_hours_mean_adult <- working_hours |>
+  group_by(rural, female) |>
+  summarise(
+    hours_worked = mean(hours_worked, na.rm = TRUE),
+    hours_worked_if_work = mean(hours_worked_if_work, na.rm = TRUE)
+  )
+
+working_hours_mean_adult |>
+  ggplot(aes(y = hours_worked,  x = as.factor(female), fill = as.factor(rural))) +
+  geom_bar(stat = "identity", position = "dodge")
+```
+
+</details>
+
+<br>
