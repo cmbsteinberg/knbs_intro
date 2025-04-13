@@ -29,7 +29,11 @@ countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-cont
 
 1.  Navigate to the `Files` at the bottom right pane of your RStudio
 2.  Create a new folder called `data`
-3.  Save the GCP dataset to this folder as `gcp.csv`
+3.  Save this [GCP dataset](https://github.com/cmbsteinberg/knbs_intro/blob/main/data/gcp.csv) to this folder as `gcp.csv`. You will need to press the download button in the top right corner.
+
+```{r, echo=TRUE}
+read_csv("data/gcp.csv")
+```
 
 Great, we will come back to using these two files, but first let's discuss how to read in csv files.
 
@@ -51,10 +55,10 @@ Notice that the file is inside the **data** folder inside the current working di
 
 `gcp` will now show in your environment. The environment viewer (top right) shows you basic information about the data that has been loaded in. You can also click on any object to view it in your script window.
 
-You can also read in data directly from the web using the same function. For example, reading in this CSV of Eurovision Song Contest data:
+You can also read in data directly from the web using the same function. For example, with the same GCP data
 
 ```{r, eval = T}
-eurovision_data <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-17/eurovision.csv")
+gcp_ <- read_csv("https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv")
 ```
 
 This works exactly the same way as reading in local data, and the object you have created will appear in your environment (top right).
@@ -82,10 +86,10 @@ frogs <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday
 
 ### Inspecting the dataset
 
-As noted in the previous section, you can see by looking in the environment window that the eurovision dataset has 2005 observations and 18 variables. You can also return this information (and more) about datasets programatically, using the `glimpse()` function, again from the dplyr package:
+As noted in the previous section, you can see by looking in the environment window that the eurovision dataset has 48 observations and 22 variables. You can also return this information (and more) about datasets programatically, using the `glimpse()` function, again from the dplyr package:
 
 ```{r}
-glimpse(eurovision_data)
+glimpse(gcp)
 ```
 
 As well as returning the number of rows and columns in the data, the glimpse function also shows you the names of the columns, the column classes (indicated in <triangular brackets>), and an example of the first few rows of data.
@@ -123,9 +127,7 @@ If we don't set any of these arguments it will assume our data is in the first r
 
 ```{r, eval = FALSE}
 # One option is to download the file 
-url = "https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"
-download_first <- download.file(,destfile = "tourism.xlsx")
-tourism <- read_excel("tourism.xlsx")
+tourism <- read_excel("data/tourism.xlsx")
 ```
 
 ### Exercise
@@ -137,8 +139,8 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 ```
 
 1.  Install and load the readxl package.
-2.  Try downloading an excel spreadsheet from KNBS. For example: "https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"
-3.  Specify the sheet name you want to read in.
+2.  Download this [dataset published by KNBS about the tourism sector]("https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx"), saving it into /data
+3.  Read it in, specifying the sheet name you want to read in.
 4.  Examine the data you have read in; are the column names what you want? Work out how to skip these and only read in the data, with the correct column names.
 
 
@@ -156,9 +158,7 @@ Sometimes you may want to read a selection of files of all different types. This
 
 ## Column Names
 
-In the previous section we looked at reading data into R and also inspecting it.
-
-In this section we are going to look at how to manipulate it.
+In the previous section we looked at reading data into R and also inspecting it. In this section we are going to look at our first steps once it's read in.
 
 In the previous session we stated that every column in a data frame is a variable and it is good practice to not have spaces within variable names, as spaces makes it harder for us to call on the variables when we need to use them.
 
@@ -194,15 +194,13 @@ We can see the column names by using the `names()` function to access the `name`
 names(Titanic)
 ```
 
-As we can see our column names have spaces and some start with capital letters and some with small letters, we can clean the names using the either the `janitor package` or `gsub`.
+As we can see our column names have spaces and some start with capital letters and some with small letters, we can clean the names using the `janitor` package.
 
 ### Cleaning Column Names
 
--   [**janitor Package**](#janitor-package)
-
 The `janitor` package offers many functions used to manipulate data, for example removing empty rows and columns, finding duplicates within a data frame. In this session we will use the library to to clean our data set names.
 
-We can clean the names of our dataset with the **janitor::`clean_names()`** function as shown below.
+We can clean the names of our dataset with the `janitor::clean_names()` function as shown below.
 
 We are overwriting the original Titanic data frame with a version with the column names cleaned.
 
@@ -212,11 +210,11 @@ We are overwriting the original Titanic data frame with a version with the colum
 # This will put all names in lower case letters and 
 # replace blank spaces with underscores.
 
-Titanic <- janitor::clean_names(Titanic)
+titanic <- janitor::clean_names(Titanic)
 
 # Getting the column names of the dataset
 
-names(Titanic)
+names(titanic)
 ```
 
 `clean_names()` removes spaces, symbols, changes characters to lower case and makes all columns start with letters.
