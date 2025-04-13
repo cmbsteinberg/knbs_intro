@@ -31,8 +31,10 @@ countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-cont
 2.  Create a new folder called `data`
 3.  Save this [GCP dataset](https://github.com/cmbsteinberg/knbs_intro/blob/main/data/gcp.csv) to this folder as `gcp.csv`. You will need to press the download button in the top right corner.
 
-```{r, echo=TRUE}
-read_csv("data/gcp.csv")
+```{r}
+#| eval: false
+
+gcp <- read_csv("data/gcp.csv")
 ```
 
 Great, we will come back to using these two files, but first let's discuss how to read in csv files.
@@ -47,7 +49,8 @@ To read in a local file, you have to specify the exact location of the file. You
 
 We will start by reading in some local data, which contains details of Kenyan Gross County Product by economic activity for 2017:
 
-```{r use_read_csv, eval=FALSE}
+```{r}
+#| echo: true
 gcp <- read_csv("data/gcp.csv")
 ```
 
@@ -58,7 +61,7 @@ Notice that the file is inside the **data** folder inside the current working di
 You can also read in data directly from the web using the same function. For example, with the same GCP data:
 
 ```{r}
-gcp_ <- read_csv("https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv")
+gcp <- read_csv("https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv")
 ```
 
 This works exactly the same way as reading in local data, and the object you have created will appear in your environment (top right).
