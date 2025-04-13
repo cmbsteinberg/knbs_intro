@@ -3,3 +3,6 @@ title: "KNBS Applications"
 format: html
 ---
 
+# KNBS Training
+
+As part of training for the Kenya National Bureau of Statistics (KNBS), real world examples are provided to complement traditional learning. 

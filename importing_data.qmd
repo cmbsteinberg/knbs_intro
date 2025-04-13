@@ -55,9 +55,9 @@ Notice that the file is inside the **data** folder inside the current working di
 
 `gcp` will now show in your environment. The environment viewer (top right) shows you basic information about the data that has been loaded in. You can also click on any object to view it in your script window.
 
-You can also read in data directly from the web using the same function. For example, with the same GCP data
+You can also read in data directly from the web using the same function. For example, with the same GCP data:
 
-```{r, eval = T}
+```{r}
 gcp_ <- read_csv("https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv")
 ```
 

@@ -4,7 +4,6 @@ format: html
 ---
 
 ```{r include=FALSE}
-# load packages
 library(gapminder)
 library(countdown)
 library(dplyr)
