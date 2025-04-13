@@ -51,30 +51,22 @@ This is the basic structure of any ggplot chart, but there are plenty of things 
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Use the iris dataset (another built-in dataset in R) to create a simple scatter (geom_point) chart, plotting Sepal.Length as the x axis and Sepal.Width as the y
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-3.1.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include = TRUE}
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point()
 
 ```
-
-</details>
-
-<br>
 
 ## Types of Geom Functions
 
@@ -102,21 +94,17 @@ ggplot(data = mpg, aes(x = displ, y = hwy))+
 
 ### Exercise
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Use the geom_smooth aesthetic to add a smoothed line to your scatter plot.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-3.2.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include = TRUE}
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point() +
@@ -124,9 +112,6 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 ```
 
-</details>
-
-<br>
 
 ## Adding different aesthetics
 
@@ -180,31 +165,24 @@ ggplot(data = mpg, aes(x = displ, y = hwy))+
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Map the colour aesthetic of your chart to correspond to the Species in the iris dataset.
 2.  Manually map the shape of the geom_point to be type 3
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-3.3.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include = TRUE}
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point(shape = 3) 
 
 ```
 
-</details>
-
-<br>
 
 ## Adding Layers
 
@@ -309,31 +287,23 @@ ggplot(data = mpg, aes(x = displ, y = hwy, colour = class))+
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Change the colour palette your chart uses to something you like better than the default! Use the scale_colour_brewer or scale_colour_manual to do this.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-3.6.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include = TRUE}
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point(shape = 3) +
   scale_colour_brewer(palette = "Dark2")
 
 ```
-
-</details>
-
-<br>
 
 ## Facets
 
@@ -402,22 +372,18 @@ plot+ugly.theme
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Add one of the default themes to your chart to improve its appearance.
 2.  Add a title and labels to your axes
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-3.9.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include = TRUE}
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
   geom_point() +
@@ -429,9 +395,6 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 
 ```
 
-</details>
-
-<br>
 
 ## Saving plots
 
@@ -452,7 +415,3 @@ ggsave(filename = paste0("plot_", Sys.Date(), ".png"), plot = myplot)
 ```
 
 This will save the plot `myplot` as a PNG file with a filename that includes the current date, like `plot_2025-03-07.png`, where `Sys.Date()` provides today's date in the format `YYYY-MM-DD`. It's a great way to ensure your plot files are uniquely named based on the date.
-
-<br>
-
-This is a good opportunity to take a 10-minute break away from the computer to refresh your mind, stretch, and reset before continuing onto Chapter 4 and 5.

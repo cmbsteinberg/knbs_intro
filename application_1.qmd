@@ -28,13 +28,15 @@ There are two stages to this task. The first is to read in the data and prepare 
 
 The second is to perform the analysis on your dataset. This will involve creating new columns, filtering out certain data, and creating summaries.
 
-## Setup
+## Preparing your dataset for analyis
 
 1. Read the dataset using `read_csv` and clean the column names using `janitor::clean_names`. The 2019 Census data you need is found [at this link](). The survey information is [here](https://statistics.knbs.or.ke/nada/index.php/catalog/116/download/534)
 
-2. Select the columns required for the three pieces of analysis (e.g., p17 for religion) using select. Rename the selected columns to be more descriptive (e.g., religion) using rename. 
+2. There are lots of columns in this dataset, making it slow to perform analysis. Select the columns required for the three pieces of analysis (e.g., p17 for religion) using `select`. Rename the selected columns to be more descriptive (e.g., religion) using `rename`. 
 
 3. Examine your data. For each task, are there any NA's or other strange values in your columns? Think about how to handle any NA's and use `mutate` and `case_when`, or `filter` to address them.
+
+## Analysis
 
 ### Breakdown of Kenya by religious belief
 
@@ -42,15 +44,19 @@ The second is to perform the analysis on your dataset. This will involve creatin
 
 ### Share of people who are migrants in each county
 
-6. Create a new binary column named migrant using `mutate` and `case_when` to indicate if an individual's birthplace county is different from their current county. 
+5. Create a new binary column named migrant using `mutate` and `case_when` to indicate if an individual's birthplace county is different from their current county. 
+
 6. Calculate the share of migrants in each county: Group by county using `group_by` and calculate the mean of the migrant column using `summarise(migration_prop = mean(migrant))`. 
 
 ### Average working hours for men and women in rural vs. urban areas.
 
-8. Filter the data to include only the working-age population or adults (e.g., age >= 18) using filter. 
-9. Create binary indicator columns for rural (based on ea_type) and female (based on sex) using `mutate` and `case_when` 
-10. Create an hours_worked column where missing values (NA) in the original hours worked column (hours_worked_if_work) are replaced with 0, using `mutate` and `replace_na.`
-11. Calculate the average working hours: Group by the rural and female columns using group_by and calculate the mean of hours_worked and hours_worked_if_work using `summarise(mean())`. Remember to handle potential NAs in the mean calculation (e.g., using na.rm = TRUE). 
+7. Filter the data to include only the working-age population or adults (e.g., age >= 18) using filter. 
+
+8. Create binary indicator columns for rural (based on ea_type) and female (based on sex) using `mutate` and `case_when` 
+
+9. Create an hours_worked column where missing values (NA) in the original hours worked column (hours_worked_if_work) are replaced with 0, using `mutate` and `replace_na.`
+
+10. Calculate the average working hours: Group by the rural and female columns using group_by and calculate the mean of hours_worked and hours_worked_if_work using `summarise(mean())`. Remember to handle potential NAs in the mean calculation (e.g., using na.rm = TRUE). 
 
 
 

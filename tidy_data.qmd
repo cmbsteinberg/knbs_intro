@@ -111,21 +111,17 @@ pay_gap_long <- pay_gap |>
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Using the inbuilt dataset `billboard`, pivot the week columns into a single long column. Call the dataset `billboard_long`
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 #Option 1: Excluding columns not being pivoted
 billboard_long <- billboard |>
   pivot_longer(cols = -c(artist, track, date.entered),
@@ -144,20 +140,6 @@ billboard_long <- billboard |>
                names_to = "week",
                values_to = "rank")
 ```
-
-```{r, eval = TRUE}
-#Using option 1
-billboard_long <- billboard |>
-  pivot_longer(cols = -c(artist, track, date.entered),
-               names_to = "week",
-               values_to = "rank")
-
-billboard_long
-```
-
-</details>
-
-<br>
 
 ## Combining data tidying with data manipulation
 
@@ -193,24 +175,20 @@ ggplot(pay_gap_summary, aes(x = employer_size,
 
 ### Exercise
 
-`r countdown(minutes = 15, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 15, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Using the inbuilt dataset `relig_income`, pivot the income columns into a long dataset.
 2.  Assign this to an object called `income_long`
 3.  Using the dataset income_long you created, plot a bar chart in ggplot. Use religion as the x axis and the count of people as the y axis.
 4.  Assign the income groupings to the colour aesthetic.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.4.1. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
 #Tidy the data using pivot_longer()
 income_long <- relig_income |>
   pivot_longer(cols = -religion,
@@ -228,10 +206,6 @@ income_chart <-
 #print() allows you to view the chart in the 'Plots' tab
 print(income_chart)
 ```
-
-</details>
-
-<br>
 
 ## Multiple data frames
 
