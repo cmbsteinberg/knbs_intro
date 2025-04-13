@@ -1,9 +1,7 @@
 ---
-title: "mapping"
+title: "Introduction to GIS in R"
 format: html
 ---
-
-# Introduction to GIS in R
 
 ```{r, include=FALSE}
 
@@ -179,8 +177,6 @@ plotly::ggplotly(ggplot_graph)
 </details>
 
 <br>
-
-
 
 ## Filtering by Administration Code
 

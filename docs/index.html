@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -66,8 +32,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data_manipulation.html" rel="next">
-<link href="./curriculum.html" rel="prev">
+<link href="./intro.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -104,8 +69,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
-<script src="site_libs/countdown-0.4.0/countdown.js"></script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -119,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Curriculum</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./curriculum.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNBS R Programming Curriculum</span></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Curriculum</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./index.html" class="sidebar-item-text sidebar-link active">
+            <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -161,27 +127,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./data_manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./importing_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Plotting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basic Plotting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">KNBS Applications</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./application_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Application 1</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">mapping</span></span>
+ <span class="menu-text">Introduction to GIS in R</span></span>
   </li>
     </ul>
     </div>
@@ -193,30 +182,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r"><span class="header-section-number">1</span> Introduction to R</a>
+  <li><a href="#knbs-r-programming-curriculum" id="toc-knbs-r-programming-curriculum" class="nav-link active" data-scroll-target="#knbs-r-programming-curriculum"><span class="header-section-number">1</span> KNBS R Programming Curriculum</a>
   <ul class="collapse">
-  <li><a href="#session-aims" id="toc-session-aims" class="nav-link" data-scroll-target="#session-aims"><span class="header-section-number">1.1</span> Session aims</a></li>
-  <li><a href="#what-is-r" id="toc-what-is-r" class="nav-link" data-scroll-target="#what-is-r"><span class="header-section-number">1.2</span> What is R?</a></li>
-  <li><a href="#introducing-rstudio" id="toc-introducing-rstudio" class="nav-link" data-scroll-target="#introducing-rstudio"><span class="header-section-number">1.3</span> Introducing RStudio</a>
-  <ul class="collapse">
-  <li><a href="#recommended-changes" id="toc-recommended-changes" class="nav-link" data-scroll-target="#recommended-changes"><span class="header-section-number">1.3.1</span> Recommended Changes</a></li>
+  <li><a href="#curriculum-overview" id="toc-curriculum-overview" class="nav-link" data-scroll-target="#curriculum-overview"><span class="header-section-number">1.1</span> Curriculum Overview</a></li>
   </ul></li>
-  <li><a href="#basic-syntax" id="toc-basic-syntax" class="nav-link" data-scroll-target="#basic-syntax"><span class="header-section-number">1.4</span> Basic Syntax</a>
+  <li><a href="#course-runthrough" id="toc-course-runthrough" class="nav-link" data-scroll-target="#course-runthrough"><span class="header-section-number">2</span> Course Runthrough</a>
   <ul class="collapse">
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">1.4.1</span> Exercise</a></li>
-  <li><a href="#the-assignment-operator" id="toc-the-assignment-operator" class="nav-link" data-scroll-target="#the-assignment-operator"><span class="header-section-number">1.4.2</span> The assignment operator</a></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">1.4.3</span> Exercise</a></li>
-  <li><a href="#combining-using-c" id="toc-combining-using-c" class="nav-link" data-scroll-target="#combining-using-c"><span class="header-section-number">1.4.4</span> Combining using <code>c()</code></a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="header-section-number">1.4.5</span> Exercise</a></li>
+  <li><a href="#beginner-level" id="toc-beginner-level" class="nav-link" data-scroll-target="#beginner-level"><span class="header-section-number">2.1</span> Beginner Level</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link" data-scroll-target="#introduction-to-r"><span class="header-section-number">2.1.1</span> Introduction to R</a></li>
+  <li><a href="#introduction-to-data-visualisation" id="toc-introduction-to-data-visualisation" class="nav-link" data-scroll-target="#introduction-to-data-visualisation"><span class="header-section-number">2.1.2</span> Introduction to Data Visualisation</a></li>
+  <li><a href="#introduction-to-gis-in-r" id="toc-introduction-to-gis-in-r" class="nav-link" data-scroll-target="#introduction-to-gis-in-r"><span class="header-section-number">2.1.3</span> Introduction to GIS in R</a></li>
+  <li><a href="#r-control-flow-loops-and-functions" id="toc-r-control-flow-loops-and-functions" class="nav-link" data-scroll-target="#r-control-flow-loops-and-functions"><span class="header-section-number">2.1.4</span> R Control Flow Loops and Functions</a></li>
+  <li><a href="#optional-modules" id="toc-optional-modules" class="nav-link" data-scroll-target="#optional-modules"><span class="header-section-number">2.1.5</span> Optional Modules</a></li>
   </ul></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.5</span> Functions</a>
+  <li><a href="#intermediate-level" id="toc-intermediate-level" class="nav-link" data-scroll-target="#intermediate-level"><span class="header-section-number">2.2</span> Intermediate Level</a>
   <ul class="collapse">
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3"><span class="header-section-number">1.5.1</span> Exercise</a></li>
+  <li><a href="#introduction-to-git" id="toc-introduction-to-git" class="nav-link" data-scroll-target="#introduction-to-git"><span class="header-section-number">2.2.1</span> Introduction to Git</a></li>
+  <li><a href="#statistics-in-r" id="toc-statistics-in-r" class="nav-link" data-scroll-target="#statistics-in-r"><span class="header-section-number">2.2.2</span> Statistics in R</a></li>
+  <li><a href="#more-gis-in-r" id="toc-more-gis-in-r" class="nav-link" data-scroll-target="#more-gis-in-r"><span class="header-section-number">2.2.3</span> More GIS in R</a></li>
+  <li><a href="#optional-modules-1" id="toc-optional-modules-1" class="nav-link" data-scroll-target="#optional-modules-1"><span class="header-section-number">2.2.4</span> Optional Modules</a></li>
   </ul></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">1.6</span> Packages</a></li>
-  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="header-section-number">1.7</span> The Tidyverse</a>
+  <li><a href="#advanced-level" id="toc-advanced-level" class="nav-link" data-scroll-target="#advanced-level"><span class="header-section-number">2.3</span> Advanced Level</a>
   <ul class="collapse">
-  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4"><span class="header-section-number">1.7.1</span> Exercise</a></li>
+  <li><a href="#introduction-to-nlp-in-r" id="toc-introduction-to-nlp-in-r" class="nav-link" data-scroll-target="#introduction-to-nlp-in-r"><span class="header-section-number">2.3.1</span> Introduction to NLP in R</a></li>
+  <li><a href="#introduction-to-machine-learning-in-r" id="toc-introduction-to-machine-learning-in-r" class="nav-link" data-scroll-target="#introduction-to-machine-learning-in-r"><span class="header-section-number">2.3.2</span> Introduction to Machine Learning in R</a></li>
+  <li><a href="#packaging-and-documentation" id="toc-packaging-and-documentation" class="nav-link" data-scroll-target="#packaging-and-documentation"><span class="header-section-number">2.3.3</span> Packaging and Documentation</a></li>
+  <li><a href="#additional-analysis-modules" id="toc-additional-analysis-modules" class="nav-link" data-scroll-target="#additional-analysis-modules"><span class="header-section-number">2.3.4</span> Additional Analysis Modules</a></li>
+  <li><a href="#additional-developer-modules" id="toc-additional-developer-modules" class="nav-link" data-scroll-target="#additional-developer-modules"><span class="header-section-number">2.3.5</span> Additional Developer Modules</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -256,322 +249,224 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction-to-r" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction to R</h1>
-<p>In this course, you will explore the versatility of R, a powerful language for statistical computing and graphics. You will discover the benefits of using R and get started with the basics, and fain confidence with the user-friendly R Studio interface and learn fundamental R concepts. You will also dive into the Tidyverse, a collection of packages for data storage, visualisation and manipulation. This course offers a solid foundation to kickstart your journey with R!</p>
-<p>This book is designed to accompany the Introduction to R training that is starting at KNBS. To complete this course, you will need to have <a href="https://posit.co/download/rstudio-desktop/">R Studio</a> installed on your computer.</p>
-<p>If you’re running through this book solo, it is recommended to run through it in order and try out all the of the exercises as you go through. Each exercise has a <strong>Solution</strong> dropdown, which allows you to view prompts to help with the question and see the answers.</p>
-<section id="session-aims" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="session-aims"><span class="header-section-number">1.1</span> Session aims</h2>
-<ul>
-<li>navigate the R and R Studio environment</li>
-<li>understand and use the common R functions for data manipulation</li>
-<li>understand the basics of data visualisation using the ggplot2 package</li>
-<li>understand the term <em>tidy data</em> and why it is important for writing efficient code</li>
-</ul>
-</section>
-<section id="what-is-r" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="what-is-r"><span class="header-section-number">1.2</span> What is R?</h2>
-<p>R is an open-source programming language and software environment, designed primarily for statistical computing. It has a long history - it is based on the S language, which was developed in 1976 in Bell Labs, where the UNIX operating system and the C and C++ languages were developed. The R language itself was developed in the 1990s, with the first stable version release in 2000.</p>
-<p>R has grown rapidly in popularity particularly in the last five years, due to the increased interest in the data science field. It is now a key tool used by analysts in governments globally.</p>
-<p>Some of the advantages:</p>
-<ul>
-<li>It is <strong>popular</strong> - there is a large, active and rapidly growing community of R programmers, which has resulted in a plethora of resources and extensions.</li>
-<li>It is <strong>powerful</strong> - the history as a statistical language means it is well suited for data analysis and manipulation.</li>
-<li>It is <strong>extensible</strong> - there are a vast array of <strong>packages</strong> that can be added to extend the functionality of R, produced by statisticians and programmers around the world. These can range from obscure statistical techniques to tools for making interactive charts.</li>
-<li>It’s <strong>free and open source</strong> - a large part of its popularity can be owed to its low cost, particularly relative to proprietary software such as SAS or STATA.</li>
-</ul>
-</section>
-<section id="introducing-rstudio" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="introducing-rstudio"><span class="header-section-number">1.3</span> Introducing RStudio</h2>
-<p>RStudio is an integrated development environment (IDE) for R. You don’t have to use an IDE but it’s strongly advised as it provides a user-friendly interface to work with. RStudio has four main panels;</p>
-<ol type="1">
-<li><strong>Script Editor</strong> (top left) - used to write and save your code, which is only run when you explicitly tell RStudio to do so.</li>
-<li><strong>Console</strong> (bottom left) - all code is run through the console, even the code you write in the script editor is sent to the console to be run. It’s perfect for quickly viewing data structures and help for functions but should not be used to write code you want to save (that should be done in the script editor).</li>
-<li><strong>Environment</strong> (top right) - all data, objects and functions that you have read in/created will appear here.</li>
-<li><strong>Files/Plots/Help</strong> (bottom right) - this pane groups a few miscellaneous areas of RStudio.
-<ul>
-<li><em>Files</em> acts like the windows folder to navigate between files and folders.</li>
-<li><em>Plots</em> shows any graphs that you generate.</li>
-<li><em>Packages</em> let’s you install and manage packages currently in use.</li>
-<li><em>Help</em> provides information about packages or functions, including how to use them.</li>
-<li><em>Viewer</em> is essentially RStudio’s built-in browser, which can be used for web app development.</li>
-</ul></li>
-</ol>
-<p>You may have noticed that your Script Editor is bigger than the Console or your Environment has suddenly disappeared. In RStudio, you can adjust the size of different panes by clicking and dragging the dividers between them. If you want to maximize a specific pane, such as the Script Editor, use the shortcut <strong>Ctrl + Shift + 1</strong> (Windows/Linux) or <strong>Cmd + Shift + 1</strong> (Mac) to focus on it. To restore the default layout, press <strong>Ctrl + Shift + 0</strong> (Windows/Linux) or <strong>Cmd + Shift + 0 (Mac)</strong>. You can also use the <strong>View</strong> menu to toggle different panes on and off, ensuring your workspace suits your needs.</p>
-<p>If you find the text difficult to read or prefer a different appearance, you can customise the <strong>theme</strong>, <strong>font</strong>, and <strong>text size</strong> in RStudio. Go to <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code>, where you can choose from different editor themes (e.g., light or dark mode), adjust the font type, and increase or decrease the text size for better readability. These changes can help make coding more comfortable, especially during long sessions.</p>
-<section id="recommended-changes" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="recommended-changes"><span class="header-section-number">1.3.1</span> Recommended Changes</h3>
-<p>While not necessary, certain changes are almost always recommended for visibility reasons. These include: - Choosing a different theme, as Textmate can be hard on the eyes. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code> &gt; <code>Editor theme:</code>. - Highlight R function calls. This makes functions look a different colour than normal text, which can make reading your code much easier. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Code</code> &gt; <code>Display</code> &gt; <code>Highlight R function calls</code>. - Use Rainbow Parenthesis. This makes each pair of () in a line a different colour, which can help you catch if you’re missing one and it’s breaking your code. This can be done in <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Code</code> &gt; <code>Display</code> &gt; <code>Use rainbow parenthesis</code>.</p>
-</section>
-</section>
-<section id="basic-syntax" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="basic-syntax"><span class="header-section-number">1.4</span> Basic Syntax</h2>
-<section id="exercise" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">1.4.1</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_a7bef097" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
-<p>As a quick exercise, try out some arithmetic in your console:</p>
-<ol type="1">
-<li>25 * 15</li>
-<li>(45 + 3) ^ 2</li>
-<li>78 / 4</li>
-</ol>
-<p>Now open a new script (File -&gt; New File -&gt; R Script) and save it as Intro.R</p>
-<ol type="1">
-<li>Repeat the above exercises. What happens when you hit enter? Try using <code>Ctrl</code> + <code>Enter</code></li>
-</ol>
-<details>
-<summary style="font-size: 20px; font-weight: bold;">
-<p>Solution</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="sc">*</span> <span class="dv">15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 375</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">45</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2304</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">78</span> <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.5</code></pre>
-</div>
-</div>
-</details>
-<p><br></p>
-</section>
-<section id="the-assignment-operator" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="the-assignment-operator"><span class="header-section-number">1.4.2</span> The assignment operator</h3>
-<p>R uses the assignment operator <code>&lt;-</code> to assign values or data frames to objects. The object name goes on the left, with the object value on the right. For example, <code>x &lt;- 5</code> assigns the value 5 to the object <code>x</code>. You can quickly type the assignment operator in RStudio by pressing <code>Alt</code> + <code>-</code> (Windows) or <code>Option</code> + <code>-</code> (Mac).</p>
-<p>Other programming languages tend to use <code>=</code>. The equals sign is used in R but for other purposes, as you’ll find out later. Note: <code>=</code> will actually work for assignment in R but it is not convention.</p>
-</section>
-<section id="exercise-1" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">1.4.3</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_3867f217" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
-<ol type="1">
-<li>Create an object x1 with a value of 14</li>
-<li>Create an object x2 with a value of x1 + 7</li>
-<li>Check the value of x2 by looking in the environment pane</li>
-<li>Create an object x3 equal to x2 divided by 3.</li>
-</ol>
-<details>
-<summary style="font-size: 20px; font-weight: bold;">
-<p>Solution</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="dv">14</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 14</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> <span class="dv">7</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 21</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> x2 <span class="sc">/</span> <span class="dv">3</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
-</div>
-</div>
-</details>
-<p><br></p>
-</section>
-<section id="combining-using-c" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="combining-using-c"><span class="header-section-number">1.4.4</span> Combining using <code>c()</code></h3>
-<p>So how do you assign more than one number to an object? Typing <code>x &lt;- 1,2,3</code> will throw an error. The way to do it is to combine the values into a vector before assigning. For example, <code>x &lt;- c(1, 2, 3)</code>.</p>
-<p>Note: all elements of a vector must be of the same type; either numeric, character, or logical. Vector types are important, but they aren’t interesting, which is why they aren’t covered on this course. We advise you to <a href="https://r4ds.had.co.nz/vectors.html">read about vectors</a> in your own time.</p>
-</section>
-<section id="exercise-2" class="level3" data-number="1.4.5">
-<h3 data-number="1.4.5" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">1.4.5</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_2b7cec40" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
-<ol type="1">
-<li>Use the combine function to create a vector with values 1, 2 and 3.</li>
-<li>What happens when you write <code>1:10</code> inside <code>c()</code>?</li>
-<li>What happens if you try to create a vector containing a number such as 2019 and the word “year”?</li>
-</ol>
-<details>
-<summary style="font-size: 20px; font-weight: bold;">
-<p>Solution</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1. combine c() to create vector with values 1,2,3</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2. combine c() with 1:10</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3. Incorrect code: will throw an error</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2019</span>, year)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] 2019
-
-[[2]]
-function (x) 
-{
-    UseMethod("year")
-}
-&lt;bytecode: 0x11fc82850&gt;
-&lt;environment: namespace:lubridate&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3. Correct code</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2019</span>, <span class="st">"year"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2019" "year"</code></pre>
-</div>
-</div>
-</details>
-<p><br></p>
-</section>
-</section>
-<section id="functions" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.5</span> Functions</h2>
-<p>Functions are one of the most important aspects of any programming language. Functions are essentially just R scripts that other R users have created. You could write a whole project without using any functions, but why would we when others have done the hard work for us? To demonstrate how using functions can save us time let’s look at an example.</p>
-<p>Imagine you had the following data for test scores of students and you wanted to find the mean score:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>test_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">68</span>, <span class="dv">56</span>, <span class="dv">88</span>, <span class="dv">42</span>, <span class="dv">55</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We could extract each individual score from the data frame, add them together and then divide them by the number of elements:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(test_scores[<span class="dv">1</span>] <span class="sc">+</span> test_scores[<span class="dv">2</span>] <span class="sc">+</span> test_scores[<span class="dv">3</span>] <span class="sc">+</span> test_scores[<span class="dv">4</span>] <span class="sc">+</span> test_scores[<span class="dv">5</span>] <span class="sc">+</span> test_scores[<span class="dv">6</span>]) <span class="sc">/</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 63.16667</code></pre>
-</div>
-</div>
-<p>This gives us the mean score of 63.2. But that’s pretty tedious, especially if our data set was of any significant size. To overcome this we can use a function called <code>mean()</code>. To read about a function in R type <code>help("function_name")</code> or <code>?function_name</code> in the console. By reading the help file we see that <code>mean()</code> requires an R object of numerical values. So we can pass our <code>test_scores</code> data as the argument:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(test_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 63.16667</code></pre>
-</div>
-</div>
-<p>Not only does this save us time, it makes the code far more readable. While the two approaches above return the same answer, the use of the function makes our intention immediately clear. It’s important to remember it’s not just you that will be using and reading your code.</p>
-<p>The values you passed to the mean function are known as <code>arguments</code>. Most functions require one or more arguments in order to work, and details of these can be seen by checking the help file.</p>
-<p>Running <code>?mean</code> shows us that the function mean has three arguments; <code>x</code>, <code>trim</code> and <code>na.rm</code>. You can pass these arguments to a function either by position or name. If you name the arguments in the function, R will use the values for the arguments they’ve been assigned to, e.g.:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">trim =</span> <span class="dv">0</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>If you don’t provide names for the arguments, R will just assign them in order, with the first value going to the first argument, etc:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="co">#These are used for the first argument, x</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>     <span class="dv">0</span>, <span class="co">#This is used for the second argument, trim</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>     <span class="cn">FALSE</span>) <span class="co">#This is used for the third argument, na.rm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>It is good practice to use names to assign any arguments after the first one or two, to avoid confusion and mistakes!</p>
-<p>You will notice that the first time we called the <code>mean</code> function, we didn’t have to specify values for either <code>trim</code> or <code>na.rm</code>. if you check the help file, you’ll notice that <code>trim</code> and <code>na.rm</code> have default values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>When arguments have default values like this, they will use these if you don’t provide an alternative. There is no default value for x, so if you don’t provide a value for x the function will return an error.</p>
-<section id="exercise-3" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">1.5.1</span> Exercise</h3>
-<p></p><div class="countdown" id="timer_18f1663d" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;"> <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div> <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code> </div><p></p>
-<ol type="1">
-<li>Look at the help for the <code>sum()</code> function. What does it do?</li>
-<li>How many arguments does the <code>sum()</code> function have? How many of these have default values?</li>
-<li>Try summing up the values 1 to 8 using this function.</li>
-</ol>
-<details>
-<summary style="font-size: 20px; font-weight: bold;">
-<p>Solution</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1. using sum() function</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>?<span class="fu">sum</span>()</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#2.sum() has two arguments: a numeric value or logical vector and 'na.rm'</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># whether missing values (NA) should be removed (TRUE or FALSE)</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># by default, NA values are ignored (i.e. na.rm = TRUE)</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#3. summing values 1 to 8 using sum()</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
-</div>
-</div>
-</details>
-<p><br></p>
-</section>
-</section>
-<section id="packages" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.6</span> Packages</h2>
-<p>Being open-source means R has an extensive community of users that are building and improving packages for others. Base R covers a lot of useful functions but there’s lots it doesn’t, that’s when we want to install packages. Each package contains a number of functions, once we install a package we have access to every one of it’s functions.</p>
-<p>Packages need to be both installed and loaded before they can be used. You only need to install a package the first time you use it, but you will need to load it every time you want to use it.</p>
-<p>Start by opening RStudio, which is an integrated development environment (IDE) for R. You don’t have to use an IDE but it’s strongly advised as it provides a user-friendly interface to work with.</p>
-<p>To install a package locally, run <code>install.packages("package_name")</code>, making sure the package name is wrapped in quotation marks. The code below will install the <code>tidyverse</code> package, which is actually a collection of data manipulation and presentation packages.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Once installed, you can load the packages using the <code>library()</code> function. Unlike installing packages, you don’t need to wrap package names in quotation marks inside a library call.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To know more about a package, it is always useful to read the associated documentation. You can do this by adding a <code>?</code> in front of the name of any package or function, and running this in the console</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>?tidyverse</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>?select</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="the-tidyverse" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">1.7</span> The Tidyverse</h2>
-<p>While base R has a wide range of functions for data manipulation and visualisation, most analytical code will make use of <strong>the tidyverse</strong>. This is a specific group of packages which are designed for use in the reading, processing and visualisation of data, and aim to be easy to use for beginner coders and clear to read and write. It is recommended to use the tidyverse packages wherever possible to make code consistent.</p>
-<p>This training course will therefore make extensive use of tidyverse packages including <code>dplyr</code>, <code>ggplot2</code> and <code>tidyr</code>.</p>
-<p>The following exercise should be completed by those who are running through the course solo.</p>
-<section id="exercise-4" class="level3" data-number="1.7.1">
-<h3 data-number="1.7.1" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">1.7.1</span> Exercise</h3>
-<ol type="1">
-<li>Install the tidyverse package in your Console (do you remember where this is?!)</li>
-<li>Load the tidyverse library at the top of your <code>Intro.R</code> script.</li>
-</ol>
-<details>
-<summary style="font-size: 20px; font-weight: bold;">
-<p>Solution</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-layout-align="center">
+<section id="knbs-r-programming-curriculum" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> KNBS R Programming Curriculum</h1>
+<p>This comprehensive curriculum is designed to take KNBS employees from novice R users to advanced practitioners, equipping them with the skills necessary to perform sophisticated data analysis and programming tasks. The curriculum is structured into three distinct levels - Beginner, Intermediate, and Advanced - each building upon the knowledge gained in the previous level.</p>
+<section id="curriculum-overview" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="curriculum-overview"><span class="header-section-number">1.1</span> Curriculum Overview</h2>
+<p>The journey begins with the foundational “Introduction to R” course, which provides non-R users with the essential skills to perform basic work tasks in R. This is followed by a series of courses that broaden the base knowledge of R and introduce complementary languages and tools such as SQL, Bash, and Git. These courses are designed to give analysts a well-rounded skill set that is crucial for most data analysis tasks in R.</p>
+<p>As learners progress, the Intermediate level courses delve into more specific and advanced topics. These courses introduce various analytical methods and best practices in coding for automation. They are designed to enhance the analysts’ capabilities in handling complex data tasks and improving code efficiency and reproducibility.</p>
+<p>The Advanced level courses introduce cutting-edge techniques and tools in data science and software development. These courses cover topics such as machine learning, natural language processing, big data processing with Sparklyr, and modern software development practices like continuous integration.</p>
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/tidyverse.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">gantt
+    title KNBS R Curriculum
+    dateFormat  X
+    axisFormat %H
+    
+    section Beginner
+    Introduction to R           :a1, 0, 16h
+    Introduction to Data Visualisation :a2, after a1 start, 16h
+    Optional Modules            :a3, after a2, 4h
+    Introduction to GIS in R    :a4, after a2, 3h
+    R Control Flow Loops and Functions :a5, after a2, 3h
+
+    section Intermediate Level
+    Optional Modules            :b1, after a5, 25h
+    More GIS in R               :b3, after a5, 3h
+    Introduction to Git         :b4, after a5, 4h
+    Statistics in R             :b5, after a5, 16h
+    
+    section Advanced
+    Introduction to NLP in R    :c1, after b5, 16h
+    Introduction to Machine Learning in R :c2, after b5, 24h
+    Additional Analysis Modules: c3, after c2, 38h
+    Packaging and Documentation :c4, after b5, 4h
+    Additional Developer Modules: c5, after c4, 6h
+
+    
+</pre>
+</div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
-</details>
-<p><br></p>
+</section>
+</section>
+<section id="course-runthrough" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Course Runthrough</h1>
+<section id="beginner-level" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="beginner-level"><span class="header-section-number">2.1</span> Beginner Level</h2>
+<section id="introduction-to-r" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="introduction-to-r"><span class="header-section-number">2.1.1</span> Introduction to R</h3>
+<p>This redesigned course focuses on applying skills and building confidence in R programming. Participants will learn about data types, importing data, and working with DataFrames through hands-on exercises. The course is structured with a week between sessions to allow for practice and assimilation of learning, making it ideal for beginners to develop independence and resilience in their R programming journey.</p>
+<ul>
+<li>Data Types</li>
+<li>Importing Data</li>
+<li>DataFrames, Manipulation, and Cleaning</li>
+</ul>
+<p><em>Course Length: 2 Days</em></p>
+<p><em>Prerequisites: None</em></p>
+</section>
+<section id="introduction-to-data-visualisation" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="introduction-to-data-visualisation"><span class="header-section-number">2.1.2</span> Introduction to Data Visualisation</h3>
+<p>Data Visualisation is the art of displaying data in a clear and understandable way that allows for maximum impact. This comprehensive course covers both theoretical and practical aspects of data visualization in R. Participants will learn best practices for presenting data clearly and professionally. The course then transitions into practical application, teaching how to produce production-ready visualizations using R. By the end, students will have a solid foundation in creating impactful and consistent data visualizations.</p>
+<p><em>Course Length: 2 Days</em></p>
+<p><em>Prerequisites: Introduction to R</em></p>
+</section>
+<section id="introduction-to-gis-in-r" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="introduction-to-gis-in-r"><span class="header-section-number">2.1.3</span> Introduction to GIS in R</h3>
+<p>This course introduces the fundamentals of working with geospatial data in R. Participants will learn to load spatial data, manipulate spatial objects, and create both static and interactive maps. The course covers important concepts such as spatial joins, and coordinate reference systems. By the end, students will be able to perform basic spatial analysis and create visually appealing maps using R.</p>
+<p><em>Course Length: 2-3 hours</em></p>
+<p><em>Prerequisites: Introduction to Data Visualisation</em></p>
+</section>
+<section id="r-control-flow-loops-and-functions" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="r-control-flow-loops-and-functions"><span class="header-section-number">2.1.4</span> R Control Flow Loops and Functions</h3>
+<p>This course focuses on more advanced programming concepts in R, specifically loops, control flow, and function writing. Participants will learn how to use these tools to reduce code repetition, improve readability, and follow good coding practices. The course includes practical examples and exercises to reinforce learning, and provides guidance on areas for additional study to further enhance programming skills.</p>
+<p><em>Course Length: 3 Hours</em></p>
+<p><em>Prerequisites: Introduction to Data Visualisation</em></p>
+</section>
+<section id="optional-modules" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="optional-modules"><span class="header-section-number">2.1.5</span> Optional Modules</h3>
+<section id="introduction-to-rap" class="level4" data-number="2.1.5.1">
+<h4 data-number="2.1.5.1" class="anchored" data-anchor-id="introduction-to-rap"><span class="header-section-number">2.1.5.1</span> Introduction to RAP</h4>
+<p>This course introduces the concepts, motivation, and techniques for creating a Reproducible Analytical Pipeline (RAP). Participants will learn about the benefits of RAP and how to overcome common barriers in implementation. The course is tailored for government analysts and managers of analysis, providing a foundation for enhancing reproducibility and efficiency in analytical workflows.</p>
+<p><em>Course Length: 1 Hour</em></p>
+<p><em>Prerequisites: Introduction to Data Visualisation</em></p>
+</section>
+<section id="introduction-to-rmarkdown" class="level4" data-number="2.1.5.2">
+<h4 data-number="2.1.5.2" class="anchored" data-anchor-id="introduction-to-rmarkdown"><span class="header-section-number">2.1.5.2</span> Introduction to RMarkdown</h4>
+<p>This course provides a comprehensive introduction to RMarkdown, a powerful tool for creating dynamic, reproducible documents in R. Participants will learn how to set up new documents, create various types of content, and output to different formats including HTML, PDF, and Word. The course covers text formatting, tables, images, and RMarkdown-specific features, equipping students with the skills to create professional, data-driven reports.</p>
+<p><em>Course Length: 1-2 Hours</em></p>
+<p><em>Prerequisites: Introduction to Data Visualisation</em></p>
+</section>
+<section id="best-practice-in-programming---clean-code" class="level4" data-number="2.1.5.3">
+<h4 data-number="2.1.5.3" class="anchored" data-anchor-id="best-practice-in-programming---clean-code"><span class="header-section-number">2.1.5.3</span> Best Practice in Programming - Clean Code</h4>
+<p>This workshop emphasizes best practices in programming for improved code readability and collaboration. Participants will learn general principles that enhance coding skills and make code more accessible to others. The course covers techniques for writing clean, maintainable code and encourages the development of good coding habits. By the end, students will have a solid foundation in creating code that is easy to read, understand, and modify.</p>
+<p><em>Course Length: 1 Hour</em></p>
+<p><em>Prerequisites: Introduction to Data Visualisation</em></p>
+</section>
+</section>
+</section>
+<section id="intermediate-level" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="intermediate-level"><span class="header-section-number">2.2</span> Intermediate Level</h2>
+<section id="introduction-to-git" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="introduction-to-git"><span class="header-section-number">2.2.1</span> Introduction to Git</h3>
+<p>This course provides a comprehensive understanding of the Git version control system. Participants will gain hands-on experience working both locally and collaboratively with Git. The course covers the fundamentals of Git, its practical applications, and the benefits of using it for individual and team projects. By the end, students will be equipped with the skills to effectively use Git for version control and collaboration in their development workflows.</p>
+<p><em>Course Length: 4 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="statistics-in-r" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="statistics-in-r"><span class="header-section-number">2.2.2</span> Statistics in R</h3>
+<p>This comprehensive course covers both statistical theory and its practical application in R. Participants will learn about exploratory data analysis, various statistical tests, linear regression, model adequacy and selection, and generalized linear models. The course provides a balanced mix of theoretical understanding and hands-on coding experience. By the end, students will be equipped to perform advanced statistical analyses and interpret results using R.</p>
+<p><em>Course Length: 16 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="more-gis-in-r" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="more-gis-in-r"><span class="header-section-number">2.2.3</span> More GIS in R</h3>
+<p>Building on the introductory GIS course, this advanced session covers more complex geospatial operations and analysis techniques in R. Participants will learn about buffers, intersections, area summary statistics, and network analysis. The course also focuses on troubleshooting common error messages and improving the accuracy of spatial analyses. By the end, students will be able to conduct and present comprehensive spatial analyses using R.</p>
+<p><em>Course Length: 2-3 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="optional-modules-1" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="optional-modules-1"><span class="header-section-number">2.2.4</span> Optional Modules</h3>
+<section id="foundations-of-sql" class="level4" data-number="2.2.4.1">
+<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="foundations-of-sql"><span class="header-section-number">2.2.4.1</span> Foundations of SQL</h4>
+<p>This course provides a comprehensive introduction to SQL, covering syntax applicable to various database systems. Using an online platform with SQLite, participants will learn through hands-on exercises. The course covers basic SQL queries, table manipulation, joining tables, and database alterations. By the end, students will have a solid foundation in SQL, enabling them to work with databases effectively in their data analysis projects.</p>
+<p><em>Course Length: 6 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="command-line-basics" class="level4" data-number="2.2.4.2">
+<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="command-line-basics"><span class="header-section-number">2.2.4.2</span> Command Line Basics</h4>
+<p>This course introduces the powerful world of command line interfaces for both UNIX and Windows systems. Participants will learn basic commands and understand how to navigate file systems and execute operations using the command line. The course aims to make participants comfortable using this essential tool in their work, enhancing their ability to interact with computers efficiently and perform advanced operations.</p>
+<p><em>Course Length: 2 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="reproducible-reporting-with-rmarkdown" class="level4" data-number="2.2.4.3">
+<h4 data-number="2.2.4.3" class="anchored" data-anchor-id="reproducible-reporting-with-rmarkdown"><span class="header-section-number">2.2.4.3</span> Reproducible Reporting with RMarkdown</h4>
+<p>This course delves into advanced features of RMarkdown for creating reproducible reports. Participants will learn to embed executable code and data into reports, work with YAML headers and theme options, and use parameters for dynamic reporting. The course also covers markdown syntax, code chunks, and chunk options. By the end, students will be able to create professional, reproducible reports that seamlessly integrate code, data, and narrative.</p>
+<p><em>Course Length: 2 Hours</em></p>
+<p><em>Prerequisites: Introduction to RMarkdown, Introduction to RAP</em></p>
+</section>
+<section id="modular-programming-in-r" class="level4" data-number="2.2.4.4">
+<h4 data-number="2.2.4.4" class="anchored" data-anchor-id="modular-programming-in-r"><span class="header-section-number">2.2.4.4</span> Modular Programming in R</h4>
+<p>This course focuses on the principles of modular design in R programming. Participants will learn the importance of well-structured, reproducible code and how to implement modular design principles. The course covers techniques for converting code into functions and modules, improving code organization and reusability. By the end, students will be able to write more efficient, maintainable, and scalable R code.</p>
+<p><em>Course Length: 4-5 hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+<section id="hypothesis-testing-in-r" class="level4" data-number="2.2.4.5">
+<h4 data-number="2.2.4.5" class="anchored" data-anchor-id="hypothesis-testing-in-r"><span class="header-section-number">2.2.4.5</span> Hypothesis Testing in R</h4>
+<p>This intermediate course focuses on advanced concepts in hypothesis testing using R. Participants will learn to define and calculate Type I and Type II errors, determine effect sizes, and calculate statistical power. The course also covers sample size calculations for various statistical tests. By the end, students will have a deeper understanding of the nuances of hypothesis testing and be able to design more robust statistical analyses in R.</p>
+<p><em>Course Length: 4-6 Hours</em></p>
+<p><em>Prerequisites: Statistics in R</em></p>
+</section>
+<section id="dates-and-times-in-r" class="level4" data-number="2.2.4.6">
+<h4 data-number="2.2.4.6" class="anchored" data-anchor-id="dates-and-times-in-r"><span class="header-section-number">2.2.4.6</span> Dates and Times in R</h4>
+<p>This course provides a comprehensive overview of handling date and time data in R. Participants will learn how to create, convert, and manipulate date-time objects, understanding the underlying storage mechanisms. The course covers practical operations such as extracting parts of dates, performing date-time arithmetic, and working with time zones. By the end, students will be proficient in managing and analyzing time-based data in R.</p>
+<p><em>Course Length: 4 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions</em></p>
+</section>
+</section>
+</section>
+<section id="advanced-level" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="advanced-level"><span class="header-section-number">2.3</span> Advanced Level</h2>
+<section id="introduction-to-nlp-in-r" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="introduction-to-nlp-in-r"><span class="header-section-number">2.3.1</span> Introduction to NLP in R</h3>
+<p>This course provides a comprehensive introduction to Natural Language Processing (NLP) using R. Participants will learn fundamental NLP concepts and techniques, including text cleaning, exploratory analysis, and feature engineering. The course covers practical applications such as sentiment analysis on real datasets. By the end, students will have the skills to preprocess text data, extract meaningful features, and perform basic NLP tasks in R.</p>
+<p><em>Course Length: 2 days</em></p>
+<p><em>Prerequisites: Statistics in R</em></p>
+</section>
+<section id="introduction-to-machine-learning-in-r" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="introduction-to-machine-learning-in-r"><span class="header-section-number">2.3.2</span> Introduction to Machine Learning in R</h3>
+<p>This course introduces the fundamentals of machine learning using R’s state-of-the-art “mlr3” package. Participants will learn about classification, regression, and cluster analysis experiments. The course covers the entire machine learning workflow, from data preparation to model evaluation and interpretation. By the end, students will have hands-on experience implementing various machine learning algorithms and understand how to apply them to real-world problems.</p>
+<p><em>Course Length: 3 days</em></p>
+<p><em>Prerequisites: Statistics in R</em></p>
+</section>
+<section id="packaging-and-documentation" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="packaging-and-documentation"><span class="header-section-number">2.3.3</span> Packaging and Documentation</h3>
+<p>This course guides participants through the process of building and sharing R packages. Students will learn how to create custom functions, organize them into a package structure, and document their code effectively. The course covers best practices in package development, including version control and collaboration. By the end, participants will be able to create their own R packages, enhancing code reusability and facilitating collaboration with other R users.</p>
+<p><em>Course Length: 4 Hours</em></p>
+<p><em>Prerequisites: R Control Flow Loops and Functions, Best Practice in Programming - Clean Code, Introduction to Git</em></p>
+</section>
+<section id="additional-analysis-modules" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="additional-analysis-modules"><span class="header-section-number">2.3.4</span> Additional Analysis Modules</h3>
+<section id="quality-assurance-of-predictive-modelling" class="level4" data-number="2.3.4.1">
+<h4 data-number="2.3.4.1" class="anchored" data-anchor-id="quality-assurance-of-predictive-modelling"><span class="header-section-number">2.3.4.1</span> Quality Assurance of Predictive Modelling</h4>
+<p>This course explores critical quality issues in statistical modeling and machine learning for prediction. Participants will learn best practices for model design, validation, and usage across various industries. The course covers topics such as model interpretability, bias detection, and robustness testing. By the end, students will be equipped with the knowledge to ensure the reliability and effectiveness of their predictive models.</p>
+<p><em>Course Length: 6-8 hours</em></p>
+<p><em>Prerequisites: Statistics in R</em></p>
+</section>
+<section id="introduction-to-sparklyr" class="level4" data-number="2.3.4.2">
+<h4 data-number="2.3.4.2" class="anchored" data-anchor-id="introduction-to-sparklyr"><span class="header-section-number">2.3.4.2</span> Introduction to Sparklyr</h4>
+<p>This course introduces Sparklyr, the R interface to Apache Spark for big data processing. Participants will learn how to handle and analyze massive datasets that exceed the capabilities of traditional R. The course covers data manipulation, querying, and processing techniques specific to Sparklyr. By the end, students will be able to leverage the power of distributed computing for their large-scale data analysis projects in R.</p>
+<p><em>Course Length: 2 days</em></p>
+<p><em>Prerequisites: Introduction to Machine Learning in R</em></p>
+</section>
+<section id="introduction-to-bayesian-data-analysis" class="level4" data-number="2.3.4.3">
+<h4 data-number="2.3.4.3" class="anchored" data-anchor-id="introduction-to-bayesian-data-analysis"><span class="header-section-number">2.3.4.3</span> Introduction to Bayesian Data Analysis</h4>
+<p>This course provides a foundational understanding of Bayesian Data Analysis and its implementation in R. Participants will explore the principles of Bayesian statistics, including prior and posterior distributions, and Markov Chain Monte Carlo (MCMC) methods. The course includes hands-on examples of Bayesian analysis in R, covering model fitting and interpretation. By the end, students will be able to apply Bayesian techniques to their own data analysis projects.</p>
+<p><em>Course Length: 6 Hours</em></p>
+<p><em>Prerequisites: Statistics in R</em></p>
+</section>
+</section>
+<section id="additional-developer-modules" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="additional-developer-modules"><span class="header-section-number">2.3.5</span> Additional Developer Modules</h3>
+<section id="introduction-to-unit-testing" class="level4" data-number="2.3.5.1">
+<h4 data-number="2.3.5.1" class="anchored" data-anchor-id="introduction-to-unit-testing"><span class="header-section-number">2.3.5.1</span> Introduction to Unit Testing</h4>
+<p>This course focuses on the principles and implementation of unit testing in R for ensuring code quality. Participants will learn how to design, create, and execute tests for their R code. The course covers both the theoretical aspects of software development and practical implementation in R. By the end, students will be able to implement robust testing strategies in their R projects, improving code reliability and maintainability.</p>
+<p><em>Course Length: 4 Hours</em></p>
+<p><em>Prerequisites: Packaging and Documentation</em></p>
+</section>
+<section id="introduction-to-continuous-integration" class="level4" data-number="2.3.5.2">
+<h4 data-number="2.3.5.2" class="anchored" data-anchor-id="introduction-to-continuous-integration"><span class="header-section-number">2.3.5.2</span> Introduction to Continuous Integration</h4>
+<p>This course introduces modern software development approaches, focusing on Continuous Integration (CI) concepts. Participants will learn about DevOps and CI/CD philosophies and how they contribute to efficient software development. The course covers tools and practices that automate testing and deployment processes. While not hands-on, this course provides essential background knowledge for advanced technical courses on building modern development infrastructures. <em>Course Length: 2 Hours</em></p>
+<p><em>Prerequisites: Packaging and Documentation</em></p>
 
 
+</section>
 </section>
 </section>
 </section>
@@ -996,13 +891,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./curriculum.html" class="pagination-link" aria-label="KNBS R Programming Curriculum">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNBS R Programming Curriculum</span></span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_manipulation.html" class="pagination-link" aria-label="Data Manipulation">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./intro.html" class="pagination-link" aria-label="Introduction to R">
+        <span class="nav-page-text">Introduction to R</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

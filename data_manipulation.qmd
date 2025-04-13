@@ -1,7 +1,9 @@
-# Data Manipulation
+---
+title: "Manipulating Data"
+format: html
+---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 # load packages
 library(gapminder)
 library(countdown)
@@ -13,8 +15,6 @@ In this chapter, we will cover `dplyr`, one of the most essential packages in an
 To illustrate the key functions of `dplyr`, we'll be using the `gapminder` dataset. You can view this dataset by installing and loading the `gapminder` package, just as you did with tidyverse.
 
 The exercises in this chapter will use an inbuilt R dataset. However, if you'd like to follow along with the examples, you're welcome to load the `gapminder` dataset, although please note it will not be required for the exercises themselves.
-
-<br>
 
 There are six key `dplyr` functions that allow you to solve the vast majority of data-manipulation challenges;
 
@@ -56,28 +56,20 @@ You can also use the `select` function to reorder columns as it will select colu
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Using the inbuilt dataset `airquality`, select to keep the columns Ozone, Temp, Month and Day.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, include=TRUE}
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 airquality_exercise <-
   select(airquality, Ozone, Temp, Month, Day)
 ```
-
-</details>
-
-<br>
 
 ## Pipes
 
@@ -133,34 +125,26 @@ mean_life_exp <- gapminder |>
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Using the pipe function, group the airquality dataset by month.
 2.  Summarise the grouped dataset to produce an average of Ozone and Temp by month.
 3.  Assign this to an object called airquality_summarised.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
 
 ```{r, include = TRUE}
-
+#| code-fold: true
+#| code-summary: "Solution"
 airquality_summarised <- airquality |>
   group_by(Month) |>
   summarise(avg_ozone = mean(Ozone, na.rm = TRUE),
             avg_temp = mean(Temp, na.rm = TRUE))
   
 ```
-
-</details>
-
-<br>
 
 ## Filter
 
@@ -213,31 +197,22 @@ filter(year %in% c(1992, 1998, 2002))
 
 ### Exercise
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
 
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
 1.  Filter the original airquality dataset to only include data for May and June. Try to do this using the `%in%` function.
 2.  Call this assignment: airquality_filter.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
 
 ```{r, include = TRUE}
-
+#| code-fold: true
+#| code-summary: "Solution"
 airquality_filter <- airquality |>
   filter(Month %in% c(5, 6))
   
 ```
-
-</details>
-
-<br>
 
 ## Rename
 
@@ -299,23 +274,18 @@ You can download the Data Transformation Cheat Sheet (and other cheatsheets) at:
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  The inbuilt trees dataset includes columns for tree girth and height in inches. Using mutate, create two new columns (Girth_cm and Height_cm) containing the equivalent values in centimetres.
 2.  How can you replace an existing column with a new column using mutate?
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r, include = TRUE}
-
+#| code-fold: true
+#| code-summary: "Solution"
 # 1. conversion is 2.54
 
 trees_with_cm <- trees |>
@@ -328,10 +298,6 @@ trees_with_cm <- trees |>
   mutate(Girth = Girth * 2.54)
   
 ```
-
-</details>
-
-<br>
 
 ## Arrange
 
@@ -359,28 +325,18 @@ arrange(df, desc(x))
 
 ### Exercise
 
-`r countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
 
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
 1.  Arrange the rows of the `trees` dataset by increasing height and decreasing girth.
 2.  What do you notice?
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r, include = TRUE}
-
+#| code-fold: true
+#| code-summary: "Solution"
 trees_arranged <- trees |>
   arrange(Height, desc(Girth))
 
 ```
-
-</details>
-
-<br>

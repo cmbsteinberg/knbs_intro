@@ -1,0 +1,242 @@
+---
+title: "Basics"
+format: html
+---
+
+```{r setup, include=FALSE}
+# load packages
+library(countdown)
+library(rmarkdown)
+library(dplyr)
+library(tidyverse)
+```
+
+## Basic Syntax
+
+```{r}
+#| echo: False
+
+countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+As a quick exercise, try out some arithmetic in your console:
+
+1.  `25 \* 15`
+2.  `(45 + 3) \^ 2`
+3.  `78 / 4`
+
+Now open a new script (File -\> New File -\> R Script) and save it as Intro.R
+
+1.  Repeat the above exercises. What happens when you hit enter? Try using `Ctrl` + `Enter`
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+25 * 15
+(45 + 3) ^ 2
+78 / 4
+```
+
+### The assignment operator
+
+R uses the assignment operator `<-` to assign values or data frames to objects. The object name goes on the left, with the object value on the right. For example, `x <- 5` assigns the value 5 to the object `x`. You can quickly type the assignment operator in RStudio by pressing `Alt` + `-` (Windows) or `Option` + `-` (Mac).
+
+Other programming languages tend to use `=`. The equals sign is used in R but for other purposes, as you'll find out later. Note: `=` will actually work for assignment in R but it is not convention.
+
+```{r}
+#| echo: False
+
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Create an object x1 with a value of 14
+2.  Create an object x2 with a value of x1 + 7
+3.  Check the value of x2 by looking in the environment pane
+4.  Create an object x3 equal to x2 divided by 3.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+x1 <- 14
+x1
+```
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+x2 <- x1 + 7
+x2
+```
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+x3 <- x2 / 3
+x3
+```
+
+### Combining using `c()`
+
+So how do you assign more than one number to an object? Typing `x <- 1,2,3` will throw an error. The way to do it is to combine the values into a vector before assigning. For example, `x <- c(1, 2, 3)`.
+
+Note: all elements of a vector must be of the same type; either numeric, character, or logical. Vector types are important, but they aren't interesting, which is why they aren't covered on this course. We advise you to [read about vectors](https://r4ds.had.co.nz/vectors.html) in your own time.
+
+```{r}
+#| echo: False
+
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Use the combine function to create a vector with values 1, 2 and 3.
+2.  What happens when you write `1:10` inside `c()`?
+3.  What happens if you try to create a vector containing a number such as 2019 and the word "year"?
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+
+#1. combine c() to create vector with values 1,2,3
+x <- c(1, 2, 3)
+x
+
+#2. combine c() with 1:10
+x <- c(1:10)
+x
+
+#3. Incorrect code: will throw an error
+x <- c(2019, year)
+x
+
+#3. Correct code
+x <- c(2019, "year")
+x
+  
+```
+
+## Functions
+
+Functions are one of the most important aspects of any programming language. Functions are essentially just R scripts that other R users have created. You could write a whole project without using any functions, but why would we when others have done the hard work for us? To demonstrate how using functions can save us time let's look at an example.
+
+Imagine you had the following data for test scores of students and you wanted to find the mean score:
+
+```{r use_functions}
+test_scores <- c(70, 68, 56, 88, 42, 55)
+```
+
+We could extract each individual score from the data frame, add them together and then divide them by the number of elements:
+
+```{r use_functions2}
+(test_scores[1] + test_scores[2] + test_scores[3] + test_scores[4] + test_scores[5] + test_scores[6]) / 6
+```
+
+This gives us the mean score of 63.2. But that's pretty tedious, especially if our data set was of any significant size. To overcome this we can use a function called `mean()`. To read about a function in R type `help("function_name")` or `?function_name` in the console. By reading the help file we see that `mean()` requires an R object of numerical values. So we can pass our `test_scores` data as the argument:
+
+```{r use_function3, echo=TRUE}
+mean(test_scores)
+```
+
+Not only does this save us time, it makes the code far more readable. While the two approaches above return the same answer, the use of the function makes our intention immediately clear. It's important to remember it's not just you that will be using and reading your code.
+
+The values you passed to the mean function are known as `arguments`. Most functions require one or more arguments in order to work, and details of these can be seen by checking the help file.
+
+Running `?mean` shows us that the function mean has three arguments; `x`, `trim` and `na.rm`. You can pass these arguments to a function either by position or name. If you name the arguments in the function, R will use the values for the arguments they've been assigned to, e.g.:
+
+```{r}
+mean(x = c(1, 2, 3),
+     trim = 0,
+     na.rm = FALSE)
+```
+
+If you don't provide names for the arguments, R will just assign them in order, with the first value going to the first argument, etc:
+
+```{r}
+mean(c(1, 2, 3), #These are used for the first argument, x
+     0, #This is used for the second argument, trim
+     FALSE) #This is used for the third argument, na.rm
+```
+
+It is good practice to use names to assign any arguments after the first one or two, to avoid confusion and mistakes!
+
+You will notice that the first time we called the `mean` function, we didn't have to specify values for either `trim` or `na.rm`. if you check the help file, you'll notice that `trim` and `na.rm` have default values:
+
+```{r, eval = FALSE}
+
+mean(x, trim = 0, na.rm = FALSE)
+
+```
+
+When arguments have default values like this, they will use these if you don't provide an alternative. There is no default value for x, so if you don't provide a value for x the function will return an error.
+
+```{r}
+#| echo: False
+
+countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Look at the help for the `sum()` function. What does it do?
+2.  How many arguments does the `sum()` function have? How many of these have default values?
+3.  Try summing up the values 1 to 8 using this function.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+#1. using sum() function
+?sum()
+
+#2.sum() has two arguments: a numeric value or logical vector and 'na.rm'
+# whether missing values (NA) should be removed (TRUE or FALSE)
+# by default, NA values are ignored (i.e. na.rm = TRUE)
+
+#3. summing values 1 to 8 using sum()
+sum(1:8, na.rm = TRUE)
+  
+```
+
+## Packages
+
+Being open-source means R has an extensive community of users that are building and improving packages for others. Base R covers a lot of useful functions but there's lots it doesn't, that's when we want to install packages. Each package contains a number of functions, once we install a package we have access to every one of it's functions.
+
+Packages need to be both installed and loaded before they can be used. You only need to install a package the first time you use it, but you will need to load it every time you want to use it.
+
+Start by opening RStudio, which is an integrated development environment (IDE) for R. You don't have to use an IDE but it's strongly advised as it provides a user-friendly interface to work with.
+
+To install a package locally, run `install.packages("package_name")`, making sure the package name is wrapped in quotation marks. The code below will install the `tidyverse` package, which is actually a collection of data manipulation and presentation packages.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+Once installed, you can load the packages using the `library()` function. Unlike installing packages, you don't need to wrap package names in quotation marks inside a library call.
+
+```{r, load_packages}
+library(tidyverse)
+```
+
+To know more about a package, it is always useful to read the associated documentation. You can do this by adding a `?` in front of the name of any package or function, and running this in the console
+
+```{r eval = FALSE}
+?tidyverse
+
+?select
+```
+
+## The Tidyverse
+
+While base R has a wide range of functions for data manipulation and visualisation, most analytical code will make use of **the tidyverse**. This is a specific group of packages which are designed for use in the reading, processing and visualisation of data, and aim to be easy to use for beginner coders and clear to read and write. It is recommended to use the tidyverse packages wherever possible to make code consistent.
+
+This training course will therefore make extensive use of tidyverse packages including `dplyr`, `ggplot2` and `tidyr`.
+
+The following exercise should be completed by those who are running through the course solo.
+
+1.  Install the tidyverse package in your Console (do you remember where this is?!)
+2.  Load the tidyverse library at the top of your `Intro.R` script.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+library(tidyverse)
+```
+
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics("img/tidyverse.svg")
+```

@@ -1,13 +1,8 @@
 ---
-project:
-  type: default
-format: 
-  pdf:
-    toc: false
-    number-sections: false
-  html:
-    page-layout: full
+title: "Curriculum"
+format: html
 ---
+
 
 # KNBS R Programming Curriculum
 
@@ -76,7 +71,7 @@ Data Visualisation is the art of displaying data in a clear and understandable w
 
 ### Introduction to GIS in R
 
-This course introduces the fundamentals of working with geospatial data in R. Participants will learn to load spatial data, manipulate spatial objects, and create both static and interactive maps. The course covers important concepts such as GSS codes, spatial joins, and coordinate reference systems. By the end, students will be able to perform basic spatial analysis and create visually appealing maps using R.
+This course introduces the fundamentals of working with geospatial data in R. Participants will learn to load spatial data, manipulate spatial objects, and create both static and interactive maps. The course covers important concepts such as spatial joins, and coordinate reference systems. By the end, students will be able to perform basic spatial analysis and create visually appealing maps using R.
 
 *Course Length: 2-3 hours*
 
