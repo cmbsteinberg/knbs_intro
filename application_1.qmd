@@ -31,7 +31,7 @@ The second is to perform the analysis on your dataset. This will involve creatin
 
 ## Preparing your dataset for analyis
 
-1. Read the dataset using `read_csv` and clean the column names using `janitor::clean_names`. The 2019 Census data you need is found [at this link](). The survey information is [here](https://statistics.knbs.or.ke/nada/index.php/catalog/116/download/534)
+1. Read the dataset using `read_csv` and clean the column names using `janitor::clean_names`. The 2019 Census data you need is found [at this link](https://www.dropbox.com/scl/fi/u1qj4w6esocw8fdz76tp4/census19.csv?rlkey=e2vggjqsewpmaywdwmvprbrov&e=1&st=puahp5wg&dl=0). The survey information is [here](https://statistics.knbs.or.ke/nada/index.php/catalog/116/download/534)
 
 2. There are lots of columns in this dataset, making it slow to perform analysis. Select the columns required for the three pieces of analysis (e.g., p17 for religion) using `select`. Rename the selected columns to be more descriptive (e.g., religion) using `rename`. 
 
