@@ -14,9 +14,11 @@ book:
       - data_manipulation.qmd
       - importing_data.qmd
       - ggplot.qmd
+      - tidy_data.qmd
     - part: applications.qmd
       chapters:
       - application_1.qmd
+      - application_2.qmd
     - part: mapping.qmd
       #chapters:
       #- spatial_operations.qmd

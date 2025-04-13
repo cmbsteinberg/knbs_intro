@@ -20,23 +20,11 @@ Before running any spatial operations on two spatial objects it is always worth 
 
 1.  Use `st_filter()` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, eval = FALSE}
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 poi_sf_nairobi <- st_filter(x = poi_sf, y = nairobi_boundary)
 ```
-
-</details>
-
-<br>
 
 You should have got an error here saying `x st_crs(x) == st_crs(y) is not TRUE`. It means that objects x and y have different coordinate reference systems. Spatial operations require all objects to have the same CRS. We can see this for ourselves by running the `st_crs()` function, which returns the coordinate reference system of an object.
 
@@ -46,27 +34,18 @@ You should have got an error here saying `x st_crs(x) == st_crs(y) is not TRUE`.
 
 1.  Run `st_crs()` on both and `lfb_sf` and `london_boundary` and compare the results.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 sf::st_crs(lfb_sf)[[1]]
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 sf::st_crs(london_boundary)[[1]]
 ```
 
-</details>
-
-<br>
 
 `st_crs()` provides detailed information about the CRS and projection of data, but all we need to check is its first element denoted by `[[1]]`. We can see that `lfb_sf` uses `EPSG:27700`, while `london_boundary` is set to `WGS 84`. This problem can be solved by transforming `london_boundary`'s CRS to match that of `lfb_sf`, simply by using the correct EPSG code. To do so we will use the `st_transform()` function which takes two arguments:
 
@@ -81,35 +60,22 @@ sf::st_crs(london_boundary)[[1]]
 1.  Run `st_transform()` to transform and overwrite `london_boundary`. Remember to set the correct CRS.
 2.  Run `st_crs()` on `lfb_sf` and newly transformed `london_boundary` and compare the results.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 london_boundary <- sf::st_transform(london_boundary, crs = 27700)
 
 sf::st_crs(lfb_sf)[[1]]
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 sf::st_crs(london_boundary)[[1]]
-```
-
-```         
-[1] "EPSG:27700"
 ```
 
 Now that the CRS are matching we should be able to spatially subset `lfb_sf`.
 
-</details>
-
-<br>
 
 ### Exercise
 
@@ -118,26 +84,14 @@ Now that the CRS are matching we should be able to spatially subset `lfb_sf`.
 1.  Use `st_filter` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`. Overwrite `lfb_sf` with the subset data.
 2.  Plot it to check if the results are correct - all points should be within London.
 
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 lfb_sf_filter <- sf::st_filter(x = lfb_sf, y = london_boundary)
 ggplot2::ggplot() + 
   ggplot2::geom_sf(london_boundary)  +
   ggplot2::geom_sf(lfb_sf_filter)
 ```
-
-</details>
-
-<br>
 
 ## Spatial and non-spatial joins
 
@@ -166,16 +120,6 @@ lfb_sf <- sf::st_join(lfb_sf, msoa_london_BFE)
 head(lfb_sf)
 ```
 
-```         
-Simple feature collection with 6 features and 12 fields
-geometry type:  POINT
-dimension:      XY
-bbox:           xmin: 504650 ymin: 164950 xmax: 554650 ymax: 192350
-projected CRS:  OSGB 1936 / British National Grid
-```
-
-::: {pagedtable="false"}
-:::
 
 Now that `MSOA11CD` is attached to our observations we can create summary statistics for each MSOA. As mentioned before, we can use `tidyverse` functions on `sf` objects. Here, we will use `dplyr` to calculate the total number of incidents and their cost, and then use a non spatial join to attach those results to MSOA boundaries. At this stage we no longer need the geometry column for each LFB incident as a) we're not performing any spatial operations on our points, and b) the geometry column can slow down/interrupt the `dplyr::group_by` function which we will be using. To remove the geometry column we use the `st_drop_geometry()` function directly in the `dplyr` pipe.
 
@@ -190,6 +134,8 @@ Now that `MSOA11CD` is attached to our observations we can create summary statis
 5.  Join `lfb_msoa_stats` to `msoa_london_BSC`, using `left_join()` and create a new object `msoa_lfb`
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 msoa_london_BSC <- sf::st_read("data/shp/MSOA_2011_london/MSOA_2011_BSC_London.shp", quiet = TRUE) 
 
 lfb_msoa_stats <- lfb_sf %>% 
@@ -229,6 +175,8 @@ Now that we have processed our data we can start mapping it. So far we have only
 1.  Start by specifying which `sf` object is being mapped in `tm_shape()` and what column holds the values to be visualised. We will also change the legend's title.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 ggplot(msoa_lfb) + 
   geom_sf(aes(fill = cost_per_incident)) +
   labs(fill = "Cost per Incident (£)")

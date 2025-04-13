@@ -8,6 +8,7 @@ library(gapminder)
 library(dplyr)
 library(ggplot2)
 library(countdown)
+library(nycflights13)
 
 ```
 
@@ -209,20 +210,21 @@ print(income_chart)
 
 ## Multiple data frames
 
-It's rare that a data analysis involves only a single data frame. Typically you have many data frames, and you must **join** them together to answer the questions that you're interested in. This chapter will introduce you to two important types of joins:
+It's rare that a data analysis involves only a single data frame. Typically you have many data frames, and you must join them together to answer the questions that you're interested in. 
 
--   Mutating joins, which add new variables to one data frame from matching observations in another.
--   Filtering joins, which filter observations from one data frame based on whether or not they match an observation in another.
+In this lesson, you'll learn about the most important types of joins:
 
-We'll begin by discussing keys, the variables used to connect a pair of data frames in a join. We cement the theory with an examination of the keys in the datasets from the nycflights13 package, then use that knowledge to start joining data frames together. Next we'll discuss how joins work, focusing on their action on the rows. We'll finish up with a discussion of non-equi joins, a family of joins that provide a more flexible way of matching keys than the default equality relationship.
+- Mutating joins, which add new variables to one data frame from matching observations in another.
 
-## Keys
 
-To understand joins, you need to first understand how two tables can be connected through a pair of keys, within each table. In this section, you'll learn about the two types of key and see examples of both in the datasets of the nycflights13 package. You'll also learn how to check that your keys are valid, and what to do if your table lacks a key.
+## Keys: Connecting your data frames
+To understand joins, you need to first understand how two tables can be connected through a pair of keys. Every join involves a pair of keys:
 
-### Primary and foreign keys
+A primary key is a variable or set of variables that uniquely identifies each observation.
+A foreign key is a variable (or set of variables) that corresponds to a primary key in another table.
 
-Every join involves a pair of keys: a primary key and a foreign key. A **primary key** is a variable or set of variables that uniquely identifies each observation. When more than one variable is needed, the key is called a **compound key.** For example, in nycflights13:
+When more than one variable is needed to form a key, it's called a compound key.
+Let's look at some examples from the nycflights13 package:
 
 -   `airlines` records two pieces of data about each airline: its carrier code and its full name. You can identify an airline with its two letter carrier code, making `carrier` the primary key.
 
@@ -254,13 +256,12 @@ Every join involves a pair of keys: a primary key and a foreign key. A **primary
     weather
     ```
 
-A **foreign key** is a variable (or set of variables) that corresponds to a primary key in another table. For example:
+The foreign keys in the flights dataset connect to the primary keys of these other tables:
 
--   `flights$tailnum` is a foreign key that corresponds to the primary key `planes$tailnum`.
--   `flights$carrier` is a foreign key that corresponds to the primary key `airlines$carrier`.
--   `flights$origin` is a foreign key that corresponds to the primary key `airports$faa`.
--   `flights$dest` is a foreign key that corresponds to the primary key `airports$faa`.
--   `flights$origin`-`flights$time_hour` is a compound foreign key that corresponds to the compound primary key `weather$origin`-`weather$time_hour`.
+`flights$tailnum `connects to `planes$tailnum`
+`flights$carrier` connects to `airlines$carrier`
+`flights$origin` and `flights$dest` connect to `airports$faa`
+`flights$origin` and `flights$time_hour` together connect to `weather$origin` and `weather$time_hour`
 
 These relationships are summarized visually in @fig-flights-relationships.
 
@@ -284,11 +285,9 @@ These relationships are summarized visually in @fig-flights-relationships.
 knitr::include_graphics("diagrams/relational.png", dpi = 270)
 ```
 
-You'll notice a nice feature in the design of these keys: the primary and foreign keys almost always have the same names, which, as you'll see shortly, will make your joining life much easier. It's also worth noting the opposite relationship: almost every variable name used in multiple tables has the same meaning in each place. There's only one exception: `year` means year of departure in `flights` and year manufactured in `planes`. This will become important when we start actually joining tables together.
-
 ### Checking primary keys
 
-Now that that we've identified the primary keys in each table, it's good practice to verify that they do indeed uniquely identify each observation. One way to do that is to `count()` the primary keys and look for entries where `n` is greater than one. This reveals that `planes` and `weather` both look good:
+It's good practice to verify that primary keys truly uniquely identify each observation. One way to do that is to count the primary keys and look for entries where the count is greater than one. One way to do that is to `count()` the primary keys and look for entries where `n` is greater than one. This reveals that `planes` and `weather` both look good:
 
 ```{r}
 planes |> 
@@ -310,61 +309,48 @@ weather |>
   filter(is.na(time_hour) | is.na(origin))
 ```
 
-### Surrogate keys
-
-So far we haven't talked about the primary key for `flights`. It's not super important here, because there are no data frames that use it as a foreign key, but it's still useful to consider because it's easier to work with observations if we have some way to describe them to others.
-
-After a little thinking and experimentation, we determined that there are three variables that together uniquely identify each flight:
+### Exercise
 
 ```{r}
-flights |> 
-  count(time_hour, carrier, flight) |> 
-  filter(n > 1)
+#| echo: False
+
+countdown(minutes = 10,
+          seconds = 0,
+          style = "position: relative; width: min-content;")
 ```
 
-Does the absence of duplicates automatically make `time_hour`-`carrier`-`flight` a primary key? It's certainly a good start, but it doesn't guarantee it. For example, are altitude and latitude a good primary key for `airports`?
+1.  `weather` only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to `flights`?
 
-```{r}
-airports |>
-  count(alt, lat) |> 
-  filter(n > 1)
+2.  We know that some days of the year are special and fewer people than usual fly on them (e.g., Christmas eve and Christmas day). How might you represent that data as a data frame? What would be the primary key? How would it connect to the existing data frames?
+
+```{r, eval = FALSE}
+#| code-fold: true
+#| code-summary: "Solution"
+
+# 1. weather$origin would join with flights%origin
+
+# 2. special_days 
+#  month   day  name  
+#  <int> <int> <chr> <
+# Primary key: Compound key of month and day
 ```
 
-Identifying an airport by its altitude and latitude is clearly a bad idea, and in general it's not possible to know from the data alone whether or not a combination of variables makes a good a primary key. But for flights, the combination of `time_hour`, `carrier`, and `flight` seems reasonable because it would be really confusing for an airline and its customers if there were multiple flights with the same flight number in the air at the same time.
+## Basic joins
 
-That said, we might be better off introducing a simple numeric surrogate key using the row number:
+Now that you understand how data frames are connected via keys, we can start using joins to better understand the `flights` dataset. dplyr provides six join functions: 
 
-```{r}
-flights2 <- flights |> 
-  mutate(id = row_number(), .before = 1)
-flights2
-```
+* `left_join()`: keeps all observations in the first table
+* `inner_join()`: keeps only observations that appear in both tables
+* `right_join()`: keeps all observations in the second table
+* `full_join()`: keeps all observations in either table
+* `semi_join()`: filters the first table to include only observations that match the second table
+* `anti_join()`: filters the first table to include only observations that don't match the second table
 
-Surrogate keys can be particularly useful when communicating to other humans: it's much easier to tell someone to take a look at flight 2001 than to say look at UA430 which departed 9am 2013-01-03.
-
-### Exercises
-
-1.  We forgot to draw the relationship between `weather` and `airports` in @fig-flights-relationships. What is the relationship and how should it appear in the diagram?
-
-2.  `weather` only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to `flights`?
-
-3.  The `year`, `month`, `day`, `hour`, and `origin` variables almost form a compound key for `weather`, but there's one hour that has duplicate observations. Can you figure out what's special about that hour?
-
-4.  We know that some days of the year are special and fewer people than usual fly on them (e.g., Christmas eve and Christmas day). How might you represent that data as a data frame? What would be the primary key? How would it connect to the existing data frames?
-
-5.  Draw a diagram illustrating the connections between the `Batting`, `People`, and `Salaries` data frames in the Lahman package. Draw another diagram that shows the relationship between `People`, `Managers`, `AwardsManagers`. How would you characterize the relationship between the `Batting`, `Pitching`, and `Fielding` data frames?
-
-## Basic joins {#sec-mutating-joins}
-
-Now that you understand how data frames are connected via keys, we can start using joins to better understand the `flights` dataset. dplyr provides six join functions: `left_join()`, `inner_join()`, `right_join()`, `full_join()`, `semi_join()`, and `anti_join().` They all have the same interface: they take a pair of data frames (`x` and `y`) and return a data frame. The order of the rows and columns in the output is primarily determined by `x`.
-
-In this section, you'll learn how to use one mutating join, `left_join()`, and two filtering joins, `semi_join()` and `anti_join()`. In the next section, you'll learn exactly how these functions work, and about the remaining `inner_join()`, `right_join()` and `full_join()`.
+In this course, you'll learn how to use one mutating join, `left_join()`, and two filtering joins, `semi_join()` and `anti_join()`. 
 
 ### Mutating joins
 
-A **mutating join** allows you to combine variables from two data frames: it first matches observations by their keys, then copies across variables from one data frame to the other. Like `mutate()`, the join functions add variables to the right, so if your dataset has many variables, you won't see the new ones. For these examples, we'll make it easier to see what's going on by creating a narrower dataset with just six variables[^tidy_data-1]:
-
-[^tidy_data-1]: Remember that in RStudio you can also use `View()` to avoid this problem.
+A **mutating join** allows you to combine variables from two data frames: it first matches observations by their keys, then copies across variables from one data frame to the other. Like `mutate()`, the join functions add variables to the right, so if your dataset has many variables, you won't see the new ones. For these examples, we'll make it easier to see what's going on by creating a narrower dataset with just six variables.
 
 ```{r}
 flights2 <- flights |> 
@@ -372,9 +358,7 @@ flights2 <- flights |>
 flights2
 ```
 
-There are four types of mutating join, but there's one that you'll use almost all of the time: `left_join()`. It's special because the output will always have the same rows as `x`, the data frame you're joining to[^tidy_data-2]. The primary use of `left_join()` is to add in additional metadata. For example, we can use `left_join()` to add the full airline name to the `flights2` data:
-
-[^tidy_data-2]: That's not 100% true, but you'll get a warning whenever it isn't.
+There are four types of mutating join, but there's one that you'll use almost all of the time: `left_join()`. It's special because the output will always have the same rows as `x`, the data frame you're joining to. The primary use of `left_join()` is to add in additional metadata. For example, we can use `left_join()` to add the full airline name to the `flights2` data:
 
 ```{r}
 flights2 |>
@@ -407,25 +391,24 @@ We'll come back to this problem a few times in the rest of the chapter.
 
 ### Specifying join keys
 
-By default, `left_join()` will use all variables that appear in both data frames as the join key, the so called **natural** join. This is a useful heuristic, but it doesn't always work. For example, what happens if we try to join `flights2` with the complete `planes` dataset?
+By default, left_join() will use all variables that appear in both data frames as the join key (a "natural join"). This is convenient but doesn't always work.
+For example, if we try to join flights2 with the complete planes dataset:
 
 ```{r}
 flights2 |> 
   left_join(planes)
 ```
 
-We get a lot of missing matches because our join is trying to use `tailnum` and `year` as a compound key. Both `flights` and `planes` have a `year` column but they mean different things: `flights$year` is the year the flight occurred and `planes$year` is the year the plane was built. We only want to join on `tailnum` so we need to provide an explicit specification with `join_by()`:
+We get many missing matches because our join is trying to use both tailnum and year as a compound key. But these year columns mean different things: in `flights%year`, it's the year the flight occurred; in `planes$year`, it's the year the plane was built.
 
 ```{r}
 flights2 |> 
   left_join(planes, join_by(tailnum))
 ```
 
-Note that the `year` variables are disambiguated in the output with a suffix (`year.x` and `year.y`), which tells you whether the variable came from the `x` or `y` argument. You can override the default suffixes with the `suffix` argument.
+Note that the year variables are disambiguated in the output with a suffix (year.x and year.y).
 
-`join_by(tailnum)` is short for `join_by(tailnum == tailnum)`. It's important to know about this fuller form for two reasons. Firstly, it describes the relationship between the two tables: the keys must be equal. That's why this type of join is often called an **equi join**. You'll learn about non-equi joins in @sec-non-equi-joins.
-
-Secondly, it's how you specify different join keys in each table. For example, there are two ways to join the `flight2` and `airports` table: either by `dest` or `origin`:
+`join_by(tailnum)` is short for `join_by(tailnum == tailnum)`. The latter form is useful when the key variables have different names in each table:
 
 ```{r}
 flights2 |> 
@@ -435,16 +418,17 @@ flights2 |>
   left_join(airports, join_by(origin == faa))
 ```
 
-In older code you might see a different way of specifying the join keys, using a character vector:
-
--   `by = "x"` corresponds to `join_by(x)`.
--   `by = c("a" = "x")` corresponds to `join_by(a == x)`.
-
-Now that it exists, we prefer `join_by()` since it provides a clearer and more flexible specification.
-
 `inner_join()`, `right_join()`, `full_join()` have the same interface as `left_join()`. The difference is which rows they keep: left join keeps all the rows in `x`, the right join keeps all rows in `y`, the full join keeps all rows in either `x` or `y`, and the inner join only keeps rows that occur in both `x` and `y`. We'll come back to these in more detail later.
 
-### Exercises
+### Exercise
+
+```{r}
+#| echo: False
+
+countdown(minutes = 20,
+          seconds = 0,
+          style = "position: relative; width: min-content;")
+```
 
 1.  Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the `weather` data. Can you see any patterns?
 
@@ -461,10 +445,6 @@ Now that it exists, we prefer `join_by()` since it provides a clearer and more f
 3.  Does every departing flight have corresponding weather data for that hour?
 
 4.  What do the tail numbers that don't have a matching record in `planes` have in common? (Hint: one variable explains \~90% of the problems.)
-
-5.  Add a column to `planes` that lists every `carrier` that has flown that plane. You might expect that there's an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you've learned in previous chapters.
-
-6.  Add the latitude and the longitude of the origin *and* destination airport to `flights`. Is it easier to rename the columns before or after the join?
 
 ## How do joins work?
 
@@ -662,10 +642,3 @@ df1 |>
 
 If you are doing this deliberately, you can set `relationship = "many-to-many"`, as the warning suggests.
 
-## Summary
-
-In this chapter, you've learned how to use mutating and filtering joins to combine data from a pair of data frames. Along the way you learned how to identify keys, and the difference between primary and foreign keys. You also understand how joins work and how to figure out how many rows the output will have. Finally, you've gained a glimpse into the power of non-equi joins and seen a few interesting use cases.
-
-This chapter concludes the "Transform" part of the book where the focus was on the tools you could use with individual columns and tibbles. You learned about dplyr and base functions for working with logical vectors, numbers, and complete tables, stringr functions for working with strings, lubridate functions for working with date-times, and forcats functions for working with factors.
-
-In the next part of the book, you'll learn more about getting various types of data into R in a tidy form.

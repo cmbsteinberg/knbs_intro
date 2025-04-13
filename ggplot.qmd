@@ -4,8 +4,6 @@ format: html
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dev = "svg")
-
 library(dplyr)
 library(ggplot2)
 library(countdown)
