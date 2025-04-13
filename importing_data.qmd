@@ -64,7 +64,9 @@ This works exactly the same way as reading in local data, and the object you hav
 ```{r}
 #| echo: False
 
-countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
+countdown(minutes = 5,
+          seconds = 0,
+          style = "position: relative; width: min-content;")
 ```
 
 1.  Read in the frogs dataset found here:'<https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-02/frogs.csv>' as an object called `frogs`

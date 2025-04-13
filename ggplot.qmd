@@ -1,3 +1,8 @@
+---
+title: "Plotting"
+format: html
+---
+
 ```{r include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dev = "svg")
 
@@ -6,8 +11,6 @@ library(ggplot2)
 library(countdown)
 library(tidyverse)
 ```
-
-# Basic Plotting
 
 This chapter will teach you how to visualise your data using `ggplot2`. R has several systems for making graphs, but `ggplot2` is the most elegant and versatile. The syntax behind `ggplot2` looks complicated at first, but once you understand it, it's incredibly powerful and can be used to visualise a wide range of data.
 
