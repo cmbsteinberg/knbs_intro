@@ -4,7 +4,7 @@ format: html
 ---
 
 
-# KNBS R Programming Curriculum
+# R Curriculum
 
 This comprehensive curriculum is designed to take KNBS employees from novice R users to advanced practitioners, equipping them with the skills necessary to perform sophisticated data analysis and programming tasks. The curriculum is structured into three distinct levels - Beginner, Intermediate, and Advanced - each building upon the knowledge gained in the previous level.
 

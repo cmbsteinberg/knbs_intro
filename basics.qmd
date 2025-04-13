@@ -29,14 +29,6 @@ Now open a new script (File -\> New File -\> R Script) and save it as Intro.R
 
 1.  Repeat the above exercises. What happens when you hit enter? Try using `Ctrl` + `Enter`
 
-```{r, include = TRUE}
-#| code-fold: true
-#| code-summary: "Solution"
-25 * 15
-(45 + 3) ^ 2
-78 / 4
-```
-
 ### The assignment operator
 
 R uses the assignment operator `<-` to assign values or data frames to objects. The object name goes on the left, with the object value on the right. For example, `x <- 5` assigns the value 5 to the object `x`. You can quickly type the assignment operator in RStudio by pressing `Alt` + `-` (Windows) or `Option` + `-` (Mac).
@@ -53,27 +45,6 @@ countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-cont
 2.  Create an object x2 with a value of x1 + 7
 3.  Check the value of x2 by looking in the environment pane
 4.  Create an object x3 equal to x2 divided by 3.
-
-```{r, include = TRUE}
-#| code-fold: true
-#| code-summary: "Solution"
-x1 <- 14
-x1
-```
-
-```{r, include = TRUE}
-#| code-fold: true
-#| code-summary: "Solution"
-x2 <- x1 + 7
-x2
-```
-
-```{r, include = TRUE}
-#| code-fold: true
-#| code-summary: "Solution"
-x3 <- x2 / 3
-x3
-```
 
 ### Combining using `c()`
 
@@ -119,19 +90,19 @@ Functions are one of the most important aspects of any programming language. Fun
 
 Imagine you had the following data for test scores of students and you wanted to find the mean score:
 
-```{r use_functions}
+```{r}
 test_scores <- c(70, 68, 56, 88, 42, 55)
 ```
 
 We could extract each individual score from the data frame, add them together and then divide them by the number of elements:
 
-```{r use_functions2}
+```{r}
 (test_scores[1] + test_scores[2] + test_scores[3] + test_scores[4] + test_scores[5] + test_scores[6]) / 6
 ```
 
 This gives us the mean score of 63.2. But that's pretty tedious, especially if our data set was of any significant size. To overcome this we can use a function called `mean()`. To read about a function in R type `help("function_name")` or `?function_name` in the console. By reading the help file we see that `mean()` requires an R object of numerical values. So we can pass our `test_scores` data as the argument:
 
-```{r use_function3, echo=TRUE}
+```{r, echo=TRUE}
 mean(test_scores)
 ```
 
