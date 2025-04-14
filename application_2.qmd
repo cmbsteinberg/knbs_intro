@@ -17,48 +17,48 @@ countdown(minutes = 30,
 
 # Plotting in the real world
 
-Much as with our data manipulation applications, examples in textbooks are different from real life. Hopefully any data you are plotting you have already tidied, but this can still lead to problems. 
-In this application, we will practice some of the your plotting skills on the datasets you already analysed in the previous applications.
+Much as with our data manipulation applications, examples in textbooks are different from real life. Hopefully any data you are plotting you have already tidied, but this can still lead to problems. In this application, we will practice some of the your plotting skills on the datasets you already analysed in the previous applications.
 
-If you remember, you performed analysis of 3 different issues using Kenya's 2019 census data: 
+If you remember, you performed analysis of 3 different issues using Kenya's 2019 census data:
+
 1. Breakdown of Kenya by religious belief
+
 2. Share of people who are migrants in each county
+
 3. Average working hours for men and women in rural vs. urban areas.
 
 ### Visualising Religious Breakdown
 
-1. Using the religion_overall dataframe created in step 4:
-2.  Create a bar chart (`geom_col` or `geom_bar(stat="identity"))` showing the share of each religion_label.
-3.  Map religion_label to the x-axis and share to the y-axis.
-4. Add appropriate labels using `labs()` for the title, x-axis, and y-axis.
-5. Format the y-axis to display percentages using scale_y_continuous`(labels = scales::label_percent())`.
-6. Apply a theme, for example `theme_minimal()`.
-7. Change the colour palette using `scale_fill_brewer()` (you'll need to map religion_label to the fill aesthetic as well).
+1.  Using the religion_overall dataframe, create a bar chart (`geom_col` or `geom_bar(stat="identity"))` showing the share of each religion_label.
+2.  Map religion_label to the x-axis and share to the y-axis.
+3.  Add appropriate labels using `labs()` for the title, x-axis, and y-axis.
+4.  Format the y-axis to display percentages using scale_y_continuous`(labels = scales::label_percent())`.
+5.  Apply a theme, for example `theme_minimal()`.
+6.  Change the colour palette using `scale_fill_brewer()` (you'll need to map religion_label to the fill aesthetic as well).
 
 ### Visualising Migration Proportion by County
-1. Using the migration_prop dataframe created in step 6, create a bar chart showing the migration_prop for each county. Map county to the y-axis and migration_prop to the x-axis for better readability (use geom_col).
-2. Use `coord_flip()` if you mapped county to x initially to make labels readable, or map directly as described in (a).
-3. Format the x-axis (which represents the proportion) to display percentages.
-4. Add appropriate labels using `labs()`.
-5. Apply a theme like `theme_bw()`.
-6. Order the counties by migration proportion. 
+
+1.  Using the migration_prop dataframe created in step 6, create a bar chart showing the migration_prop for each county. Map county to the y-axis and migration_prop to the x-axis for better readability (use geom_col).
+2.  Use `coord_flip()` if you mapped county to x initially to make labels readable, or map directly as described in (a).
+3.  Format the x-axis (which represents the proportion) to display percentages.
+4.  Add appropriate labels using `labs()`.
+5.  Apply a theme like `theme_bw()`.
+6.  Order the counties by migration proportion.
 
 ### Visualising Average Working Hours
-1. Using the working_hours_mean_adult dataframe created in step 10:
-2. Create a grouped bar chart (`geom_col`) showing the mean_hours_worked_if_work (average hours for those who work).
-3. Map area_type (Rural/Urban) to the x-axis.
-4. Map mean_hours_worked_if_work to the y-axis.
-5. Map sex_label (Male/Female) to the fill aesthetic to get different coloured bars for men and women.
-6. Use `position = position_dodge()` within `geom_col()` to place the bars for men and women side-by-side within each area type.
-7. Add appropriate labels using `labs() `for the title, axes, and fill legend.
-8. Apply a theme.
-9.  Use `scale_fill_brewer()` to choose a different colour palette for the fill.
+
+1.  Using the working_hours_mean_adult dataframe created in step 10, create a grouped bar chart (`geom_col`) showing the mean_hours_worked_if_work (average hours for those who work).
+2.  Map area_type (Rural/Urban) to the x-axis.
+3.  Map mean_hours_worked_if_work to the y-axis.
+4.  Map sex_label (Male/Female) to the fill aesthetic to get different coloured bars for men and women.
+5.  Use `position = position_dodge()` within `geom_col()` to place the bars for men and women side-by-side within each area type.
+6.  Add appropriate labels using `labs()`for the title, axes, and fill legend.
+7.  Apply a theme.
+8.  Use `scale_fill_brewer()` to choose a different colour palette for the fill.
 
 ### Saving a Plot
-Finally, practice saving one of the plots you created.
 
-Assign one of your plots to a variable (e.g., migration_plot <- ggplot(...) + ...).
-Use `ggsave()` to save this plot to a file. Include today's date in the filename using `Sys.Date()`. For example, save it as "migration_plot_YYYY-MM-DD.png".
+Finally, practice saving one of the plots you created. Assign one of your plots to a variable (e.g., migration_plot \<- ggplot(...) + ...). Use `ggsave()` to save this plot to a file. Include today's date in the filename using `Sys.Date()`. For example, save it as *"migration_plot_YYYY-MM-DD.png"*.
 
 ```{r}
 #| code-fold: true
@@ -120,8 +120,3 @@ ggsave(filename = paste0("migration_plot_", Sys.Date(), ".png"), plot = migratio
 
 # Note: This saves the file to your current working directory in RStudio.
 ```
-
-
-
-
-

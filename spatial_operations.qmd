@@ -16,7 +16,11 @@ Before running any spatial operations on two spatial objects it is always worth 
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Use `st_filter()` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`.
 
@@ -30,7 +34,11 @@ You should have got an error here saying `x st_crs(x) == st_crs(y) is not TRUE`.
 
 ### Exercise
 
-`r countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Run `st_crs()` on both and `lfb_sf` and `london_boundary` and compare the results.
 
@@ -46,7 +54,6 @@ sf::st_crs(lfb_sf)[[1]]
 sf::st_crs(london_boundary)[[1]]
 ```
 
-
 `st_crs()` provides detailed information about the CRS and projection of data, but all we need to check is its first element denoted by `[[1]]`. We can see that `lfb_sf` uses `EPSG:27700`, while `london_boundary` is set to `WGS 84`. This problem can be solved by transforming `london_boundary`'s CRS to match that of `lfb_sf`, simply by using the correct EPSG code. To do so we will use the `st_transform()` function which takes two arguments:
 
 -   x - `sf` object to be transformed
@@ -55,7 +62,11 @@ sf::st_crs(london_boundary)[[1]]
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Run `st_transform()` to transform and overwrite `london_boundary`. Remember to set the correct CRS.
 2.  Run `st_crs()` on `lfb_sf` and newly transformed `london_boundary` and compare the results.
@@ -76,10 +87,13 @@ sf::st_crs(london_boundary)[[1]]
 
 Now that the CRS are matching we should be able to spatially subset `lfb_sf`.
 
-
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Use `st_filter` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`. Overwrite `lfb_sf` with the subset data.
 2.  Plot it to check if the results are correct - all points should be within London.
@@ -106,7 +120,11 @@ We will be joining the Middle Super Output Areas to LFB locations, which will th
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Read in BFE boundaries`data/shp/MSOA_2011_london/MSOA_2011_BFE_London.gpkg` as `msoa_london_BFE` - use `st_read()`
 2.  Overwrite `lfb_sf` by running `st_join()` between `lfb_sf` and `msoa_london_BFE`
@@ -120,12 +138,15 @@ lfb_sf <- sf::st_join(lfb_sf, msoa_london_BFE)
 head(lfb_sf)
 ```
 
-
 Now that `MSOA11CD` is attached to our observations we can create summary statistics for each MSOA. As mentioned before, we can use `tidyverse` functions on `sf` objects. Here, we will use `dplyr` to calculate the total number of incidents and their cost, and then use a non spatial join to attach those results to MSOA boundaries. At this stage we no longer need the geometry column for each LFB incident as a) we're not performing any spatial operations on our points, and b) the geometry column can slow down/interrupt the `dplyr::group_by` function which we will be using. To remove the geometry column we use the `st_drop_geometry()` function directly in the `dplyr` pipe.
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Read in BSC boundaries`data/shp/MSOA_2011_london/MSOA_2011_BSC_London.shp` as `msoa_london_BSC` - use `st_read()`
 2.  Use `st_drop_geometry()` on `lfb_sf` to remove geometry data.
@@ -152,7 +173,11 @@ At this stage it is a good idea to save our data. We can do this using the `st_w
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Copy and execute the following code to save your data: `st_write(msoa_lfb,"output/msoa_lfb.gpkg)`
 
@@ -170,7 +195,11 @@ Now that we have processed our data we can start mapping it. So far we have only
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Start by specifying which `sf` object is being mapped in `tm_shape()` and what column holds the values to be visualised. We will also change the legend's title.
 
@@ -366,34 +395,23 @@ interactive_map <- ggplotly(p, tooltip = "text")
 interactive_map
 ```
 
-## Recommended resources
-
-[Geocomputation with R](https://geocompr.robinlovelace.net/index.html)
-
-[Simple Features for R](https://r-spatial.github.io/sf/index.html)
-
-[Spatial Data Science with R](https://www.rspatial.org/)
-
 ### Exercise
 
-`r countdown(minutes = 15, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 15, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Using the inbuilt dataset `relig_income`, pivot the income columns into a long dataset.
 2.  Assign this to an object called `income_long`
 3.  Using the dataset income_long you created, plot a bar chart in ggplot. Use religion as the x axis and the count of people as the y axis.
 4.  Assign the income groupings to the colour aesthetic.
 
-<details>
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
 
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.4.1. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, eval = FALSE}
 #Tidy the data using pivot_longer()
 income_long <- relig_income |>
   tidyr::pivot_longer(cols = -religion,
@@ -411,7 +429,3 @@ income_chart <-
 #print() allows you to view the chart in the 'Plots' tab
 print(income_chart)
 ```
-
-</details>
-
-<br>

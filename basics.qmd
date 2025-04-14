@@ -21,8 +21,8 @@ countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-cont
 
 As a quick exercise, try out some arithmetic in your console:
 
-1.  `25 \* 15`
-2.  `(45 + 3) \^ 2`
+1.  `25 * 15`
+2.  `(45 + 3) ^ 2`
 3.  `78 / 4`
 
 Now open a new script (File -\> New File -\> R Script) and save it as Intro.R

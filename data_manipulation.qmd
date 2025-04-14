@@ -89,7 +89,7 @@ gapminder_new <- gapminder |>
 
 The pipe means we can read this code as a series of statements separated by the pipe representing "and then"; e.g. take the gapminder data *and then* remove the continent column *and then* select the year, country and lifeExp columns.
 
-You may notice that we don't need to specify the `data` argument in each function when using \|\>. By piping, the subsequent function recognises we want to use the result of our previous statement as our data.
+You may notice that we don't need to specify the `data` argument in each function when using `|>`. By piping, the subsequent function recognises we want to use the result of our previous statement as our data.
 
 You can quickly insert the pipe operator in RStudio by pressing `Ctrl` + `Shift` + `M` (Windows) or `Cmd` + `Shift` + `M` (Mac). This will still insert the old pipe `%>%`. This can be changed in `Tools` \> `Global Options` \> `Code` \> `Editing` \> `Use native pipe operator, |>`
 
@@ -97,10 +97,10 @@ You can quickly insert the pipe operator in RStudio by pressing `Ctrl` + `Shift`
 
 We can produce breakdowns of statistics using the group_by and summarise commands from the dplyr package:
 
--   group_by() identifies which variables we want to produce breakdowns by.
--   summarise() is used to indicate which values we want to calculate.
+-   `group_by()` identifies which variables we want to produce breakdowns by.
+-   `summarise()` is used to indicate which values we want to calculate.
 
-Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use the pipe (\|\>) operator to chain these functions together.
+Using these functions together we can produce summary statistics in a similar way to pivot tables in Excel. We can use the pipe (`|>`) operator to chain these functions together.
 
 So if we want the mean life expectancy by *continent* and *year*:
 
@@ -112,7 +112,7 @@ mean_life_exp <- gapminder |>
 
 Here R takes the dataset, then groups it first by year and then by continent and then outputs the mean life expectancy. The mean life expentancy variable is created as a new column called `life_exp`. The results are saved into a new dataset called `mean_life_exp`.
 
-There are other functions that could be used here instead of mean e.g. n, n_distinct, min, max, mean, median, var and sd.
+There are other functions that could be used here instead of mean e.g. `n`, `n_distinct`, `min`, `max`, `mean`, `median`, `var` and `sd.`
 
 If we want to add a new variable that we decide to call `country_count` that provides the counts by year and continent we can rerun as follows using the pipe operator:
 
@@ -134,7 +134,6 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 2.  Summarise the grouped dataset to produce an average of Ozone and Temp by month.
 3.  Assign this to an object called airquality_summarised.
 
-
 ```{r, include = TRUE}
 #| code-fold: true
 #| code-summary: "Solution"
@@ -147,7 +146,7 @@ airquality_summarised <- airquality |>
 
 ## Filter
 
-If you would like to produce statistics for a subset of rows or observations, a good function to use is filter() from the dplyr package.
+If you would like to produce statistics for a subset of rows or observations, a good function to use is `filter()` from the dplyr package.
 
 Let's first take a look at the different possible values of the continent variable. We can do that quickly using the group_by/summarise combination.
 
@@ -157,7 +156,7 @@ gapminder |>
   summarise(count = n())
 ```
 
-To filter we just specify the data that we want to filter (gapminder) and the value that we want to filter on. In this case lets filter where continent is "Asia" and year is after 1992 then recalculate the mean life expectancy by country:
+To filter we just specify the data that we want to filter (gapminder) and the value that we want to filter on. In this case lets filter where continent is *"Asia"* and year is after 1992 then recalculate the mean life expectancy by country:
 
 ```{r results="hide", eval = FALSE}
 mean_life_exp <- gapminder |> 
@@ -201,9 +200,9 @@ filter(year %in% c(1992, 1998, 2002))
 
 countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
 ```
+
 1.  Filter the original airquality dataset to only include data for May and June. Try to do this using the `%in%` function.
 2.  Call this assignment: airquality_filter.
-
 
 ```{r, include = TRUE}
 #| code-fold: true
@@ -215,7 +214,7 @@ airquality_filter <- airquality |>
 
 ## Rename
 
-We can rename variables using the dplyr function rename(). Let’s amend our previous code creating the mean_life_exp dataset to change the name of the "year" column to "selected_year".
+We can rename variables using the dplyr function `rename()`. Let’s amend our previous code creating the mean_life_exp dataset to change the name of the *"year"* column to *"selected_year"*.
 
 ```{r results="hide", eval = FALSE}
 mean_life_exp <- gapminder |> 
@@ -225,11 +224,11 @@ mean_life_exp <- gapminder |>
   rename(selected_year = year)
 ```
 
-Within the rename function, the new name "selected_year" is specified on the left and the old name on the right of the equal sign.
+Within the rename function, the new name *"selected_year"* is specified on the left and the old name on the right of the equal sign.
 
 ## Mutate
 
-You can create new columns and perform calculations on existing columns using the dplyr command mutate().
+You can create new columns and perform calculations on existing columns using the dplyr command `mutate()`.
 
 ```{r eval = FALSE}
 ?mutate
@@ -269,7 +268,7 @@ gapminder |>
   )
 ```
 
-You can download the Data Transformation Cheat Sheet (and other cheatsheets) at: <https://www.rstudio.com/resources/cheatsheets/>
+You can download the Data Transformation Cheat Sheet (and other cheatsheets) at the [R Studio Website](https://www.rstudio.com/resources/cheatsheets/)
 
 ### Exercise
 
@@ -280,7 +279,7 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 ```
 
 1.  The inbuilt trees dataset includes columns for tree girth and height in inches. Using mutate, create two new columns (Girth_cm and Height_cm) containing the equivalent values in centimetres.
-2.  How can you replace an existing column with a new column using mutate?
+2.  How can you replace an existing column with a new column using `mutate`?
 
 ```{r, include = TRUE}
 #| code-fold: true
@@ -329,6 +328,7 @@ arrange(df, desc(x))
 
 countdown(minutes = 5, seconds = 0, style = "position: relative; width: min-content;")
 ```
+
 1.  Arrange the rows of the `trees` dataset by increasing height and decreasing girth.
 2.  What do you notice?
 

@@ -1,0 +1,20 @@
+---
+title: "Application 3: Joining and Mapping"
+format: html
+---
+
+```{r include=FALSE}
+library(countdown)
+```
+
+```{r}
+#| echo: False
+
+countdown(minutes = 45,
+          seconds = 0,
+          style = "position: relative; width: min-content;")
+```
+
+
+
+Remember the [GCP data](https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv) we looked at when learning about importing data?

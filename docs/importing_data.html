@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Importing Data – KNBS: Introduction to R</title>
+<title>3&nbsp; Importing Data – KNBS: Introduction to R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./importing_data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./importing_data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Curriculum</span></span></a>
+ <span class="menu-text">Curriculum</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -160,25 +160,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./importing_data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Plotting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Plotting</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidy Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -195,7 +201,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./application_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Application 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Application 1: Data Manipulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./application_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Application 2: Plotting</span></span></a>
   </div>
 </li>
       </ul>
@@ -214,21 +226,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#local-reading" id="toc-local-reading" class="nav-link active" data-scroll-target="#local-reading"><span class="header-section-number">4.1</span> Local Reading</a></li>
-  <li><a href="#csv" id="toc-csv" class="nav-link" data-scroll-target="#csv"><span class="header-section-number">4.2</span> CSV</a>
+  <li><a href="#local-reading" id="toc-local-reading" class="nav-link active" data-scroll-target="#local-reading"><span class="header-section-number">3.1</span> Local Reading</a></li>
+  <li><a href="#csv" id="toc-csv" class="nav-link" data-scroll-target="#csv"><span class="header-section-number">3.2</span> CSV</a>
   <ul class="collapse">
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">4.2.1</span> Exercise</a></li>
-  <li><a href="#inspecting-the-dataset" id="toc-inspecting-the-dataset" class="nav-link" data-scroll-target="#inspecting-the-dataset"><span class="header-section-number">4.2.2</span> Inspecting the dataset</a></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">4.2.3</span> Exercise</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">3.2.1</span> Exercise</a></li>
+  <li><a href="#inspecting-the-dataset" id="toc-inspecting-the-dataset" class="nav-link" data-scroll-target="#inspecting-the-dataset"><span class="header-section-number">3.2.2</span> Inspecting the dataset</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">3.2.3</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="header-section-number">4.3</span> Excel</a>
+  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="header-section-number">3.3</span> Excel</a>
   <ul class="collapse">
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="header-section-number">4.3.1</span> Exercise</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="header-section-number">3.3.1</span> Exercise</a></li>
   </ul></li>
-  <li><a href="#rio" id="toc-rio" class="nav-link" data-scroll-target="#rio"><span class="header-section-number">4.4</span> Rio</a></li>
-  <li><a href="#column-names" id="toc-column-names" class="nav-link" data-scroll-target="#column-names"><span class="header-section-number">4.5</span> Column Names</a>
+  <li><a href="#rio" id="toc-rio" class="nav-link" data-scroll-target="#rio"><span class="header-section-number">3.4</span> Rio</a></li>
+  <li><a href="#column-names" id="toc-column-names" class="nav-link" data-scroll-target="#column-names"><span class="header-section-number">3.5</span> Column Names</a>
   <ul class="collapse">
-  <li><a href="#cleaning-column-names" id="toc-cleaning-column-names" class="nav-link" data-scroll-target="#cleaning-column-names"><span class="header-section-number">4.5.1</span> Cleaning Column Names</a></li>
+  <li><a href="#cleaning-column-names" id="toc-cleaning-column-names" class="nav-link" data-scroll-target="#cleaning-column-names"><span class="header-section-number">3.5.1</span> Cleaning Column Names</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -236,9 +248,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./importing_data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./importing_data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Importing Data</span></h1>
 </div>
 
 
@@ -260,12 +272,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>CSV</li>
 <li>Excel</li>
 </ul>
-<section id="local-reading" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="local-reading"><span class="header-section-number">4.1</span> Local Reading</h2>
+<section id="local-reading" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="local-reading"><span class="header-section-number">3.1</span> Local Reading</h2>
 <p>As described in Chapter 1, the bottom right pane of RStudio allows you to view files that are within your own personal filesystem. You are free to create new folders in this area, using the <code>New Folder</code> button.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_f770ecda" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
+<div class="countdown" id="timer_201d3f0b" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -281,8 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Great, we will come back to using these two files, but first let’s discuss how to read in csv files.</p>
 </section>
-<section id="csv" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="csv"><span class="header-section-number">4.2</span> CSV</h2>
+<section id="csv" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="csv"><span class="header-section-number">3.2</span> CSV</h2>
 <p>Although there is a <code>read.csv()</code> function in base R, like most things there is a better <code>tidyverse</code> alternative! <code>read_csv()</code> from the <code>readr</code> package reads CSVs in as a tibble (which has additional features compared to a standard data frame), is much faster (~10X), and allows you to specify how you read data in more easily.</p>
 <p>As always, let’s read the function documentation using <code>?read_csv</code>. This tells us we need to provide a path to the file. This path can be either local or remote; so it will work equally well for data inside your project or from the internet.</p>
 <p>To read in a local file, you have to specify the exact location of the file. You can do this as either an <em>absolute</em> filepath, which starts from the drive name right through to the final file (e.g.&nbsp;C:/Documents/My_work/file.csv), or as a <em>relative</em> file path. A relative file path just gives the location of the file starting from your current working environment. You can check what your current working environment is using the command <code>getwd()</code>. The advantage of using relative file paths is if someone duplicates your project from Github, the code will still work on their own computer.</p>
@@ -319,11 +331,11 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <p>This works exactly the same way as reading in local data, and the object you have created will appear in your environment (top right).</p>
-<section id="exercise" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">4.2.1</span> Exercise</h3>
+<section id="exercise" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">3.2.1</span> Exercise</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_7ac5bcb0" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
+<div class="countdown" id="timer_37f9176e" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -339,8 +351,8 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </details>
 </div>
 </section>
-<section id="inspecting-the-dataset" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="inspecting-the-dataset"><span class="header-section-number">4.2.2</span> Inspecting the dataset</h3>
+<section id="inspecting-the-dataset" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="inspecting-the-dataset"><span class="header-section-number">3.2.2</span> Inspecting the dataset</h3>
 <p>As noted in the previous section, you can see by looking in the environment window that the eurovision dataset has 48 observations and 22 variables. You can also return this information (and more) about datasets programatically, using the <code>glimpse()</code> function, again from the dplyr package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gcp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -373,11 +385,11 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 </div>
 <p>As well as returning the number of rows and columns in the data, the glimpse function also shows you the names of the columns, the column classes (indicated in <triangular brackets="">), and an example of the first few rows of data.</triangular></p>
 </section>
-<section id="exercise-1" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">4.2.3</span> Exercise</h3>
+<section id="exercise-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.2.3</span> Exercise</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_6e7c1ab8" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
+<div class="countdown" id="timer_05e3c688" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -396,8 +408,8 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 </div>
 </section>
 </section>
-<section id="excel" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="excel"><span class="header-section-number">4.3</span> Excel</h2>
+<section id="excel" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="excel"><span class="header-section-number">3.3</span> Excel</h2>
 <p>Reading excel files works in much the same way as CSV files. However, due to the difference in underlying structures we require the function <code>read_excel()</code> from a different package called <code>readxl</code>.</p>
 <p>The main difference when reading excel files is three additional arguments that we can set;</p>
 <ul>
@@ -410,11 +422,11 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One option is to download the file </span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tourism <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/tourism.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercise-2" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">4.3.1</span> Exercise</h3>
+<section id="exercise-2" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">3.3.1</span> Exercise</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_b013ac23" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
+<div class="countdown" id="timer_57833032" data-update-every="1" tabindex="0" style="right:0;bottom:0;position: relative; width: min-content;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -422,7 +434,7 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 </div>
 <ol type="1">
 <li>Install and load the readxl package.</li>
-<li>Download this <a href="&quot;https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx&quot;">dataset published by KNBS about the tourism sector</a>, saving it into /data</li>
+<li>Download this <a href="https://www.knbs.or.ke/wp-content/uploads/2024/04/2023-Economic-Survey-Kenya-Tourism-Sector.xlsx">dataset published by KNBS about the tourism sector</a>, saving it into /data</li>
 <li>Read it in, specifying the sheet name you want to read in.</li>
 <li>Examine the data you have read in; are the column names what you want? Work out how to skip these and only read in the data, with the correct column names.</li>
 </ol>
@@ -436,12 +448,12 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 </div>
 </section>
 </section>
-<section id="rio" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="rio"><span class="header-section-number">4.4</span> Rio</h2>
+<section id="rio" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="rio"><span class="header-section-number">3.4</span> Rio</h2>
 <p>Sometimes you may want to read a selection of files of all different types. This is where <code>Rio</code> can come in handy. <code>Rio</code> is a wrapper around the libraries we’ve used above and many more, which lets you use <code>import()</code> to read almost any file in. This isn’t always useful, when you want to do very specific things with a certain file, but can be much cleaner.</p>
 </section>
-<section id="column-names" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="column-names"><span class="header-section-number">4.5</span> Column Names</h2>
+<section id="column-names" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="column-names"><span class="header-section-number">3.5</span> Column Names</h2>
 <p>In the previous section we looked at reading data into R and also inspecting it. In this section we are going to look at our first steps once it’s read in.</p>
 <p>In the previous session we stated that every column in a data frame is a variable and it is good practice to not have spaces within variable names, as spaces makes it harder for us to call on the variables when we need to use them.</p>
 <p>When you enter data in Excel, you most often don’t think too much about what you call each column. After all, you just label them once and as long as they are meaningful to you, what does it matter if the column name is a long combination of CAPITALLETTERS, lowercaseletters, and numbers?</p>
@@ -471,8 +483,8 @@ $ ...22                                                  &lt;lgl&gt; NA, NA, NA,
 </div>
 </div>
 <p>As we can see our column names have spaces and some start with capital letters and some with small letters, we can clean the names using the <code>janitor</code> package.</p>
-<section id="cleaning-column-names" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="cleaning-column-names"><span class="header-section-number">4.5.1</span> Cleaning Column Names</h3>
+<section id="cleaning-column-names" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="cleaning-column-names"><span class="header-section-number">3.5.1</span> Cleaning Column Names</h3>
 <p>The <code>janitor</code> package offers many functions used to manipulate data, for example removing empty rows and columns, finding duplicates within a data frame. In this session we will use the library to to clean our data set names.</p>
 <p>We can clean the names of our dataset with the <code>janitor::clean_names()</code> function as shown below.</p>
 <p>We are overwriting the original Titanic data frame with a version with the column names cleaned.</p>
@@ -961,12 +973,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./data_manipulation.html" class="pagination-link" aria-label="Manipulating Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ggplot.html" class="pagination-link" aria-label="Plotting">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Plotting</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Plotting</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

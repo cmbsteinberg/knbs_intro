@@ -49,8 +49,8 @@ If you find the text difficult to read or prefer a different appearance, you can
 
 ### Recommended Changes
 
-While not necessary, certain changes are almost always recommended for visibility reasons. These include: 
+While not necessary, certain changes are almost always recommended for visibility reasons. These include:
 
-* *Choosing a different theme*, as Textmate can be hard on the eyes. This can be done in `Tools` \> `Global Options` \> `Appearance` \> `Editor theme:`. 
-* *Highlight R function calls*. This makes functions look a different colour than normal text, which can make reading your code much easier. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Highlight R function calls`. 
-* *Use Rainbow Parenthesis*. This makes each pair of () in a line a different colour, which can help you catch if you're missing one and it's breaking your code. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Use rainbow parenthesis`.
+-   *Choosing a different theme*, as Textmate can be hard on the eyes. This can be done in `Tools` \> `Global Options` \> `Appearance` \> `Editor theme:`.
+-   *Highlight R function calls*. This makes functions look a different colour than normal text, which can make reading your code much easier. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Highlight R function calls`.
+-   *Use Rainbow Parenthesis*. This makes each pair of () in a line a different colour, which can help you catch if you're missing one and it's breaking your code. This can be done in `Tools` \> `Global Options` \> `Code` \> `Display` \> `Use rainbow parenthesis`.

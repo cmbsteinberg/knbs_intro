@@ -20,6 +20,7 @@ book:
       chapters:
       - application_1.qmd
       - application_2.qmd
+      #- application_3.qmd
     - part: mapping.qmd
       #chapters:
       #- spatial_operations.qmd
