@@ -58,3 +58,69 @@ The second is to perform the analysis on your dataset. This will involve creatin
 9.  Create an hours_worked column where missing values (NA) in the original hours worked column (hours_worked_if_work) are replaced with 0, using `mutate` and `replace_na.`
 
 10. Calculate the average working hours: Group by the rural and female columns using group_by and calculate the mean of hours_worked and hours_worked_if_work using `summarise(mean())`. Remember to handle potential NAs in the mean calculation (e.g., using na.rm = TRUE).
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Preparing your dataset for analysis"
+
+library(tidyverse)
+library(janitor)
+
+census <- read_csv("../intro_R-main/data/census.csv") |>
+  janitor::clean_names()
+
+census_small <- census |>
+  select(county, subcounty_code, ea_type, p11, p12, p17, p19, p52) |>
+  rename(
+    religion = p17,
+    age = p12,
+    sex = p11,
+    hours_worked_if_work = p52
+  )
+
+census_small <- census_small |>
+  mutate(religion = case_when(religion == 99 ~ NA, TRUE ~ religion))
+```
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Breakdown of Kenya by religious belief"
+
+religion_by_county <- census_small |>
+  group_by(county, religion) |>
+  summarise(total = n()) |>
+  mutate(share = total/sum(total))
+```
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Share of people who are migrants in each county"
+
+migration_prop <- census_small |>
+  mutate(migrant = if_else(birthplace == county, 0, 1)) |>
+  summarise(migration_prop = mean(migrant))
+```
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Average working hours for men and women in rural vs. urban areas"
+
+census_small <- census_small |>
+  mutate(
+    rural = if_else(ea_type == 1, 1, 0),
+    female = if_else(sex == 2, 1, 0),
+    hours_worked = if_else(is.na(hours_worked_if_work), 0, hours_worked_if_work)
+  )
+
+working_hours_mean_adult <- census_small |>
+  filter(age >= 18) |>
+  group_by(rural, female) |>
+  summarise(
+    hours_worked = mean(hours_worked, na.rm = TRUE),
+    hours_worked_if_work = mean(hours_worked_if_work, na.rm = TRUE)
+  )
+

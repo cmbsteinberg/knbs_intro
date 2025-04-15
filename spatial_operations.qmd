@@ -1,113 +1,38 @@
 ---
-title: "mapping"
+title: "Spatial Operations"
 format: html
 ---
 
-## Spatial subsetting and CRS
+```{r, include=FALSE}
 
-In addition to subsetting by value, as we did with the UTLA boundaries earlier, we can also subset observations by evaluating their spatial relationship with another data set. We can for example select all UTLAs which are fully within Wales, every Output Area intersected by a river, or all households outside of city boundaries. There are a number of different spatial relationships which can be tested and used to subset observations.
-
-`sf` has an inbuilt function called `st_filter()` which we can use to spatially subset observations. The function takes several arguments:
-
--   x - `sf` data frame we want to subset - `lfb_sf`
--   y - `sf` object used to evaluate the spatial relationship - `london_boundary`
-
-Before running any spatial operations on two spatial objects it is always worth checking if their coordinate reference systems (CRS) match. `sf` will throw an error if that's not the case. Try it for yourself below.
-
-### Exercise
-
-```{r}
-#| echo: False
-
-countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
-```
-
-1.  Use `st_filter()` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`.
-
-```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-poi_sf_nairobi <- st_filter(x = poi_sf, y = nairobi_boundary)
-```
-
-You should have got an error here saying `x st_crs(x) == st_crs(y) is not TRUE`. It means that objects x and y have different coordinate reference systems. Spatial operations require all objects to have the same CRS. We can see this for ourselves by running the `st_crs()` function, which returns the coordinate reference system of an object.
-
-### Exercise
-
-```{r}
-#| echo: False
-
-countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
-```
-
-1.  Run `st_crs()` on both and `lfb_sf` and `london_boundary` and compare the results.
-
-```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-sf::st_crs(lfb_sf)[[1]]
+# load packages
+library(sf) 
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(stringr)
+library(ggspatial)
+library(plotly)
+library(countdown)
+library(tidyr)
 ```
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-sf::st_crs(london_boundary)[[1]]
+#| include: false
+kenya_2017 <- sf::st_read(
+  "/Users/christophersteinberg/Documents/GitHub/admn2/ken_admbnda_adm2_iebc_20191031.shp",
+  quiet = TRUE
+)
+
+health_sf <- readr::read_csv("data/Health_facilities_-4126638174547585951.csv") |> sf::st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+
+nairobi_boundary <- kenya_2017 |>
+  dplyr::filter(stringr::str_detect(ADM1_PCODE, "KE047")) |>  sf::st_union()
+
+
 ```
 
-`st_crs()` provides detailed information about the CRS and projection of data, but all we need to check is its first element denoted by `[[1]]`. We can see that `lfb_sf` uses `EPSG:27700`, while `london_boundary` is set to `WGS 84`. This problem can be solved by transforming `london_boundary`'s CRS to match that of `lfb_sf`, simply by using the correct EPSG code. To do so we will use the `st_transform()` function which takes two arguments:
-
--   x - `sf` object to be transformed
--   crs - EPSG code that we want to transform our data to - BNG is
-    27700. 
-
-### Exercise
-
-```{r}
-#| echo: False
-
-countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
-```
-
-1.  Run `st_transform()` to transform and overwrite `london_boundary`. Remember to set the correct CRS.
-2.  Run `st_crs()` on `lfb_sf` and newly transformed `london_boundary` and compare the results.
-
-```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-london_boundary <- sf::st_transform(london_boundary, crs = 27700)
-
-sf::st_crs(lfb_sf)[[1]]
-```
-
-```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-sf::st_crs(london_boundary)[[1]]
-```
-
-Now that the CRS are matching we should be able to spatially subset `lfb_sf`.
-
-### Exercise
-
-```{r}
-#| echo: False
-
-countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
-```
-
-1.  Use `st_filter` to spatially subset `lfb_sf` by testing its relationship with `london_boundary`. Overwrite `lfb_sf` with the subset data.
-2.  Plot it to check if the results are correct - all points should be within London.
-
-```{r}
-#| code-fold: true
-#| code-summary: "Solution"
-lfb_sf_filter <- sf::st_filter(x = lfb_sf, y = london_boundary)
-ggplot2::ggplot() + 
-  ggplot2::geom_sf(london_boundary)  +
-  ggplot2::geom_sf(lfb_sf_filter)
-```
-
-## Spatial and non-spatial joins
+## Spatial joins
 
 Simple features data can be joined to other data sets in two ways. We can either use a traditional, SQL like join, based on a value shared across the data sets or, since we have a geometry column, on the spatial relationship between the data sets. This is known as a spatial join, where variables from one data set are joined to another only on the basis of their spatial relationship. The most commonly used operation is known as a Point-in-Polygon join where data from a polygon is joined to the points within them.
 
@@ -116,7 +41,7 @@ In `sf` spatial joins are handled using the `st_join(x, y)` function with argume
 -   x - `sf` object to which we are joining data (LHS in SQL)
 -   y - `sf` object whose variables are being joined (RHS in SQL)
 
-We will be joining the Middle Super Output Areas to LFB locations, which will then allow us to group and plot data at MSOA level. It's important to note that we are using two different sets of MSOA boundaries - one to perform a spatial join, and another to visualise the data. Full Extent (BFE) boundaries are used for the former. This ensures that all points are correctly joined to MSOA boundaries, and that we don't lose any data around bodies of water. To plot the data we use Super Generalised Clipped (BSC) boundaries. They are smaller in size, load faster, and, because they're clipped to the coastline, appear in a way that's familiar to most users.
+We will be joining the subcounty shapefile to the health facility location data.
 
 ### Exercise
 
@@ -126,19 +51,17 @@ We will be joining the Middle Super Output Areas to LFB locations, which will th
 countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-1.  Read in BFE boundaries`data/shp/MSOA_2011_london/MSOA_2011_BFE_London.gpkg` as `msoa_london_BFE` - use `st_read()`
-2.  Overwrite `lfb_sf` by running `st_join()` between `lfb_sf` and `msoa_london_BFE`
-3.  Inspect it using `head()` or `glimpse()` to see what columns have been added.
+1.  Create a new dataframe called `kenya_health` by running `st_join()` between `kenya_2017` and `health_sf`
+2.  Inspect it using `head()` or `glimpse()` to see what columns have been added.
 
 ```{r}
-msoa_london_BFE <- sf::st_read("data/shp/MSOA_2011_london/MSOA_2011_BFE_London.gpkg", quiet = TRUE)
+kenya_2017 <- st_make_valid(kenya_2017)
+kenya_health <- sf::st_join(kenya_2017, health_sf) 
 
-lfb_sf <- sf::st_join(lfb_sf, msoa_london_BFE) 
-
-head(lfb_sf)
+head(kenya_health)
 ```
 
-Now that `MSOA11CD` is attached to our observations we can create summary statistics for each MSOA. As mentioned before, we can use `tidyverse` functions on `sf` objects. Here, we will use `dplyr` to calculate the total number of incidents and their cost, and then use a non spatial join to attach those results to MSOA boundaries. At this stage we no longer need the geometry column for each LFB incident as a) we're not performing any spatial operations on our points, and b) the geometry column can slow down/interrupt the `dplyr::group_by` function which we will be using. To remove the geometry column we use the `st_drop_geometry()` function directly in the `dplyr` pipe.
+Now that `kenya_2017` is attached to our observations we can create summary statistics for each subcounty, and plot them at the subcounty level As mentioned before, we can use `tidyverse` functions on `sf` objects. Here, we will use `dplyr` to calculate the total number of facilities in each subcounty.
 
 ### Exercise
 
@@ -148,25 +71,17 @@ Now that `MSOA11CD` is attached to our observations we can create summary statis
 countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-1.  Read in BSC boundaries`data/shp/MSOA_2011_london/MSOA_2011_BSC_London.shp` as `msoa_london_BSC` - use `st_read()`
-2.  Use `st_drop_geometry()` on `lfb_sf` to remove geometry data.
-3.  Create summary statistics per MSOA - sum of `cost_gbp` as `total_cost` (use `na.rm = TRUE`), and the total number of incidents as `n_cases`. You will need to use `group_by()` and `summarise()`
-4.  Use `mutate` to create a new column called `cost_per_incident` which is equal to `total_cost` divided by `n_cases`.
-5.  Join `lfb_msoa_stats` to `msoa_london_BSC`, using `left_join()` and create a new object `msoa_lfb`
+1.  Create summary statistics per subcounty for the total number of health facilities. You will need to use `group_by()` and `summarise()`
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Solution"
-msoa_london_BSC <- sf::st_read("data/shp/MSOA_2011_london/MSOA_2011_BSC_London.shp", quiet = TRUE) 
 
-lfb_msoa_stats <- lfb_sf %>% 
-                  sf::st_drop_geometry() %>% 
-                  dplyr::group_by(MSOA11CD) %>% 
-                  dplyr::summarise(total_cost = sum(cost_gbp, na.rm=TRUE), n_cases = n()) %>% 
-                  dplyr::mutate(cost_per_incident = total_cost/n_cases)
-                         
-msoa_lfb <- dplyr::left_join(msoa_london_BSC, lfb_msoa_stats)
-head(msoa_lfb)
+
+health_facilities <- kenya_health |>
+  group_by(geometry, ADM2_EN) |> 
+  summarise(num_facilities = n())
+      
 ```
 
 At this stage it is a good idea to save our data. We can do this using the `st_write()` function. It needs an `sf` object and the path and name of the output.
@@ -185,13 +100,14 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 
 Now that we have processed our data we can start mapping it. So far we have only used the `geom_sf()` function from the `ggplot2` package. This creates a default map and is great when all we want to do is quickly visualise our data. The full range of `ggplot2` (and `ggspatial`) functions gives us control over all elements of the final plot and allows us to create high quality maps.
 
-`ggplot2` follows the grammar of graphics, where we first specify the data source - `tm_shape`, then the aesthetics of the plot - `tm_polygons`, `tm_dots`, etc., and then we make any final adjustments to the overall look - `tm_layout`. All functions need to be connected using the `+` symbol.
+`ggplot2` follows the grammar of graphics, where we first specify the data source - `ggplot()`, then the type of plot - `geom_sf`, `geom_polygons`, etc., and then we make any final adjustments to the overall look - `labs`.
 
--   `tm_shape()` - `sf` object which you want to plot
--   `tm_fill()`, `tm_borders()`, `tm_polygons()`, `tm_dots()` - types of output
--   `tm_layout()` - controls layout of the map, titles, labels, etc.
-
-`tmap` syntax: `tm_shape(sf_object) + tm_borders(col = either "colour" or name of column which we want to plot) + tm_layout(main.title = "title of your map")`
+```{r}
+#| eval: false
+ggplot(sf_object) + 
+  geom_sf(aes(fill = name_of_column)) +
+  labs(title = title_of_map)
+```
 
 ### Exercise
 
@@ -201,47 +117,53 @@ Now that we have processed our data we can start mapping it. So far we have only
 countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-1.  Start by specifying which `sf` object is being mapped in `tm_shape()` and what column holds the values to be visualised. We will also change the legend's title.
+1.  Start by specifying which `sf` object is being mapped in `ggplot()` and what column holds the values to be visualised. We will also change the legend's title.
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Solution"
-ggplot(msoa_lfb) + 
-  geom_sf(aes(fill = cost_per_incident)) +
-  labs(fill = "Cost per Incident (£)")
+ggplot(health_facilities) + 
+  geom_sf(aes(fill = num_facilities)) +
+  labs(fill = "Number of health facilities")
 ```
 
-2.  Now let's add `london_boundary` to have a thicker line around London.
+2.  Now let's add `nairobi_boundary` to have a thicker line around Nairobi.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
-  labs(fill = "Cost per Incident (£)")
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
+  labs(fill = "Number of health facilities")
 ```
 
 3.  Next we will add a scale bar and position it in the bottom left corner.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 # First, install and load ggspatial if not already available
 # install.packages("ggspatial")
 ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
   annotation_scale(location = "bl") +
-  labs(fill = "Cost per Incident (£)")
+  labs(fill = "Number of health facilities")
 ```
 
 4.  We can now remove the black frame from the map and add a title to our map.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
   annotation_scale(location = "bl") +
   labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
+    title = "Kenya Health",
+    fill = "Number of health facilities"
   ) +
   theme_minimal() +
   theme(panel.grid = element_blank())
@@ -250,148 +172,68 @@ ggplot() +
 5.  All of the map elements are now visible but they're not in the right place. We can solve this by increasing the margins around our map. This will allow the title and the legend to move outwards.
 
 ```{r}
-ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
-  annotation_scale(location = "bl") +
-  labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
-  )
-```
-
-6.  `tmap` breaks up numerical data into evenly sized categories by default, but you can provide it with custom breaks as well.
-
-```{r}
-seq(0, 900, 300)
-```
-
-```{r}
-ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
-  annotation_scale(location = "bl") +
-  scale_fill_gradientn(
-    colors = blues9,  # From RColorBrewer palette
-    breaks = seq(0, 900, 300),
-    labels = c("0 - 300", ">300 - 600", ">600 - 900", ">900 - 1200")
-  ) +
-  labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
-  )
-```
-
-You can also use other methods of automatic data categorisation. `Jenks` is a popular method for clustering data into classes. You can set the number of desired classes using the `n` argument, and the exact method with the `style` argument.
-
-```{r}
-# For Jenks natural breaks
-# install.packages("classInt")
-library(classInt)
-breaks <- classIntervals(msoa_lfb$cost_per_incident, n = 4, style = "jenks")$brks
+#| code-fold: true
+#| code-summary: "Solution"
 
 ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
   annotation_scale(location = "bl") +
-  scale_fill_gradientn(
-    colors = blues9,
-    breaks = breaks,
-    labels = paste(round(breaks[-length(breaks)]), "-", round(breaks[-1]))
-  ) +
   labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
+    title = "Kenya Health",
+    fill = "Number of health facilities"
   ) +
   theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
-  )
-```
-
-We will use the manually set breaks to ensure consistent results. It's also important to change the legend labels to ensure there are no overlapping values.
-
-```{r}
-ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
-  annotation_scale(location = "bl") +
-  scale_fill_gradientn(
-    colors = blues9,  # From RColorBrewer palette
-    breaks = seq(0, 900, 300),
-    labels = c("0 - 300", ">300 - 600", ">600 - 900", ">900 - 1200")
-  ) +
-  labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
-  )
+  theme(panel.grid = element_blank(),
+            plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
+)
 ```
 
 Finally, save your map as an R object and export it.
 
 ```{r}
-average_cost <- ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident)) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
+#| code-fold: true
+#| code-summary: "Solution"
+
+health_map <- ggplot() + 
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
   annotation_scale(location = "bl") +
-  scale_fill_brewer(
-    palette = "Blues", 
-    breaks = seq(0, 900, 300),
-    labels = c("0 - 300", ">300 - 600", ">600 - 900", ">900 - 1200")
-  ) +
   labs(
-    title = "Average cost of animal related incidents between 2009 and 2020",
-    fill = "Cost per Incident (£)"
+    title = "Kenya Health",
+    fill = "Number of health facilities"
   ) +
   theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
-  )
-
+  theme(panel.grid = element_blank(),
+            plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
+)
 
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
+#| eval: false
 # Save the map
-ggsave("output/maps/average_cost_msoa.png", average_cost, width = 8, height = 5)
+ggsave("output/maps/health_facilities.png", health_map, width = 8, height = 5)
 ```
 
 You can also view your choropleth as an interactive map.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 
-# Create a basic ggplot map
-p <- ggplot() + 
-  geom_sf(data = msoa_lfb, aes(fill = cost_per_incident, text = paste("MSOA:", MSOA11CD, "<br>Cost:", round(cost_per_incident, 2)))) +
-  geom_sf(data = london_boundary, fill = NA, color = "black", size = 1) +
-  scale_fill_gradientn(
-    colors = blues9,
-    breaks = seq(0, 900, 300),
-    labels = c("0 - 300", ">300 - 600", ">600 - 900", ">900 - 1200")
-  ) +
-  labs(fill = "Cost per Incident (£)") +
-  theme_minimal() +
-  theme(panel.grid = element_blank())
-
+health_map <- ggplot() + 
+  geom_sf(data = health_facilities, aes(fill = num_facilities)) +
+  geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
+  annotation_scale(location = "bl") +
+  labs(
+    title = "Kenya Health",
+    fill = "Number of health facilities"
+  ) 
 # Convert to interactive plot
-interactive_map <- ggplotly(p, tooltip = "text")
+interactive_map <- ggplotly(health_map)
 interactive_map
 ```
 

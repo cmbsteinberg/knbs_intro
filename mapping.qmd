@@ -1,5 +1,5 @@
 ---
-title: "Introduction to GIS in R"
+title: "Mapping"
 format: html
 ---
 
@@ -17,79 +17,43 @@ library(countdown)
 library(tidyr)
 ```
 
-## Aims
-
--   Know how to load spatial data into R using the `sf` library.
--   Be familiar with using GSS codes to join statistics to geographies.
--   Understand how spatial objects can be manipulated using `dplyr`.
--   Understand how to use spatial joins.
--   Be aware of map projections and Coordinate Reference Systems (CRS) and be able to modify them.
--   Know how to make static and interactive maps in `ggplot2`.
--   Be able to export your maps and shapefiles.
-
-## GIS and R
-
-R is commonly used for statistical analysis and programming, however it also has a range of geospatial libraries developed by a community of researchers and programmers. In the last few years, working with spatial data became much easier in R, with the development of the `sf` package. `sf` keeps all the spatial information for each observation in a geometry column which means that we can treat it like a normal data frame and also perform spatial operations on the data.
-
-```{r, echo=FALSE}
-poi <- sf::st_read("/Users/christophersteinberg/Downloads/hotosm_ken_points_of_interest_points_shp/hotosm_ken_points_of_interest_points_shp.shp", quiet=TRUE, as_tibble = TRUE)
-head(poi)
-```
-
 ## Working with spatial data in R
 
-### Open Street Map Data
+### Kenyan Health Facilities Data
 
-Throughout this tutorial you will be using data about Kenyan rainfall - [Kenyan Rainfall Data](https://data.humdata.org/dataset/ken-rainfall-subnational). It covers total rainfall at the subcounty level in the last 5 years, from 2021-01-01. The data is updated weekly and includes a range of variables capturing amount of rain.
+Throughout this tutorial you will be using data about health facilities in Kenya: [Kenyan Health Facilities Data](https://hub.arcgis.com/datasets/Esri-EA::health-facilities-in-kenya/about). It covers all the health facilities in Kenya, with the agency they are run by, their facility type, and their location. This data was last updated in 2022.
 
-We want to visualise, and better understand how much rain has fallen in the last 5 years at the sub-county and county level, and what the distribution is at the MSOA level of geography. To achieve this we will have to import spatial data, manipulate it, create summary statistics, and then plot it.
+We want to visualise, and better understand how many health facilities there are at the sub-county and county level, and what the distribution of the different types of facility there are. To achieve this we will have to import spatial data, manipulate it, create summary statistics, and then plot it.
 
 ## Loading spatial and non-spatial data
 
-Rainfall data has been tidied up and saved as a Comma Separated Value file (.csv). We can use `read_csv` to open it in R.
+H data has been tidied up and saved as a Comma Separated Value file (.csv). We can use `read_csv` to open it in R.
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
 
-1.  Create a new object called `poi` by using `read_csv()`. Load data located in "<https://data.humdata.org/dataset/ken-rainfall-subnational>".
-2.  Use `glimpse()` or `head()` to view `health` structure.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>\
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r, eval = TRUE}
-poi <- readr::read_csv("/Users/christophersteinberg/Documents/GitHub/intro_R-main/data/poi.csv")
-
-poi
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-</details>
+1.  Create a new object called `health` by using `read_csv()`.
+2.  Use `glimpse()` or `head()` to view the structure of `health`.
 
-<br>
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
 
-`poi` is currently just a data frame - it has not got an explicit geometry column which links observations to their geographic location. It does however contain several columns which can be used to convert it into a spatial data format.
+health <- readr::read_csv("data/Health_facilities_-4126638174547585951.csv")
 
-**Ward_code** column references the GSS codes of wards within which the observations fall. GSS codes can be used to join `lfb` data to boundaries from the Open Geography Portal. One issue with this particular column is that it does not indicate the currency of GSS codes. Wards are subject to frequent change, and as such it is best practice to be clear about the dates of any boundaries used by stating the exact code used, e.g. **wd19cd**. Because LFB data does not include this information we have no guarantee that the boundaries and GSS codes we join will match.
+health
+```
 
-Fortunately we have also been provided with columns recording the **easting**, and **northing** of each incident. We can use those to convert `lfb` into an `sf` object. To achieve this we will use the `st_as_sf()` function which takes the following arguments:
+`health` is currently just a data frame - it has not got an explicit geometry column which links observations to their geographic location. It does however contain several columns which can be used to convert it into a spatial data format.
+
+We could use the various names of locations to use as locations. But we would have to find a pre-existing map which had coordinates for each location. These locations could also be quite imprecise.
+
+Fortunately we have also been provided with columns recording the **Latitude**, and **Longitude** of each incident. We can use those to convert `health` into an `sf` object. To achieve this we will use the `st_as_sf()` function which takes the following arguments:
 
 ```{r, eval = FALSE}
 new_object <- st_as_sf(x = input_data_frame, coords = c("x_coordinate_column", "y_coordinate_column"), crs = 27700)
@@ -97,182 +61,239 @@ new_object <- st_as_sf(x = input_data_frame, coords = c("x_coordinate_column", "
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
-
-1.  Create a new object called `poi_sf` by converting `poi` using the `st_as_sf()` function.
-2.  Use `glimpse()` or `head()` to view `poi_sf` structure.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
-poi_sf <- sf::st_as_sf(x = poi, coords = c("easting", "northing"), crs = 4326)
-head(poi_sf)
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-</details>
+1.  Create a new object called `health_sf` by converting `health` using the `st_as_sf()` function.
+2.  Use `glimpse()` or `head()` to view `health_sf` structure.
 
-<br>
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
 
-`st_as_sf()` converted the **easting** and **northing** columns to simple feature geometries and created a new column called **geometry** which holds spatial information for each row. Now that `poi` is a spatial object we can plot it using the `ggplot2` package. For now we will use the `geom_sf()` function which creates a quick map, using `ggplot2's` default settings. `geom_sf()` only needs to be supplied with a simple feature object and is very useful for quickly inspecting your data. To quickly plot multiple layers on the same map use `geom_sf() + geom_sf()`.
+health_sf <- sf::st_as_sf(health, coords = c("Longitude","Latitude"), crs = 4326)
+head(health_sf)
+```
+
+`st_as_sf()` converted the **Latitude** and **Longitude** columns to simple feature geometries and created a new column called **geometry** which holds spatial information for each row. Now that `health` is a spatial object we can plot it using the `ggplot2` package. For now we will use the `geom_sf()` function which creates a quick map, using `ggplot2's` default settings. `geom_sf()` only needs to be supplied with a simple feature object and is very useful for quickly inspecting your data. To quickly plot multiple layers on the same map use `geom_sf() + geom_sf()`.
 
 ### Exercise
 
-`r countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")`
-
-1.  Plot `poi_sf` using the `geom_sf()` function.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
-ggplot2::ggplot(poi_sf) + 
+#| echo: False
+
+countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Plot `health_sf` using the `geom_sf()` function.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+
+ggplot2::ggplot(health_sf) + 
   ggplot2::geom_sf() 
 ```
 
-</details>
-
-<br>
-
-We can also create interactive maps using `plotly` or `leaflet`. For `plotly` we ca write the map using ggplot2, before executing `ggplotly()`.
+We can also create interactive maps using `plotly` or `leaflet`. For `plotly` we can write the map using ggplot2, before executing `ggplotly()`.
 
 ### Exercise
 
-`r countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")`
-
-1.  Make an interactive map of `poi_sf` using the `ggplotly()` function.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
-ggplot_graph <- ggplot2::ggplot(poi_sf) + 
+#| echo: False
+
+countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Make an interactive map of `health_sf` using the `ggplotly()` function.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+
+ggplot_graph <- ggplot2::ggplot(health_sf) + 
   ggplot2::geom_sf() 
 
 plotly::ggplotly(ggplot_graph)
   
 ```
 
-</details>
-
-<br>
-
 ## Filtering by Administration Code
 
-This dataset covers all of Kenya at subnational administrative boundaries. Let's look at solely locations in Nairobi to narrow down our exploration more. To remove all points outside of Nairobi we will have to import a shapefile with the right county level and then use it to spatially filter our `poi_df` data.
+Our health facilities dataset covers all of Kenya. Let's look at solely locations in Nairobi to narrow down our exploration more. To remove all points outside of Nairobi we will have to import a shapefile with the right county level and then use it to spatially filter our `health_sf` data.
 
-So far we have created our own `sf` objects by adding a geometry column. The kenya data set is already a spatial one and as such we can use the `st_read()` function from the `sf` package to import it. `st_read` isextremely versatile and able to import most spatial data formats into R. The only argument that needs to be supplied to `st_read` is the fullpath to the UTLA file
+So far we have created our own `sf` objects by adding a geometry column. The kenya data set is already a spatial one and as such we can use the `st_read()` function from the `sf` package to import it. `st_read` is extremely versatile and able to import most spatial data formats into R. The only argument that needs to be supplied to `st_read` is the fullpath to the UTLA file
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
-
-1.  Use `st_read()` to load the kenya sub-county boundaries you downloaded at the beginning of the tutorial, as`kenya_2017`.
-2.  UTLA path - `https://data.humdata.org/dataset/cod-ab-ken`
-3.  Make a static map of the object you have just created using `geom_sf()`.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Use `st_read()` to load the kenya sub-county boundaries as`kenya_2017`. You will need to download the [Kenya shapefile](https://data.humdata.org/dataset/cod-ab-ken), downloading as a *Shapefile*, and the unzipping it.
+2.  Make a static map of the object you have just created using `geom_sf()`.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
 
 kenya_2017 <- sf::st_read("/Users/christophersteinberg/Documents/GitHub/admn2/ken_admbnda_adm2_iebc_20191031.shp", quiet = TRUE)
+```
+
+```{r}
 ggplot2::ggplot(kenya_2017) + 
   ggplot2::geom_sf() 
 
 ```
 
-</details>
-
-<br>
-
-Sub-county level boundaries have loaded correctly but they currently cover all of Kenya. Because simple feature objects are data frames with a geometry column attached, any operations that we would perform on a normal data frame can also be performed on an object of class `sf`. We will use `dplyr::filter` and `stringr::str_detect()` to only keep UTLAs where their `ADMN_PCODE` code starts with "KE47". "KE47" denotes that an sub-county is part of Nairobi county.
+Sub-county level boundaries have loaded correctly but they currently cover all of Kenya. Because simple feature objects are data frames with a geometry column attached, any operations that we would perform on a normal data frame can also be performed on an object of class `sf`. We will use `dplyr::filter` and `stringr::str_detect()` to only keep sub-counties where their `ADM1_PCODE` code starts with *"KE047"*. *"KE047"* denotes that an sub-county is part of Nairobi county.
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
-
-1.  Inspect kenya_2017 using `head()` or `glimpse()`, and identify which column holds the GSS codes - it should end in "cd".
-2.  Create a new object called `nairobi_subcounty`. Use `dplyr::filter` alongside `stringr::str_detect()` to only keep observations which have a Administrative code starting with "KE47".
-3.  Plot `nairobi_subcounty` to see if the results look correct.
-
-<details>
-
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
 ```{r}
-head(kenya_2017)
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-```{r}
-nairobi_subcounty <- dplyr::filter(kenya_2017, stringr::str_detect(ADM2_PCODE, "KE047"))
+1.  Inspect kenya_2017 using `head()` or `glimpse()`, and identify which column holds the county codes.
+2.  Create a new object called `nairobi_subcounty`. Use `dplyr::filter` alongside `stringr::str_detect()` to only keep observations which have a Administrative code starting with "KE047".
+3.  Plot `nairobi_subcounty` to see if the results look correct.
+
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
+
+head(kenya_2017)
+
+nairobi_subcounty <- dplyr::filter(kenya_2017, stringr::str_detect(ADM1_PCODE, "KE047"))
 ggplot2::ggplot(nairobi_subcounty) + 
   ggplot2::geom_sf() 
 ```
-
-</details>
-
-<br>
 
 Finally, for the next step, we only need the outer boundary of Nairobi - all the internal subcounty boundaries have to be removed and only the outer edges kept. `sf` has a function exactly for this purpose called `st_union()`. It only takes one argument, which is the `sf` object we want to merge.
 
 ### Exercise
 
-`r countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")`
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
 
 1.  Create a new object called `nairobi_boundary` using the `st_union` function.
 2.  Plot it to check the results.
 
-<details>
+```{r, include = TRUE}
+#| code-fold: true
+#| code-summary: "Solution"
 
-<summary style="font-size: 20px; font-weight: bold;">
-
-5.2.2. Solution</strong>
-
-</summary>
-
-<br>
-
-```{r}
 nairobi_boundary <- sf::st_union(nairobi_subcounty)
 ggplot2::ggplot(nairobi_boundary) + 
   ggplot2::geom_sf() 
 ```
 
-</details>
+## Spatial subsetting and CRS
 
-<br>
+In addition to subsetting by value, as we did with the Nairobi boundaries earlier, we can also subset observations by evaluating their spatial relationship with another data set. We can for example select all counties intersected by a river, or all households outside of city boundaries. There are a number of different spatial relationships which can be tested and used to subset observations.
+
+`sf` has an inbuilt function called `st_filter()` which we can use to spatially subset observations. The function takes several arguments:
+
+-   x - `sf` data frame we want to subset - `health_sf`
+-   y - `sf` object used to evaluate the spatial relationship - `nairobi_boundary`
+
+Before running any spatial operations on two spatial objects it is always worth checking if their coordinate reference systems (CRS) match. `sf` will throw an error if that's not the case. Try it for yourself below.
+
+### Exercise
+
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Use `st_filter()` to spatially subset `health_sf` by testing its relationship with `nairobi_boundary`.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
+#| eval: false
+health_sf_nairobi <- st_filter(x = health_sf, y = nairobi_boundary)
+```
+
+You should have got an error here saying `x st_crs(x) == st_crs(y) is not TRUE`. It means that objects x and y have different coordinate reference systems. Spatial operations require all objects to have the same CRS. We can see this for ourselves by running the `st_crs()` function, which returns the coordinate reference system of an object.
+
+### Exercise
+
+```{r}
+#| echo: False
+
+countdown(minutes = 3, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Run `st_crs()` on both and `health_sf` and `nairobi_boundary` and compare the results.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
+sf::st_crs(health_sf)[[1]]
+
+sf::st_crs(nairobi_boundary)[[1]]
+```
+
+`st_crs()` provides detailed information about the CRS and projection of data, but all we need to check is its first element denoted by `[[1]]`. We can see that `health_sf` uses `EPSG:4326`, while `nairobi_boundary` is set to `WGS 84`. This problem can be solved by transforming `nairobi_boundary`'s CRS to match that of `health_sf`, simply by using the correct EPSG code. To do so we will use the `st_transform()` function which takes two arguments:
+
+-   x - `sf` object to be transformed
+-   crs - EPSG code that we want to transform our data to - BNG is 4326
+
+### Exercise
+
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Run `st_transform()` to transform and overwrite `nairobi_boundary`. Remember to set the correct CRS.
+2.  Run `st_crs()` on `health_sf` and newly transformed `nairobi_boundary` and compare the results.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
+nairobi_boundary <- sf::st_transform(nairobi_boundary, crs = 4326)
+
+sf::st_crs(health_sf)[[1]]
+
+sf::st_crs(nairobi_boundary)[[1]]
+```
+
+Now that the CRS are matching we should be able to spatially subset `health_sf`.
+
+### Exercise
+
+```{r}
+#| echo: False
+
+countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
+```
+
+1.  Use `st_filter` to spatially subset `health_sf` by testing its relationship with `nairobi_boundary`. Overwrite `health_sf` with the subset data.
+2.  Plot it to check if the results are correct - all points should be within Nairobi
+
+```{r}
+#| code-fold: true
+#| code-summary: "Solution"
+health_sf_filter <- sf::st_filter(x = health_sf, y = nairobi_boundary)
+nairobi_map <- ggplot2::ggplot() + 
+  ggplot2::geom_sf(data = nairobi_boundary)  +
+  ggplot2::geom_sf(data = health_sf_filter)
+```
+
+```{r, echo }
+nairobi_map
+```

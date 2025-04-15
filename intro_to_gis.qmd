@@ -1,0 +1,16 @@
+---
+title: "Introduction to GIS in R"
+format: html
+---
+## Aims
+
+-   Know how to load spatial data into R using the `sf` library.
+-   Understand how spatial objects can be manipulated using `dplyr`.
+-   Understand how to use spatial joins.
+-   Be aware of map projections and Coordinate Reference Systems (CRS) and be able to modify them.
+-   Know how to make static and interactive maps in `ggplot2`.
+-   Be able to export your maps and shapefiles.
+
+## GIS and R
+
+R is commonly used for statistical analysis and programming, however it also has a range of geospatial libraries developed by a community of researchers and programmers. In the last few years, working with spatial data became much easier in R, with the development of the `sf` package. `sf` keeps all the spatial information for each observation in a geometry column which means that we can treat it like a normal data frame and also perform spatial operations on the data.

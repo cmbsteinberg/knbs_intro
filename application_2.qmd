@@ -21,36 +21,31 @@ Much as with our data manipulation applications, examples in textbooks are diffe
 
 If you remember, you performed analysis of 3 different issues using Kenya's 2019 census data:
 
-1. Breakdown of Kenya by religious belief
+1.  Breakdown of Kenya by religious belief
 
-2. Share of people who are migrants in each county
+2.  Share of people who are migrants in each county
 
-3. Average working hours for men and women in rural vs. urban areas.
+3.  Average working hours for men and women in rural vs. urban areas.
 
 ### Visualising Religious Breakdown
 
-1.  Using the religion_overall dataframe, create a bar chart (`geom_col` or `geom_bar(stat="identity"))` showing the share of each religion_label.
-2.  Map religion_label to the x-axis and share to the y-axis.
-3.  Add appropriate labels using `labs()` for the title, x-axis, and y-axis.
-4.  Format the y-axis to display percentages using scale_y_continuous`(labels = scales::label_percent())`.
-5.  Apply a theme, for example `theme_minimal()`.
-6.  Change the colour palette using `scale_fill_brewer()` (you'll need to map religion_label to the fill aesthetic as well).
+1.  Using the religion_overall dataframe, create a bar chart (`geom_col` or `geom_bar(stat="identity"))` showing the share of each religion_label. Map `religion_label` to the x-axis and `share` to the y-axis.
+2.  Add appropriate labels using `labs()` for the title, x-axis, and y-axis.
+3.  Format the y-axis to display percentages using `scale_y_continuous(labels = scales::label_percent())`.
+4.  Apply a theme, for example `theme_minimal()`.
+5.  Change the colour palette using `scale_fill_brewer()` (you'll need to map religion_label to the `fill` aesthetic as well).
 
 ### Visualising Migration Proportion by County
 
 1.  Using the migration_prop dataframe created in step 6, create a bar chart showing the migration_prop for each county. Map county to the y-axis and migration_prop to the x-axis for better readability (use geom_col).
-2.  Use `coord_flip()` if you mapped county to x initially to make labels readable, or map directly as described in (a).
-3.  Format the x-axis (which represents the proportion) to display percentages.
-4.  Add appropriate labels using `labs()`.
-5.  Apply a theme like `theme_bw()`.
-6.  Order the counties by migration proportion.
+2.  Format the x-axis (which represents the proportion) to display percentages.
+3.  Add appropriate labels using `labs()`.
+4.  Apply a theme like `theme_bw()`.
+5.  Order the counties by migration proportion.
 
 ### Visualising Average Working Hours
 
-1.  Using the working_hours_mean_adult dataframe created in step 10, create a grouped bar chart (`geom_col`) showing the mean_hours_worked_if_work (average hours for those who work).
-2.  Map area_type (Rural/Urban) to the x-axis.
-3.  Map mean_hours_worked_if_work to the y-axis.
-4.  Map sex_label (Male/Female) to the fill aesthetic to get different coloured bars for men and women.
+1.  Using the working_hours_mean_adult dataframe created in step 10, create a grouped bar chart (`geom_col`) showing the mean_hours_worked_if_work (average hours for those who work). Map area_type (Rural/Urban) to the x-axis and mean_hours_worked_if_work to the y-axis. Map sex_label (Male/Female) to the fill aesthetic to get different coloured bars for men and women.
 5.  Use `position = position_dodge()` within `geom_col()` to place the bars for men and women side-by-side within each area type.
 6.  Add appropriate labels using `labs()`for the title, axes, and fill legend.
 7.  Apply a theme.
@@ -58,55 +53,41 @@ If you remember, you performed analysis of 3 different issues using Kenya's 2019
 
 ### Saving a Plot
 
-Finally, practice saving one of the plots you created. Assign one of your plots to a variable (e.g., migration_plot \<- ggplot(...) + ...). Use `ggsave()` to save this plot to a file. Include today's date in the filename using `Sys.Date()`. For example, save it as *"migration_plot_YYYY-MM-DD.png"*.
+Finally, practice saving one of the plots you created. Assign one of your plots to a variable. Use `ggsave()` to save this plot to a file. Include today's date in the filename using `Sys.Date()`. For example, save it as *"migration_plot_YYYY-MM-DD.png"*.
 
 ```{r}
 #| code-fold: true
 #| eval: False
-#| code-summary: "Solution: Religion Plot"
+#| code-summary: "Solution: Visualising Religious Breakdown"
 
-ggplot(data = religion_overall, aes(x = religion_label, y = share, fill = religion_label)) +
-  geom_col() + # Use geom_col as we have pre-summarised y values
+religion_overall <- religion_overall |>
+  mutate(religion_lab = case_when(religion==1 ~ "Catholic",
+                                  religion==2 ~ "Protestant",
+                                  religion==3 ~ "Evangelical churches",
+                                  religion==4 ~ "African Instituted churches",
+                                  religion==5 ~ "Orthodox",
+                                  religion==6 ~ "Other christian",
+                                  religion==7 ~ "Islam",
+                                  religion==8 ~ "Hindu",
+                                  religion==9 ~ "Traditionalists",
+                                  religion==10 ~ "Other religion",
+                                  religion==11 ~ "No religion",
+                                  TRUE ~ NA
+                                  )) |> 
+  ggplot(aes(x = religion_lab, y = share, fill = religion_lab)) +
+  geom_bar(stat = "identity") +
+  theme_minimal()+
   scale_y_continuous(labels = scales::label_percent()) +
-  scale_fill_brewer(palette = "Set3") + # Optional: Change colour palette
-  labs(
-    title = "Religious Breakdown in Kenya (2019 Census)",
-    x = "Religion",
-    y = "Share of Population",
-    fill = "Religion" # Optional: Rename legend title
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels if needed
+  labs(x = "religion", y = "share", title = "Religions of Kenya")
+```
 
-#Reorder counties before plotting
-migration_prop_ordered <- migration_prop |>
-  mutate(county = fct_reorder(county, migration_prop))
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Visualising Migration Proportion by County"
 
-ggplot(data = migration_prop_ordered, aes(x = migration_prop, y = county)) +
-  geom_col(fill = "skyblue") + # Manually set a fill colour
-  scale_x_continuous(labels = scales::label_percent()) +
-  labs(
-    title = "Share of Migrants by County (2019 Census)",
-    x = "Proportion of Residents Born Elsewhere",
-    y = "County"
-  ) +
-  theme_bw()
-
-ggplot(working_hours_mean_adult, aes(x = area_type, y = mean_hours_worked_if_work, fill = sex_label)) +
-  geom_col(position = position_dodge()) +
-  scale_fill_brewer(palette = "Paired") + # Optional: Choose a palette
-  labs(
-    title = "Average Weekly Hours Worked by Area and Sex (Adults, 2019 Census)",
-    subtitle = "Among those reporting working hours",
-    x = "Area Type",
-    y = "Average Weekly Hours Worked",
-    fill = "Sex" # Renames the legend
-  ) +
-  theme_light()
-
-# First, assign the migration plot code to a variable
-migration_plot <- ggplot(data = migration_prop_ordered, aes(x = migration_prop, y = county)) +
-  geom_col(fill = "skyblue") +
+migration_plot <- ggplot(data = migration_prop, aes(x = migration_prop, y = county)) +
+  geom_col() + # Manually set a fill colour
   scale_x_continuous(labels = scales::label_percent()) +
   labs(
     title = "Share of Migrants by County (2019 Census)",
@@ -118,5 +99,19 @@ migration_plot <- ggplot(data = migration_prop_ordered, aes(x = migration_prop, 
 # Now, save the plot
 ggsave(filename = paste0("migration_plot_", Sys.Date(), ".png"), plot = migration_plot, width = 8, height = 10) # Adjust width/height as needed
 
-# Note: This saves the file to your current working directory in RStudio.
+```
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Visualising Average Working Hours"
+
+ggplot(working_hours_mean_adult, aes(x = area_type, y = mean_hours_worked_if_work, fill = sex_label)) +
+  geom_col(position = position_dodge()) +
+  scale_fill_brewer(palette = "Paired") + # Optional: Choose a palette
+  labs(
+    title = "Average Weekly Hours Worked by Area and Sex (Adults, 2019 Census)",
+    fill = "Sex" # Renames the legend
+  ) +
+  theme_light()
 ```
