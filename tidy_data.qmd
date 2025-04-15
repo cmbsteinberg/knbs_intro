@@ -313,7 +313,6 @@ countdown(minutes = 10,
 
 1.  `weather` only contains information for the three origin airports in NYC. If it contained weather records for all airports in the USA, what additional connection would it make to `flights`?
 
-
 ```{r, eval = FALSE}
 #| code-fold: true
 #| code-summary: "Solution"

@@ -19,15 +19,11 @@ library(tidyr)
 
 ## Working with spatial data in R
 
-### Kenyan Health Facilities Data
-
-Throughout this tutorial you will be using data about health facilities in Kenya: [Kenyan Health Facilities Data](https://hub.arcgis.com/datasets/Esri-EA::health-facilities-in-kenya/about). It covers all the health facilities in Kenya, with the agency they are run by, their facility type, and their location. This data was last updated in 2022.
+Throughout this tutorial you will be using [ESRI Health Facilities in Kenya data](https://hub.arcgis.com/datasets/Esri-EA::health-facilities-in-kenya/about) It covers all the health facilities in Kenya, with the agency they are run by, their facility type, and their location. This data was last updated in 2022.
 
 We want to visualise, and better understand how many health facilities there are at the sub-county and county level, and what the distribution of the different types of facility there are. To achieve this we will have to import spatial data, manipulate it, create summary statistics, and then plot it.
 
-## Loading spatial and non-spatial data
-
-H data has been tidied up and saved as a Comma Separated Value file (.csv). We can use `read_csv` to open it in R.
+The data has been tidied up and saved as a Comma Separated Value file (.csv). We can use `read_csv` to open it in R.
 
 ### Exercise
 
@@ -146,9 +142,9 @@ kenya_2017 <- sf::st_read("/Users/christophersteinberg/Documents/GitHub/admn2/ke
 ```
 
 ```{r}
+#| echo: false
 ggplot2::ggplot(kenya_2017) + 
   ggplot2::geom_sf() 
-
 ```
 
 Sub-county level boundaries have loaded correctly but they currently cover all of Kenya. Because simple feature objects are data frames with a geometry column attached, any operations that we would perform on a normal data frame can also be performed on an object of class `sf`. We will use `dplyr::filter` and `stringr::str_detect()` to only keep sub-counties where their `ADM1_PCODE` code starts with *"KE047"*. *"KE047"* denotes that an sub-county is part of Nairobi county.
@@ -294,6 +290,7 @@ nairobi_map <- ggplot2::ggplot() +
   ggplot2::geom_sf(data = health_sf_filter)
 ```
 
-```{r, echo }
+```{r}
+#| echo: false
 nairobi_map
 ```
