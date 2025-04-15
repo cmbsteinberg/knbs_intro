@@ -15,6 +15,4 @@ countdown(minutes = 45,
           style = "position: relative; width: min-content;")
 ```
 
-
-
 Remember the [GCP data](https://raw.githubusercontent.com/cmbsteinberg/knbs_intro/refs/heads/main/data/gcp.csv) we looked at when learning about importing data?

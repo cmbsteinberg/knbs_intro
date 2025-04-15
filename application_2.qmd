@@ -46,10 +46,10 @@ If you remember, you performed analysis of 3 different issues using Kenya's 2019
 ### Visualising Average Working Hours
 
 1.  Using the working_hours_mean_adult dataframe created in step 10, create a grouped bar chart (`geom_col`) showing the mean_hours_worked_if_work (average hours for those who work). Map area_type (Rural/Urban) to the x-axis and mean_hours_worked_if_work to the y-axis. Map sex_label (Male/Female) to the fill aesthetic to get different coloured bars for men and women.
-5.  Use `position = position_dodge()` within `geom_col()` to place the bars for men and women side-by-side within each area type.
-6.  Add appropriate labels using `labs()`for the title, axes, and fill legend.
-7.  Apply a theme.
-8.  Use `scale_fill_brewer()` to choose a different colour palette for the fill.
+2.  Use `position = position_dodge()` within `geom_col()` to place the bars for men and women side-by-side within each area type.
+3.  Add appropriate labels using `labs()`for the title, axes, and fill legend.
+4.  Apply a theme.
+5.  Use `scale_fill_brewer()` to choose a different colour palette for the fill.
 
 ### Saving a Plot
 
