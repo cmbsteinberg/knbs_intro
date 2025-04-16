@@ -95,10 +95,6 @@ migration_plot <- ggplot(data = migration_prop, aes(x = migration_prop, y = coun
     y = "County"
   ) +
   theme_bw()
-
-# Now, save the plot
-ggsave(filename = paste0("migration_plot_", Sys.Date(), ".png"), plot = migration_plot, width = 8, height = 10) # Adjust width/height as needed
-
 ```
 
 ```{r}
@@ -114,4 +110,12 @@ ggplot(working_hours_mean_adult, aes(x = area_type, y = mean_hours_worked_if_wor
     fill = "Sex" # Renames the legend
   ) +
   theme_light()
+```
+
+```{r}
+#| code-fold: true
+#| eval: False
+#| code-summary: "Solution: Saving a Plot"
+
+ggsave(filename = paste0("migration_plot\_", Sys.Date(), ".png"), plot = migration_plot, width = 8, height = 10) \# Adjust width/height as needed
 ```

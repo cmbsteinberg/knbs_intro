@@ -55,6 +55,8 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 2.  Inspect it using `head()` or `glimpse()` to see what columns have been added.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Solution"
 kenya_2017 <- st_make_valid(kenya_2017)
 kenya_health <- sf::st_join(kenya_2017, health_sf) 
 
@@ -77,7 +79,6 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 #| code-fold: true
 #| code-summary: "Solution"
 
-
 health_facilities <- kenya_health |>
   group_by(geometry, ADM2_EN) |> 
   summarise(num_facilities = n())
@@ -94,13 +95,11 @@ At this stage it is a good idea to save our data. We can do this using the `st_w
 countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-1.  Copy and execute the following code to save your data: `st_write(msoa_lfb,"output/msoa_lfb.gpkg)`
+1.  Copy and execute the following code to save your data: `st_write(health_facilities,"output/health_facilities.gpkg)`
 
 ## Making better maps
 
 Now that we have processed our data we can start mapping it. So far we have only used the `geom_sf()` function from the `ggplot2` package. This creates a default map and is great when all we want to do is quickly visualise our data. The full range of `ggplot2` (and `ggspatial`) functions gives us control over all elements of the final plot and allows us to create high quality maps.
-
-`ggplot2` follows the grammar of graphics, where we first specify the data source - `ggplot()`, then the type of plot - `geom_sf`, `geom_polygons`, etc., and then we make any final adjustments to the overall look - `labs`.
 
 ```{r}
 #| eval: false
@@ -127,7 +126,7 @@ ggplot(health_facilities) +
   labs(fill = "Number of health facilities")
 ```
 
-2.  Now let's add `nairobi_boundary` to have a thicker line around Nairobi.
+2.  Now let's add `nairobi_boundary` to have a thicker line around Nairobi. Let's also change the colours used.
 
 ```{r}
 #| code-fold: true
@@ -135,7 +134,9 @@ ggplot(health_facilities) +
 ggplot() + 
   geom_sf(data = health_facilities, aes(fill = num_facilities)) +
   geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
-  labs(fill = "Number of health facilities")
+  labs(fill = "Number of health facilities") +
+  scale_fill_gradient(low = "white", high = "purple")
+
 ```
 
 3.  Next we will add a scale bar and position it in the bottom left corner.
@@ -149,7 +150,8 @@ ggplot() +
   geom_sf(data = health_facilities, aes(fill = num_facilities)) +
   geom_sf(data = nairobi_boundary, fill = NA, color = "black", size = 1) +
   annotation_scale(location = "bl") +
-  labs(fill = "Number of health facilities")
+  labs(fill = "Number of health facilities")+
+    scale_fill_gradient(low = "white", high = "purple")
 ```
 
 4.  We can now remove the black frame from the map and add a title to our map.
@@ -165,6 +167,7 @@ ggplot() +
     title = "Kenya Health",
     fill = "Number of health facilities"
   ) +
+    scale_fill_gradient(low = "white", high = "purple")+
   theme_minimal() +
   theme(panel.grid = element_blank())
 ```
@@ -183,6 +186,7 @@ ggplot() +
     title = "Kenya Health",
     fill = "Number of health facilities"
   ) +
+    scale_fill_gradient(low = "white", high = "purple")+
   theme_minimal() +
   theme(panel.grid = element_blank(),
             plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")
@@ -203,6 +207,7 @@ health_map <- ggplot() +
     title = "Kenya Health",
     fill = "Number of health facilities"
   ) +
+    scale_fill_gradient(low = "white", high = "purple")+
   theme_minimal() +
   theme(panel.grid = element_blank(),
             plot.margin = margin(0.5, 0.5, 0.5, 0.5, "cm")

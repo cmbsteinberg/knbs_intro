@@ -105,22 +105,21 @@ migration_prop <- census_small |>
 ```
 
 ```{r}
-#| code-fold: true
-#| eval: False
+#| code-fold: true 
+#| eval: False 
 #| code-summary: "Solution: Average working hours for men and women in rural vs. urban areas"
 
-census_small <- census_small |>
-  mutate(
-    rural = if_else(ea_type == 1, 1, 0),
-    female = if_else(sex == 2, 1, 0),
-    hours_worked = if_else(is.na(hours_worked_if_work), 0, hours_worked_if_work)
-  )
 
-working_hours_mean_adult <- census_small |>
-  filter(age >= 18) |>
+census_small <- census_small |> mutate(
+  rural = if_else(ea_type == 1, 1, 0),
+  female = if_else(sex == 2, 1, 0),
+  hours_worked = if_else(is.na(hours_worked_if_work), 0, hours_worked_if_work)
+)
+
+working_hours_mean_adult <- census_small |> filter(age >= 18) |>
   group_by(rural, female) |>
   summarise(
     hours_worked = mean(hours_worked, na.rm = TRUE),
     hours_worked_if_work = mean(hours_worked_if_work, na.rm = TRUE)
   )
-
+```

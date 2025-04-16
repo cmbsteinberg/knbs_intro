@@ -131,8 +131,9 @@ So far we have created our own `sf` objects by adding a geometry column. The ken
 countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-content;")
 ```
 
-1.  Use `st_read()` to load the kenya sub-county boundaries as`kenya_2017`. You will need to download the [Kenya shapefile](https://data.humdata.org/dataset/cod-ab-ken), downloading as a *Shapefile*, and the unzipping it.
-2.  Make a static map of the object you have just created using `geom_sf()`.
+1.   You will need to download the [Kenya shapefile](https://data.humdata.org/dataset/cod-ab-ken). This is called `ken_adm_iebc_20191031_SHP.zip` on the website. It will download a zip file, which you need to extract. You must extract the whole contents, as a shapefile is composed of multiple files. 
+2. Then, using `st_read`, read in `ken_admbnda_adm2_iebc_20191031.shp`, which is the shapefile containing the lowest level, subcounty, boundaries.
+3.  Make a static map of the object you have just created using `geom_sf()`.
 
 ```{r, include = TRUE}
 #| code-fold: true
