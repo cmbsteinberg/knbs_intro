@@ -25,6 +25,7 @@ book:
       chapters:
       - mapping.qmd
       - spatial_operations.qmd
+    - feedback.qmd
 
 format:
   html:

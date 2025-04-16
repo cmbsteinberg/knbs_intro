@@ -1,0 +1,9 @@
+# Feedback {.unnumbered}
+---
+title: "Feedback Form"
+format: html
+---
+
+Thank you for taking part in this Introduction to R training!
+
+As part of improving the training, we invite you to leave feedback via this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfVXDZe7_UATfDOU1mXDoOSmWzpu2K2xSmMRcYFlTytehBTLQ/viewform). Your feedback will be anonymous.

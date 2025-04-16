@@ -20,7 +20,7 @@ library(tidyr)
 ```{r}
 #| include: false
 kenya_2017 <- sf::st_read(
-  "/Users/christophersteinberg/Documents/GitHub/admn2/ken_admbnda_adm2_iebc_20191031.shp",
+  "data/admn2/ken_admbnda_adm2_iebc_20191031.shp",
   quiet = TRUE
 )
 

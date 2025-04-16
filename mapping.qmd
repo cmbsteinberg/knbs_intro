@@ -138,7 +138,7 @@ countdown(minutes = 10, seconds = 0, style = "position: relative; width: min-con
 #| code-fold: true
 #| code-summary: "Solution"
 
-kenya_2017 <- sf::st_read("/Users/christophersteinberg/Documents/GitHub/admn2/ken_admbnda_adm2_iebc_20191031.shp", quiet = TRUE)
+kenya_2017 <- sf::st_read("data/admn2/ken_admbnda_adm2_iebc_20191031.shp", quiet = TRUE)
 ```
 
 ```{r}
